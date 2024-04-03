@@ -99,7 +99,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 class Interests(models.Model):
     name = models.CharField(max_length=255, verbose_name='Интерес')
-    image = models.ImageField(upload_to='interests/%Y/%m/%d/', verbose_name='Значок')
+    image = models.ImageField(upload_to='interests/%Y/%m/%d/', verbose_name='Значок', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -111,7 +111,7 @@ class Interests(models.Model):
 
 class Habits(models.Model):
     name = models.CharField(max_length=255, verbose_name='Привычка')
-    image = models.ImageField(upload_to='habits/%Y/m/%d/')
+    image = models.ImageField(upload_to='habits/%Y/m/%d/', blank=True, null=True)
 
     def __str__(self):
         return self.name
