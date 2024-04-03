@@ -48,7 +48,7 @@ class Travel(models.Model):
 class Country(models.Model):
     name = models.CharField(max_length=200, verbose_name='Страна', blank=True, null=True)
     image = models.ImageField(upload_to='countries/%Y/%m/%d/', blank=True, null=True)
-    cities = models.ManyToManyField(City, related_name='city_countries', verbose_name='Города')
+    cities = models.ManyToManyField(City, related_name='city_countries', verbose_name='Города', blank=True, null=True)
 
     def __str__(self):
         return self.name
