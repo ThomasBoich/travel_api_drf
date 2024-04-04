@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Interests, Habits
+from .models import CustomUser, Interests, Habits, City
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,4 +14,9 @@ class InterestsSerializer(serializers.ModelSerializer):
 class HabitsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habits
+        fields = '__all__'
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
         fields = '__all__'
