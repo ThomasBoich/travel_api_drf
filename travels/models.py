@@ -6,8 +6,8 @@ class Travel(models.Model):
     
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, verbose_name='Пользователь')
 
-    MEN = 'MEN'
-    GIRL = 'GIRL'
+    MEN = 'Мужчина'
+    GIRL = 'Женщина'
 
     GENDERS_LIST = [
         (MEN, 'Мужчина'),
@@ -15,9 +15,9 @@ class Travel(models.Model):
     ]
 
 
-    SEARCH_MEN = 'SEARH_MEN'
-    SEARCH_GIRL = 'SEARCH_GIRL'
-    SEARCH_FAMIlY = 'SEARCH_FAMILY'
+    SEARCH_MEN = 'Мужчину'
+    SEARCH_GIRL = 'Женщину'
+    SEARCH_FAMIlY = 'Семью'
 
 
     SEARCH_GENDERS_LIST = [
