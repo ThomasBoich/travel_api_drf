@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Travel, Country
-from users.serializers import CitySerializer
+from users.serializers import CitySerializer, CustomUserSerializer
 
 class CountrySerializer(serializers.ModelSerializer):
     travel_count = serializers.IntegerField(read_only=True)
@@ -13,6 +13,7 @@ class TravelSerializer(serializers.ModelSerializer):
     travel_count = serializers.IntegerField(read_only=True)
     from_city = CitySerializer()
     country = CountrySerializer()
+    user = CustomUserSerializer()
     class Meta:
         model = Travel
         fields = '__all__'
