@@ -14,6 +14,7 @@ class TravelSerializer(serializers.ModelSerializer):
     from_city = CitySerializer()
     country = CountrySerializer()
     user = CustomUserSerializer()
+    city = CitySerializer()
     class Meta:
         model = Travel
         fields = '__all__'
