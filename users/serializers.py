@@ -17,8 +17,8 @@ class CitySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class CustomUserSerializer(serializers.ModelSerializer):
-    habits = HabitsSerializer()
-    interests = InterestsSerializer()
+    habits = HabitsSerializer(many=True)
+    interests = InterestsSerializer(many=True)
     class Meta:
         model = CustomUser
         fields = '__all__'
