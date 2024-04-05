@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
-from users.models import CustomUser, Profile, Habits, Interests, City
+from users.models import CustomUser, Profile, Habits, Interests, City, Interests, Habits
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -22,7 +22,9 @@ class CustomUserAdmin(UserAdmin):
         'age',
         'description',
         'small_description',
-        'city'
+        'city',
+        'interests',
+        'habits'
     )
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
@@ -39,6 +41,8 @@ class CustomUserAdmin(UserAdmin):
             'description',
             'small_description',
             'city'
+            'interests',
+            'habits'
         )}),
         ('Permissions', {
             'fields': ('is_superuser', 'ban', 'type', 'is_staff', 'is_active',)}),
@@ -63,6 +67,8 @@ class CustomUserAdmin(UserAdmin):
                 'description',
                 'small_description',
                 'city'
+                'interests',
+                'habits'
 
             )}
         ),
