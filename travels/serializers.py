@@ -12,7 +12,7 @@ class CountrySerializer(serializers.ModelSerializer):
 class TravelSerializer(serializers.ModelSerializer):
     travel_count = serializers.IntegerField(read_only=True)
     from_city = CitySerializer()
-    country = CountrySerializer()
+    country = CountrySerializer(many=True)
     user = CustomUserSerializer()
     city = CitySerializer()
     class Meta:
