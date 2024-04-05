@@ -30,8 +30,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name='Бонусные баллы',
         default=0,
     )
-    habits = models.ManyToManyField('Habits', related_name='user_habits', blank=True, null=True)
-    interests = models.ManyToManyField('Interests', related_name='users_interests', blank=True, null=True)
+    habits = models.ManyToManyField('Habits', related_name='user_habits', blank=True)
+    interests = models.ManyToManyField('Interests', related_name='users_interests', blank=True)
     ADMINISTRATOR = 'AD'
     MANAGER = 'OA'
     CLIENT = 'CL'
