@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
-from users.models import CustomUser, Profile, Habits, Interests, City, Interests, Habits
+from users.models import CustomUser, Profile, Habits, Interests, City
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -40,7 +40,7 @@ class CustomUserAdmin(UserAdmin):
             'age',
             'description',
             'small_description',
-            'city'
+            'city',
             'interests',
             'habits'
         )}),
@@ -66,7 +66,7 @@ class CustomUserAdmin(UserAdmin):
                 'age',
                 'description',
                 'small_description',
-                'city'
+                'city',
                 'interests',
                 'habits'
 
