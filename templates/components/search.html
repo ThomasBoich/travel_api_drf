@@ -1,0 +1,53 @@
+<template>
+  <!-- <div></div> -->
+  <form action="" method="post">
+    <ButtonsWhatSearch></ButtonsWhatSearch>
+
+    <ButtonsTheWhereSearch></ButtonsTheWhereSearch>
+
+    <USelectMenu
+      class="where"
+      v-model="selected"
+      :loading="loading"
+      :searchable="search"
+      placeholder="Куда?"
+      option-attribute="name"
+      multiple
+      trailing
+      by="id"
+      style="
+        border: none;
+        box-shadow: none;
+        font-size: 17px;
+        padding: 0px 0px 0px 0px;
+        width: 100%!IMPORTANT;
+      "
+    />
+    <Button class="search" label="Найти" severity="contrast" rounded />
+  </form>
+</template>
+
+<style>
+
+
+@media (max-width: 770px){
+  form{
+    display: flex;
+    flex-direction: column;
+    border-radius: 9px;
+  }.search{
+    width: calc(100% - 30px);
+    border-radius: 9px;
+    padding: 9px 5px 9px 5px;
+    margin: 0px 0px 15px 0px;
+  }
+  .where{
+    width: 100%;
+    padding: 15px 0px 15px 15px!IMPORTANT;
+    margin: 0px 0px 0px 0px!IMPORTANT;
+    display: inline-flex;
+    height: 55px;
+  }
+}
+
+</style>

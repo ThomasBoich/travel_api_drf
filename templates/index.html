@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+    <div class="content">
+    <div class="hello-layout">
+      <h1 data-aos="fade-down">
+        {{ hello }}
+      </h1>
+      <p>Travelo — это тысячи любителей впечатлений в одном месте</p>
+
+      {% include 'components/search.html' %}
+
+      <IndexSearch :popular_countries="countries" :total_popular_countries="travel_count.total_country_count"></IndexSearch>
+      <NuxtLink to="search" style="width:100%;"><button class="other">Еще варианты: {{ travel_count.total_country_count}} шт.</button></NuxtLink>
+    </div>
+
+    <PopularRoad :travels_from_moscow></PopularRoad>
+    <IndexFriends :popular_users="users" :popular_interests="interests"></IndexFriends>
+    <div class="info-slide" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+      <div class="info-slide-layout">
+      <span>Запывпл ыжэлпжыэвлп эыжлп
+вадлоыва опжапо ждываоп вы</span>
+      <p>ывлдаофыж даофжы оапфжоп жфдво пджлво пывжо дывоп ыовжрд оыро ывждлро ыап
+ывжр ывджлр оыапр оыдлро дывор джыордыаордлыаор дыворвоыр
+ывджлр оыдвлжорывдорджываордлаыопр</p>
+      <button>Название кнопки</button>
+    </div>
+    </div>
+    <!-- <img src="~/assets/img/slider.png" alt=""> -->
+  </div>
+  <Footer></Footer>
+
+
+
+
+<style>
+@media (max-width: 490px){
+    .hello-layout h1{
+      width: 99%;
+      text-align: center;
+      font-size: 6.5vw;
+      margin: 35px 0px 0px 0px;
+    }
+    .hello-layout p{
+      width: 95%;
+      font-size: 4.5vw;
+      margin: 0px 0px 35px 0px;
+    }
+}
+</style>
+{% endblock %}

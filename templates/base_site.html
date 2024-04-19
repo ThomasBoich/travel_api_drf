@@ -1,0 +1,19 @@
+<!DOCTYPE html>{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+  <div class="base-content">
+  <div class="vertical-nav">
+  <a href="/me"><img src="~/assets/img/BMTH.png" />Талайн</a>
+  <a href="/"><img src="~/assets/img/Search.png" />Поиск поездок</a>
+  <a href="/chat"><img src="~/assets/img/Communication.png" />Сообщения <span>2</span> </a>
+  <!-- <a><img src="~/assets/img/Commercial.png" />Мои объявления <span>15</span></a> -->
+  </div>
+{% block content %}
+{% endblock %}
+</body>
+</html>

@@ -23,8 +23,8 @@ class CustomUserAdmin(UserAdmin):
         'description',
         'small_description',
         'city',
-        'interests',
-        'habits'
+        # 'interests',
+        # 'habits'
     )
     list_filter = ('email', 'is_staff', 'is_active',)
     fieldsets = (
