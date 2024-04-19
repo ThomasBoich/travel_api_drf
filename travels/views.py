@@ -16,11 +16,6 @@ class TravelViewSet(viewsets.ModelViewSet):
     def total_travel_count(self, request):
         travels = Travel.objects.all()
         total_count = travels.count()
-        trips_from_moscow = []
-
-        for i in travels:
-            if i.from_city == 'Москва' :
-                trips_from_moscow
 
         return Response({'total_travel_count': total_count})
 
