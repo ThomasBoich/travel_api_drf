@@ -99,3 +99,16 @@ class AppLoginView(LoginView):
         else:
             print("User not found")
             return super().form_invalid(form)
+        
+
+from django.views import View
+from users.forms import UserUpdateForm
+from django.views.generic import UpdateView
+class UpdateUserView(UpdateView):
+    model = CustomUser
+    form_class = UserUpdateForm
+    template_name = 'settings.html'
+    pk_url_kwarg = 'user_id'
+
+    def get_success_url(self):
+        return reverse_lazy('update_user', kwargs={'user_id': self.object.pk})

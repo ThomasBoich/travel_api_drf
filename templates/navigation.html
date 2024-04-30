@@ -20,7 +20,7 @@
               <a href="{% url 'profile' request.user.id %}">Моя страница</a>
               <a href="">Сообщения</a>
               <a href="">Поиск поездок</a>
-              <a href="">Настройки</a>
+              <a href="{% url 'update_user' request.user.id %}">Настройки</a>
               <a href="{% url 'logout' %}">Выход</a>
             </div>
           </div> 

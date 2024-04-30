@@ -85,7 +85,7 @@ class UserUpdateForm(forms.ModelForm):
     confirm_password = forms.CharField(label='Подтвердите пароль', widget=forms.PasswordInput, required=False)
     class Meta:
         model = CustomUser
-        fields = ['email', 'first_name', 'last_name', 'patronymic', 'phone', 'photo']
+        fields = ['email', 'first_name', 'last_name', 'patronymic', 'phone', 'photo', 'city', 'description','small_description','age', 'habits', 'interests']
         exclude = ['username', 'sender', 'type']
 
     def clean(self):
