@@ -1,0 +1,62 @@
+{% extends 'base_site.html' %}{% load static %}
+{% block content %}
+<div class="content" style="width:100%;max-width: 100%;" v-if="loaded" data-aos="fade-down">
+    <div class="user-layer">
+      <div class="user-info-layer">
+
+      <img src="{{user.photo.url}}" class="user-avatar"/>
+
+      <div class="user-info">
+        <div class="user-rating">
+
+          <h2>{{user.first_name}} {{user.last_name}}, {{user.age}} лет</h2>
+          <img src="~/assets/img/pic_location_grey.png" alt=""><span>{{user.city}}</span>
+
+          <div class="rating_layout_star" data-total-value="5">
+            <div class="rating_star" data-item-value="5">★</div>
+            <div class="rating_star" data-item-value="4">★</div>
+            <div class="rating_star" data-item-value="3">★</div>
+            <div class="rating_star" data-item-value="2">★</div>
+            <div class="rating_star" data-item-value="1">★</div>
+          </div>
+
+        </div>
+
+        <span>Online</span>
+        <p>{{user.small_description}}</p>
+
+        </div>
+      </div>
+
+      {% if user.id != request.user.id %}
+        <a to="chat"><button style="max-width: max-content;font-size:15px;"><img src="{% static '/img/Communication.png' %}" /> Написать сообщение</button></a>
+      {% endif %}
+
+    </div>
+
+    <div class="user-nav_profile">
+      <a to="/me" class="active">О себе</a>
+      <a to="/comments">Отзывы</a>
+      <a to="/posts">Объявления</a>
+    </div>
+
+    <div class="photos-layout">
+      <UCarousel v-slot="{ item }" :items="items">
+        <img :src="item" width="250" height="350" draggable="false">
+      </UCarousel>
+    </div>
+
+    <div class="about-user">
+      <h2>О себе</h2>
+      <AboutUser :abouts="abouts" :margin="margin"></AboutUser>
+    </div>
+
+    <div class="intresting">
+      <h2>Интересы</h2>
+      <roadViews :views="views"></roadViews>
+    </div>  
+     
+  </div>
+</div>
+<style> </style>
+{% endblock %}

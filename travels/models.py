@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import CustomUser, City
+from django.db.models import Count
 # Create your models here.
 
 class Travel(models.Model):
@@ -56,3 +57,11 @@ class Country(models.Model):
     class Meta:
         verbose_name = 'Страна'
         verbose_name_plural = 'Страны'
+
+    @property
+    def travel_count(self):
+        return self.travels.count()
+
+    @classmethod
+    def with_travel_counts(cls):
+        return cls.objects.annotate(travel_count=Count('travels'))

@@ -5,34 +5,66 @@
       </div>
       <div class="auth-user">
         <div class="no-login">
-          <addContent></addContent>
-          <!-- <span class="create-button">+ Создать</span> -->
-          <Button
-            class="login"
-            label="Войти"
-            severity="contrast"
-            rounded
-            @click="isOpen = true"
-          />
+          {%if request.user.is_authenticated %}
+          <div class="add-layer">
+            <div class="add_content">Создать</div>
+            <div class="add-layer-content">
+              <a href="">Создать путешествие</a>
+              <a href="">Запись в блоге</a>
+            </div>
+          </div>          
+          <!-- <span class="create-button">+ Создать</span> -->         
+          <div class="user-nav">
+            <img id="user_nav" class="user_nav" src="{{ request.user.photo.url }}" alt="">
+            <div class="user-nav-layer">
+              <a href="{% url 'profile' request.user.id %}">Моя страница</a>
+              <a href="">Сообщения</a>
+              <a href="">Поиск поездок</a>
+              <a href="">Настройки</a>
+              <a href="{% url 'logout' %}">Выход</a>
+            </div>
+          </div> 
+
+          <script defer>         
+            const user_nav = document.querySelector('.user_nav')
+            const user_nav_layer = document.querySelector('.user-nav-layer')
+
+            user_nav.addEventListener('click', () =>{
+              user_nav_layer.classList.toggle('active');
+            })
+
+            document.addEventListener('click', (event) => {
+              if (!user_nav_layer.contains(event.target) && event.target !== user_nav) {
+                user_nav_layer.classList.remove('active');
+              }
+            });
+
+            const add_content = document.querySelector('.add_content')
+            const add_layer_content = document.querySelector('.add-layer-content')
+
+            add_content.addEventListener('click', () =>{
+              add_layer_content.classList.toggle('active');
+            })
+
+            document.addEventListener('click', (event) => {
+              if (!add_layer_content.contains(event.target) && event.target !== add_content) {
+                add_layer_content.classList.remove('active');
+              }
+            });
+          </script>
+
+          {%else%}
+          <button class="_login_in_">Войти</button>
+          {%endif%}
         </div>
       </div>
     </div>
   </div>
-  <!-- <UButton label="Open" @click="isOpen = true" /> -->
-  <UModal v-model="isOpen" prevent-close style="z-index: 1150">
-    <UCard :ui="{ ring: '', divide: 'divide-y divide-gray-100 dark:divide-gray-800' }">
-      <template #header>
-                  <!-- <h3 class="text-base font-semibold leading-6 text-gray-900 dark:text-white">
-            Modal
-          </h3> -->
-          <UButton
-            color="gray"
-            variant="ghost"
-            icon="i-heroicons-x-mark-20-solid"
-            class="-my-1"
-            @click="isOpen = false"
-          />
-        <div class="flex items-center justify-between" style="height: 75dvh;">
+  
+  <div class="_login" v-model="isOpen" prevent-close style="z-index: 1150">
+    <div class="_login_content_">
+
+        <div class="flex items-center justify-between" style="min-height: 75dvh;display: flex;justify-content: center;align-items: center;">
           <div class="text-layout">
           <img src="~/assets/img/planet.png" alt="" style="max-width:49px;max-height: auto;position: relative;left: -5px;margin: 0px 0px 15px 0px;">
           <span>
@@ -40,137 +72,49 @@
           чтобы открыть все возможности
           Trave<span style="color:#4dd8cf;">lo</span>.
           </span>
-          <form method="post" action="" @submit.prevent="" style="box-shadow: none;border:none;">
-            <input type="text" placeholder="Электронная почта">
-            <input type="password" placeholder="Пароль">
-            <button>Войти</button>
+          <form method="post" action="{% url 'custom_login' %}" style="box-shadow: none;border:none;">
+            {% csrf_token %}
+            <!-- {{form.as_p}} -->
+            <!-- <input type="text" placeholder="Электронная почта">
+            <input type="password" placeholder="Пароль"> -->
+            <input type="email" name="username" id="id_username" placeholder="" required>
+            <input type="password" name="password" id="id_password" placeholder="" required>
+            <button type="submit">Войти</button>
           </form>
-         <NuxtLink>Нет аккаунта? <span>Зарегистрироваться</span></NuxtLink>
+         <a>Нет аккаунта? <span>Зарегистрироваться</span></a>
          <div class="copy">
           Продолжай, Вы соглашайтесь с <span>Условиями использования</span> и <span>Политикой конфиденциальности</span>, а так же с <span>Политикой использования файлов cookie</span>.
          </div>
           </div>
         </div>
-      </template>
-
       <Placeholder class="h-32" />
-    </UCard>
-  </UModal>
+    </div>
+  </div>
 
 
 <script>
+
+const _login = document.querySelector('._login')
+const _login_in_ = document.querySelector('._login_in_')
+const _body = document.querySelector('html')
+const _login_content_ = document.querySelector('._login_content_')
+
+_login_in_.addEventListener('click', () =>{
+  _login.classList.toggle('active');
+  _body.classList.toggle('overflow');
+})
+
+document.addEventListener('click', (event) => {
+  if (!_login_content_.contains(event.target) && event.target !== _login_in_) {
+    _login.classList.remove('active');
+    _body.classList.remove('overflow');
+  }
+});
+
+
 const isOpen = ref(false);
 </script>
 
 <style>
 
-.text-layout{
-  font-weight: 900;
-  font-size: 25px;
-  width: 100%;
-  padding: 2vw;
-  display: inline-flex;
-  flex-direction: column;
-}.text-layout .copy{
-  font-size: 13px;
-  text-align: center;
-  font-weight: 700;
-  margin: 25px 0px 0px 0px;
-  color: #b5b5b5;
-}
-.text-layout a{
-  font-size: 17px;
-  text-align: center;
-  font-weight: 700;
-}.text-layout a span{
-  color: #4ac9c0;
-}.text-layout a span{cursor: pointer;}
-.text-layout a span:hover{
-  color: #54e9df;
-}
-.text-layout button{
-  font-size: 17px;
-  font-weight: 700;
-  background-color: #4dd8cf;
-  padding: 15px;
-  border-radius: 50px;
-  margin: 0px 0px 25px 0px;
-  width: 100%;
-}.text-layout button:hover{
-  background-color: #54e9df;
-}.text-layout button:focus{
-  background-color: #4ac9c0;
-}
-
-.text-layout form{
-  display: flex;
-  flex-direction: column;
-  margin: 25px 0px 0px 0px;
-}
-
-.text-layout input{
-  font-size: 17px;
-  font-weight: 700;
-  border: 1px solid #000000;
-  width: 100%;
-  padding: 15px 15px 15px 25px;
-  margin: 0px 0px 15px 0px;
-  border-radius: 50px;
-}
-.navigation {
-  width: 100%;
-  position: sticky;
-  top: 0;
-  display: flex;
-  padding: 15px 15px 15px 15px;
-  background-color: #ffffff;
-  border-bottom: 1px solid #e8e8e8;
-  z-index: 999;
-}
-.navigantion-layer {
-  max-width: 1279px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-.login {
-  margin: 0px 0px 0px 25px;
-  padding: 9px 19px 9px 19px;
-  background-color: #000000;
-  color: #ffffff;
-  border-radius: 50px;
-}
-
-.no-login {
-  display: flex;
-  align-items: center;
-}
-.logo {
-  font-size: 25px;
-  font-weight: 900;
-  color: #000000;
-}
-.logo a {
-  color: #000000;
-}
-.logo span {
-  color: #4dd8cf;
-}
-.no-login .create-button {
-  border-right: 1px solid #d6d6d6;
-  padding: 0px 25px 0px 0px;
-  font-weight: 500;
-  font-size: 17px;
-  cursor: pointer;
-}
-.no-login .create-button:hover {
-  opacity: 0.9;
-}
-@media(max-width: 350px){
-  .no-login button{
-    display: none;
-  }
-}
 </style>

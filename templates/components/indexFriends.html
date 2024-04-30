@@ -1,0 +1,140 @@
+<div class="index-friends-layout" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
+
+  <div class="index-friends-title">
+    <h2>Найди друга по интересам</h2>
+    <button>Как найти надежного попутчика ></button>
+  </div>
+
+  <div class="friends-layout">
+    {% include 'components/roadViews.html' %}
+    
+    <div class="index-friends-users">
+      {% for user in users %}    
+      <div class="index-friends-user">
+        <a href="{% url 'profile' user.id %}" style="display: flex;flex-direction: column;">
+        <img src="{{user.photo.url}}" alt="" />
+          <span>{{ user.first_name }}</span>
+        </a>
+        <p>{{ user.small_description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <a to="search"><button class="other">Показать всех</button></a>
+
+</div>
+<style>
+    .index-friends-layout {
+      width: 100%;
+      margin: 75px auto auto;
+    }
+    .index-friends-layout h2 {
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .friends-layout {
+      width: 100%;
+      margin: 0 auto 35px;
+    }
+    .index-friends-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0px 0px 25px 0px;
+    }
+    
+    .index-friends-users {
+      margin: 50px 0px 0px 0px;
+      display: flex;
+      justify-content: space-between;
+      overflow: hidden;
+      overflow-x: auto;
+    }
+    .index-friends-user {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: max-content;
+    }
+    .index-friends-user img {
+      border-radius: 1000px;
+      max-width: 150px;
+      max-height: 150px;
+      margin: 0px 0px 15px 0px;
+    }
+    .index-friends-user span {
+      font-size: 19px;
+      font-weight: 700;
+    }
+    .index-friends-user p {
+      font-size: 15px;
+      color: #9b9b9b;
+      width: 79%;
+      max-width: 150px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: grid;
+      max-height: 48px;
+      text-align: center;
+    }
+    .other {
+      border: 1px solid #e6e6e6;
+      border-radius: 9px;
+      font-size: 17px;
+      text-align: center;
+      width: 100%;
+      padding: 15px 15px 15px 15px;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+    }
+    .other:hover {
+      background-color: #000000;
+      color: #ffffff;
+      border: 1px solid #000000;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+      -moz-transition: all 0.3s;
+    }
+    @media (max-width: 770px) {
+      .index-friends-layout {
+        margin: 0px auto 35px;
+      }
+      .index-friends-title {
+        width: calc(100% -30px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 0px 0px 15px;
+      }
+      .index-friends-title h2 {
+        font-size: 5vw;
+      }
+      .road-view {
+        overflow: hidden;
+        overflow-x: auto;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: repeat(2, auto);
+        padding: 0px 15px 0px 15px;
+      }
+      .index-friends-user {
+        margin: 0px 15px 0px 0px;
+      }
+      .index-friends-user img {
+        max-width: 135px;
+      }
+      .index-friends-user p {
+        font-size: 12px;
+        padding: 0px;
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+      }
+      .index-friends-users {
+        padding: 0px 15px 0px 15px;
+        margin: 0px 0px 35px 0px;
+      }
+    }
+    </style>

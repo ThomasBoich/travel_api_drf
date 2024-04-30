@@ -128,3 +128,31 @@ class CustomUserSetPasswordForm(SetPasswordForm):
         return self.user
 
 
+
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(label='Электронная почта', widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(label='Пароль', widget=forms.PasswordInput(attrs={'class': 'form-control'}))
+
+    error_messages = {
+        "invalid_login": 
+            'НЕВЕРНЫЙ ЛОГИН И/ИЛИ ПАРОЛЬ. Попробуйте снова.'
+        ,
+        "inactive": "This account is inactive.",
+    }
+    def confirm_login_allowed(self, user):
+        if not user.is_active:
+            raise ValidationError(
+                "Этот аккаунт не активен.",
+                code='inactive',
+            )
+        if user.ban:
+            raise ValidationError(
+                "Вы не можете войти, обратитесь к администратору",
+                code='fired',
+            )
+
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'username', 'password']
