@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 
 from travels.models import Country, Travel
-from users.models import City, CustomUser, Interests
+from users.models import City, CustomUser, Interests, Habits
 from django.contrib.auth.views import LoginView
 from django.views.generic import CreateView
 from django.contrib.auth import authenticate, login
@@ -46,8 +46,12 @@ def me(request):
 def profile(request, user_id):
     travels = Travel.objects.all()
     user = CustomUser.objects.get(id=user_id)
+    interests = Interests.objects.filter(users_interests=user)
+    habits = Habits.objects.filter(user_habits=user)
     context = {
         'travels': travels,
+        'habits': habits,
+        'interests': interests,
         'user': user,
         'title': f'{user.first_name}',
     }
@@ -109,6 +113,15 @@ class UpdateUserView(UpdateView):
     form_class = UserUpdateForm
     template_name = 'settings.html'
     pk_url_kwarg = 'user_id'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.get_object()
+        context['interests'] = user.interests.all()
+        context['all_interests'] = Interests.objects.all()
+        context['habits'] = Habits.objects.all()
+        context['cities'] = City.objects.all()
+        return context
 
     def get_success_url(self):
         return reverse_lazy('update_user', kwargs={'user_id': self.object.pk})

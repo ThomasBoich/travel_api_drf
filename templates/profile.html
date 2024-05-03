@@ -49,11 +49,13 @@
     <div class="about-user">
       <h2>О себе</h2>
       <AboutUser :abouts="abouts" :margin="margin"></AboutUser>
+      {% include 'components/AboutUser.html' %}
     </div>
 
     <div class="intresting">
       <h2>Интересы</h2>
       <roadViews :views="views"></roadViews>
+      {% include 'components/roadViews.html' %}
     </div>  
      
   </div>

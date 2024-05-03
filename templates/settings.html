@@ -7,137 +7,154 @@
     <form action="" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <!-- {{ form.as_p }} -->
-
-
-      <div class="ineteres_layer">
-        <h2>Интересы</h2>
-        <p>
-          <label for="id_habits">Habits:</label>
-          <select name="habits" id="id_habits" multiple="">
-        <option value="1">Курю</option>
       
-      </select>
-          
-          
+      <div class="profile_left">
+
+        <p>
+          <!-- <label for="id_photo">Avatar:</label> -->
+          <img src="{{request.user.photo.url}}" alt="" style="border-radius: 9px 9px 0px 0px;">
+          <!-- На данный момент: <a href="{{request.user.photo.url}}">{{request.user.photo.url}}</a>
+      <input type="checkbox" name="photo-clear" id="photo-clear_id">
+      <label for="photo-clear_id">Очистить</label><br>
+      Изменить:   -->
+      <input type="file" name="photo" accept="image/*" id="id_photo" style="border-radius: 0px 0px 9px 9px;">
+                  
+        </p>  
+
+        <p style="margin:0px 0px 15px 0px;">
+          <label for="id_description">Описание страницы:</label>
+          <textarea name="description" id="id_description">
+            {{user.description}}
+          </textarea>
         </p>
         <p>
-          <label for="id_interests">Interests:</label>
-          <select name="interests" id="id_interests" multiple="">
-        <option value="1">Секс</option>
-      
-        <option value="2">Трах</option>
-      
-        <option value="3">Ебаться</option>
-      
-        <option value="4">Ебашить</option>
-      
-        <option value="5">Пирдеть</option>
-      
-      </select>
+          <label for="id_small_description">Краткое описание:</label>
+          <input type="text" name="small_description" maxlength="99" id="id_small_description" value="{{user.small_description}}">
         </p>
+
+ 
       </div>
-      <div class="contant_info">
-        <h2>Контактная информация</h2>
-        <p>
-          <label for="id_city">City:</label>
-          <select name="city" id="id_city">
-        <option value="" selected="">---------</option>
-      
-        <option value="1">Москва</option>
-      
-      </select>
-          
-          
-        </p>
-        <p>
-          <label for="id_email">Email adress:</label>
-          <input type="email" name="email" value="root@root.root" maxlength="254" id="id_email">
-          
-          
-        </p>
-      </div>
+      <div class="profile_right">
 
-    
 
-      <div class="info">
-        <h2>Основная информация</h2>
-        <p>
-          <label for="id_first_name">First Name:</label>
-          <input type="text" name="first_name" value="Хочу нежно войти" maxlength="100" id="id_first_name">
+
+        <div class="ineteres_layer">
+          <div class="info">
+            <h2>Основная информация</h2>
+            <p>
+              <label for="id_first_name">First Name:</label>
+              <input type="text" name="first_name" value="{{user.first_name}}" maxlength="100" id="id_first_name">
+              
+              
+            </p>
           
+            
+            <p>
+              <label for="id_last_name">Last Name:</label>
+              <input type="text" name="last_name" value="{{user.last_name}}" maxlength="100" id="id_last_name">
+              
+              
+            </p>
           
-        </p>
-      
+            
+            <p>
+              <label for="id_patronymic">Patronymic:</label>
+              <input type="text" name="patronymic" value="{{user.patronymic}}" maxlength="100" id="id_patronymic">
+  
+            </p>
+            <p>
+              <label for="id_age">Age:</label>
+              <input type="number" name="age" value="{{request.user.age}}" id="id_age">           
+            </p>
+          </div>
+          <h2>Интересы</h2>
+          <p>
+            <label for="id_habits">Habits:</label>
+            <select name="habits" id="id_habits" multiple="">
+              {%for habit in habits %}
+              <option value="{{habit.id}}"  {% if habit in user.habits.all %} selected {% endif %}>{{habit.name}}</option>
+              {%endfor%}            
+            <!-- <option value="1">Курю</option>       -->
+        </select>
+                      
+          </p>
+          <p>
+            <label for="id_interests">Interests:</label>
+            <select name="interests" id="id_interests" multiple="">
+            {% for interest in all_interests %}
+            
+            <option value="{{interest.id}}" {% if interest in user.interests.all %} selected {% endif %}>{{interest.name}}</option>
+            
+            {% endfor %}
         
-        <p>
-          <label for="id_last_name">Last Name:</label>
-          <input type="text" name="last_name" value="Во влажную киску Дианы" maxlength="100" id="id_last_name">
-          
-          
-        </p>
-      
-        
-        <p>
-          <label for="id_patronymic">Patronymic:</label>
-          <input type="text" name="patronymic" value="И целовать её грудь" maxlength="100" id="id_patronymic">
+            </select>
+          </p>
+        </div>
+        <div class="contant_info">
+          <h2>Контактная информация</h2>
+          <p style="margin: 0px 0px 15px 0px;">
+            <label for="id_city">City:</label>
+            <select name="city" id="id_city">
+            <option value="" selected="">---------</option>
+            {% for city in cities %}
+              <option value="{{city.id}}" {% if interest == user.city.all %} selected {% endif %}>{{city.name}}</option>
+            {% endfor %}          
+            <!-- <option value="1">Москва</option>       -->
+        </select>
+            
+            
+          </p>
           <p>
             <label for="id_phone">Phone:</label>
-            <input type="text" name="phone" value="68787987897" maxlength="24" id="id_phone">
+            <input type="text" name="phone" value="{{user.phone}}" maxlength="24" id="id_phone">
           </p>
           
-        </p>
-        <p>
-          <label for="id_age">Age:</label>
-          <input type="number" name="age" value="0" id="id_age">           
-        </p>
+          <p>
+            <label for="id_email">Email adress:</label>
+            <input type="email" name="email" value="{{ user.email }}" maxlength="254" id="id_email">                      
+          </p>
+        </div>  
+
+
+  
+  
+  
+  
+      
+  
+      
+        
+      
+      
+        <div class="password_info">
+          <h2>Изменение пароля</h2>
+  
+          <p>
+            <label for="id_password">Новый пароль:</label>
+            <input type="password" name="password" id="id_password">      
+          </p>
+        
+          <p>
+            <label for="id_confirm_password">Подтвердите пароль:</label>
+            <input type="password" name="confirm_password" id="id_confirm_password">
+          </p>
+  
+  
+        </div>
+  
+  
+
+  
+  
+        <button type="submit">Сохранить</button>
+
+        
+
       </div>
 
 
-    
-      
-      <p>
-        <label for="id_photo">Avatar:</label>
-        <img src="{{request.user.photo.url}}" alt="">
-        На данный момент: <a href="{{request.user.photo.url}}">{{request.user.photo.url}}</a>
-    <input type="checkbox" name="photo-clear" id="photo-clear_id">
-    <label for="photo-clear_id">Очистить</label><br>
-    Изменить:
-    <input type="file" name="photo" accept="image/*" id="id_photo">
-        
-        
-      </p>
-    
-      
-    
-    
-      <div class="password_info">
-        <h2>Изменение пароля</h2>
-
-        <p>
-          <label for="id_password">Новый пароль:</label>
-          <input type="password" name="password" id="id_password">      
-        </p>
-      
-        <p>
-          <label for="id_confirm_password">Подтвердите пароль:</label>
-          <input type="password" name="confirm_password" id="id_confirm_password">
-        </p>
 
 
-      </div>
-
-
-      <p>
-        <label for="id_description">Описание страницы:</label>
-        <textarea name="description" cols="40" rows="10" id="id_description"></textarea>
-      </p>
-      <p>
-        <label for="id_small_description">Краткое описание:</label>
-        <input type="text" name="small_description" maxlength="99" id="id_small_description">
-      </p>
-
-
-      <button type="submit">Сохранить</button>
     </form>
   </div>
 <style>
@@ -146,6 +163,7 @@
   }
   .ineteres_layer{
     width: 100%;
+    margin: 0px 0px 15px 0px;
   }
   .form_layer{
     display: flex;
@@ -153,7 +171,7 @@
     width: 100%;
   }.form_layer form{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     box-shadow: none;
     width: 100%;
     max-width: 100%;
@@ -161,6 +179,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     line-height: 1.9;
+    justify-content: space-between;
   }.form_layer form p{
     display: flex;
     flex-direction: column;
@@ -175,6 +194,10 @@
     background-color: #00000009;
     font-size: 15px;
     margin: 0px 0px 25px 0px;
+  }.form_layer form h2{
+    margin: 0px 0px 15px 0px;
+  }.form_layer form button{
+    max-width: max-content;
   }
 </style>
      
