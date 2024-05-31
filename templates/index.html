@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
+
     <div class="content">
     <div class="hello-layout">
       <h1 data-aos="fade-down">
@@ -9,9 +10,12 @@
 
       {% include 'components/search.html' %}
       {% include 'components/indexSearch.html' %}
-
-      <a href="search" style="width:100%;"><button class="other">Еще варианты: {{ total_popular_countries}} шт.</button></a>
+      <style>
+        .search-sites{max-width: 768px!IMPORTANT;padding: 9px 5px 9px 5px!IMPORTANT;}
+      </style>
+      <a href="{% url 'travels' %}" style="width:100%;"><button class="other">Ещё варианты</button></a>
     </div>
+
 
     {% include 'components/popularRoad.html' %}
     {% include 'components/indexFriends.html' %}

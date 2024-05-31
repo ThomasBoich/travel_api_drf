@@ -12,7 +12,7 @@ data-aos-anchor-placement="center-bottom"
   
   {% for road in countries_from_moscow %}
   <div class="popular-road">
-    <a href="">
+    <a href="/travels/?country={{road.name}}">
       <div class="popular-road-filter"></div>
       <div class="index-popular-city-info">
         <span>{{road.name}}</span>
@@ -24,7 +24,7 @@ data-aos-anchor-placement="center-bottom"
   {% endfor %}
 
 </div>
-<a href="" style="width:100%;"><button class="other">Показать всех</button></a>
+<a href="/travels/?from_moscow=Москва" style="width:100%;"><button class="other">Показать все</button></a>
 </div>
 <style>
     .index-pupular-roads-layer {

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
-
+from django.db.models import Q
+from django.shortcuts import get_object_or_404
 from travels.models import Country, Travel
 from users.models import City, CustomUser, Interests, Habits
 from django.contrib.auth.views import LoginView
@@ -17,9 +18,10 @@ def index(request):
     users = CustomUser.objects.all()
     users = CustomUser.objects.all()
     interests = Interests.objects.all()
-    countries_from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()
+    countries_from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()[0:3]
     context = {
         'countries': countries[:12],
+        'countries_list': countries,
         'total_popular_countries': countries.count(),
         'travels': travels,
         'cities': cities,
@@ -31,6 +33,9 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def about(request):
+    context = {}
+    return render(request, 'about.html', context)
 
 def me(request):
     travels = Travel.objects.all()
@@ -125,3 +130,55 @@ class UpdateUserView(UpdateView):
 
     def get_success_url(self):
         return reverse_lazy('update_user', kwargs={'user_id': self.object.pk})
+    
+
+def travels(request):
+    if request.method == 'GET':
+        travels = Travel.objects.all()
+        from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()
+        travels_title = f'Поиск поездок - {travels.count()} шт.'
+        country_name = request.GET.get('country')
+        city_name = request.GET.get('city')
+        interest_name = request.GET.get('interest')
+        from_moscow = request.GET.get('from_moscow')
+        filters = Q()
+        
+        if country_name:
+            travels_title = f'Поиск поездок в {country_name}'
+            travels = Travel.objects.filter(country__name=country_name).distinct()
+        
+        if city_name:
+            travels_title = f'Поиск поездок из города {city_name}'
+            travels = Travel.objects.filter(from_city__name=city_name).distinct()
+        
+        if country_name and city_name:
+            travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name))
+            travels_title = f"Поездки: {city_name} — {country_name}"
+
+        if country_name and city_name and interest_name:
+            travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name), Q(gender_search=interest_name))
+            travels_title = f"Поездки: {city_name} — {country_name}"
+
+        if interest_name:
+            interest = get_object_or_404(Interests, name=interest_name)
+            filters &= Q(interests=interest)
+
+        if from_moscow:
+            travels = Country.objects.filter(travels__from_city__name=from_moscow).distinct()
+            travels_title = f'Популярные направления из Москвы'
+
+        if not country_name and not city_name and not interest_name:
+            travels = Travel.objects.all()
+            travels_title = f'Поиск поездок - {travels.count()} шт.'
+            
+    context = {
+        'title': f'Travelo',
+        'travels_title': travels_title,
+        'travels': travels,
+        'from_moscow': from_moscow,
+        'countries_list': Country.objects.all()
+    }
+    return render(request, 'travels.html', context)
+    #   else:
+    #     travels = Travel.objects.filter(filters)
+    #     travels_title = 'Поиск поездок'

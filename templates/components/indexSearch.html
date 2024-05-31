@@ -1,7 +1,7 @@
 <div class="popular-countries">
     <div class="popular-countries-title">
       <h2>Популярные направления <span>{{ total_popular_countries }} шт.</span></h2>
-      <button>Как найти надежного попутчика ></button>
+      <!-- <button>Как найти надежного попутчика ></button> -->
     </div>
 
     <div
@@ -27,7 +27,7 @@
 
       {% for country in countries %}
       <div class="popular-country">
-    <a href="" style="width: 100%;display: flex;
+    <a href="/travels/?country={{country.name}}" style="width: 100%;display: flex;
   align-items: center;justify-content: flex-start;text-align: left;">
       <img src="{{country.image.url}}" alt="">
       <div class="popular-country-info">

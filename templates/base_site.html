@@ -2,20 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Travelo</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
   {% include 'navigation.html' %}
   <div class="base-content">
+  {% if request.user.is_authenticated %}
   <div class="vertical-nav">
-    {% if request.user.is_authenticated %}
+ 
     <a href="{% url 'profile' request.user.id %}"><img src="{{request.user.photo.url}}" style="border-radius: 50px;"/>{{ request.user.first_name }}</a>
-    <a href="/chat"><img src="{% static '/img/Communication.png' %}" />Сообщения <span>2</span></a>
+        <a href="{% url 'travels' %}"><img src="{% static '/img/Search.png' %}" />Поиск поездок</a>
+    <!-- <a href="/chat"><img src="{% static '/img/Communication.png' %}" />Сообщения <span>2</span></a> -->
       <!-- <a><img src="{% static '/img/Commercial.png' %}" />Мои объявления <span>15</span></a> -->
-    {% endif %}
-    <a href="/"><img src="{% static '/img/Search.png' %}" />Поиск поездок</a>
+ 
+    <!-- <span class="no-login button" style="background-color: #000;
+    border-radius: 50px;
+    color: #fff;
+    padding: 9px 19px;
+    font-size: 17px;
+    width: max-content;">Авторизироваться</span> -->
+
   </div>
+  {% endif %}
 {% block content %}
 {% endblock %}
 {% include 'footer.html' %}
@@ -55,5 +64,33 @@
     opacity: 0.5;
   }
   </style> 
+
+<script>
+  const toogle_buttons = document.querySelectorAll('#active_toogle')
+  toogle_buttons.forEach(button => button.addEventListener('click', function(){
+  button.classList.toggle('active')    
+  }))
+</script>
+<link rel="stylesheet" href="{% static 'css/chosen.css' %}">
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/chosen.jquery.js' %}"></script>
+<script>
+$(document).ready(function(){
+	$('.js-chosen').chosen({
+		width: '100%',
+		no_results_text: 'Совпадений не найдено',
+		placeholder_text_single: 'Выберите город'
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+	$('.js-chosen1').chosen({
+		width: '100%',
+		no_results_text: 'Совпадений не найдено',
+		placeholder_text_single: 'Выберите город'
+	});
+});
+</script>
 </body>
 </html>

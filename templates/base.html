@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travelo</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
 </head>
 <body>
@@ -10,5 +11,32 @@
 {% block content %}
 {% endblock %}
 {% include 'footer.html' %}
+    <script>
+    const toogle_buttons = document.querySelectorAll('#active_toogle')
+    toogle_buttons.forEach(button => button.addEventListener('click', function(){
+    button.classList.toggle('active')    
+    }))
+  </script>
+<link rel="stylesheet" href="{% static 'css/chosen.css' %}">
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<script src="{% static 'js/chosen.jquery.js' %}"></script>
+<script>
+$(document).ready(function(){
+	$('.js-chosen').chosen({
+		width: '100%',
+		no_results_text: 'Совпадений не найдено',
+		placeholder_text_single: 'Выберите город'
+	});
+});
+</script>
+<script>
+$(document).ready(function(){
+	$('.js-chosen1').chosen({
+		width: '100%',
+		no_results_text: 'Совпадений не найдено',
+		placeholder_text_single: 'Выберите город'
+	});
+});
+</script>
 </body>
 </html>

@@ -1,3 +1,60 @@
+    <!-- Окно создания путешествия -->
+
+    <div class="create_travel_window_script">
+      
+      <form id="create_travel_window_script_form" action="" method="post" class="create-travel-form">
+        <h1>Создать путешествие</h1>
+        <div class="form-user-info">
+          <div>
+            <label for="gender">Я</label>
+            <select name="gender" id="gender">
+              <option value="Мужчина">Мужчина</option>
+              <option value="Женщина">Женщина</option>
+            </select>
+          </div>
+        <div>
+          <label for="search">Ищу</label>
+          <select name="search" id="search"><option value="Семейную пару">Семейную пару</option>
+            <option value="Женщину">Женщину</option>
+          </select>
+        </div><div style="width: 100%;">
+          <label for="">Откуда едем</label>
+          <input type="text" placeholder="Новосибирск">
+        </div>
+      </div>
+      <div class="where">
+        <label for="" style="border-bottom: 1px solid rgb(225, 225, 225); padding: 0px 0px 9px; margin: 0px 0px 15px;">Куда</label>
+        <div class="where-content">
+          {% for city in cities_as %}
+          <div>
+            <input type="checkbox" name="{{city.name}}" id="{{city.id}}">
+            <label for="{{city.id}}">{{city.name}}</label>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="form-city">
+        <label for="">Город, курорт</label>
+        <input type="text" placeholder="Новосибирск"></div>
+        <div class="form-date">
+          <div>
+            <label for="">Когда</label>
+            <input type="date" id="start" name="trip-start" min="2018-01-01" max="3999-12-31">
+          </div>
+          <div>
+            <label for="">Кол-во дней</label>
+            <input type="number" placeholder="15" style="max-width: 70px; text-align: center;">
+          </div>
+          <div style="flex-direction: row; align-items: center; margin: 25px 0px 0px;">
+            <label for="" style="margin: 0px 15px 0px 0px;">Уже отдыхаю</label>
+            <!----><button class="relative inline-flex flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none h-5 w-9 rounded-full focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 bg-gray-200 dark:bg-gray-700" role="switch" type="button" tabindex="0" aria-checked="false" data-headlessui-state="" id="nuid-2"><span class="pointer-events-none relative inline-block rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200 h-4 w-4 translate-x-0 rtl:-translate-x-0"><!--v-if--><!--v-if--></span>
+            </button>
+          </div>
+        </div>
+        <textarea name="" id="" cols="15" rows="2" placeholder="Опишите ваше путешествие ....."></textarea>
+        <button>Опубликовать</button>
+      </form>
+    </div>
   <div class="navigation">
     <div class="navigantion-layer">
       <div class="logo">
@@ -9,8 +66,39 @@
           <div class="add-layer">
             <div class="add_content">Создать</div>
             <div class="add-layer-content">
-              <a href="">Создать путешествие</a>
-              <a href="">Запись в блоге</a>
+              <!-- <a id="" onclick="create_travel()" href="">Создать путешествие</a> -->
+              <a id="" href="" class="no_active">Запись в блоге</a>
+              <span id="create_travels" onclick="create_travel()"
+              style="              
+              cursor: pointer;
+              width: 100%;
+              margin: 0px 0px 0px 0px;
+              font-size: 15px;
+              font-weight: 500;
+              background-color: #FFFFFF;
+              padding: 15px 25px;
+              transition: background-color 0.3s;
+              -moz-transition: background-color 0.3s;
+              -webkit-transition: background-color 0.3s;
+              ">Создать путешествие</span>
+              <script>
+                const html = document.querySelector('html')
+                const create_modal = document.querySelector('.create_travel_window_script')
+                const create_travels = document.querySelector('#create_travels')
+                const create_travel_window_script_form = document.querySelector('#create_travel_window_script_form')
+                function create_travel(){
+                  html.style.overflow = 'hidden'
+                  create_modal.classList.add('active')
+                }
+                
+                document.addEventListener('click', function(e){
+                  if (!create_travel_window_script_form.contains(e.target) && create_travels !== e.target){
+                    html.style.overflow = 'auto'
+                    create_modal.classList.remove('active')
+                  }
+                })
+
+              </script>
             </div>
           </div>          
           <!-- <span class="create-button">+ Создать</span> -->         
@@ -18,8 +106,8 @@
             <img id="user_nav" class="user_nav" src="{{ request.user.photo.url }}" alt="">
             <div class="user-nav-layer">
               <a href="{% url 'profile' request.user.id %}">Моя страница</a>
-              <a href="">Сообщения</a>
-              <a href="">Поиск поездок</a>
+              <!-- <a href="">Сообщения</a> -->
+              <a href="{% url 'travels' %}">Поиск поездок</a>
               <a href="{% url 'update_user' request.user.id %}">Настройки</a>
               <a href="{% url 'logout' %}">Выход</a>
             </div>
