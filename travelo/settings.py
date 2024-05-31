@@ -162,3 +162,4 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = 'TRAVELO'
 ADMIN_SITE_HEADER_COLOR = 'green'
+CSRF_TRUSTED_ORIGINS=["http://travel.deadspace14.net/","https://travel.deadspace14.net/"]

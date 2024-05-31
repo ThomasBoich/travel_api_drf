@@ -1,7 +1,7 @@
 {% load static %}
 <div class="aboutUser aboutUser" style="/*border-bottom: 1px solid #ebebeb;*/margin: 15px 0px 15px 0px!IMPORTANT;padding: 0px 0px 15px 0px;">
     {% for habit in habits %}
-        <span><img src="{{ habit.image.url }}" alt="">{{ habit.name }}</span>
+        {% if habit.image.url and habit.image %} <span><img src="{{ habit.image.url }}" alt="">{{ habit.name }}</span>{% endif %}
     {% endfor %}
 </div>
 <style scoped>

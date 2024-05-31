@@ -141,6 +141,7 @@ def travels(request):
         city_name = request.GET.get('city')
         interest_name = request.GET.get('interest')
         from_moscow = request.GET.get('from_moscow')
+        cities = City.objects.all()
         filters = Q()
         
         if country_name:
@@ -176,7 +177,8 @@ def travels(request):
         'travels_title': travels_title,
         'travels': travels,
         'from_moscow': from_moscow,
-        'countries_list': Country.objects.all()
+        'countries_list': Country.objects.all(),
+        'cities': cities,
     }
     return render(request, 'travels.html', context)
     #   else:
