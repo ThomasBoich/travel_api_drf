@@ -1,0 +1,60 @@
+{% extends 'base_site.html' %}{% load static %}
+{% block content %}
+<div class="content" style="width:100%;max-width: 100%;" v-if="loaded" data-aos="fade-down">
+    <div class="travel__header">
+      <div class="travel__header__title">
+        <div class="travel_gender_search">
+          {% if travel.gender == 'Мужчина' and travel.gender_search == 'Женщину' %}
+          <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;
+          {% elif travel.gender == 'Женщина' and travel.gender_search == 'Мужчину' %}
+          <img src="{% static 'img/pic_female.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;
+          {% elif travel.gender == 'Мужчина' and travel.gender_search == 'Семью' %}
+          <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;
+          {% elif travel.gender == 'Женщина' and travel.gender_search == 'Семью' %}
+          <img src="{% static 'img/pic_female.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;
+          {% elif travel.gender == 'Мужчина' and travel.gender_search == 'Мужчину' %}
+          <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;
+          {% else %}
+          <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;
+      {% endif %}  
+        {{travel.gender}}
+        ищет
+        {{travel.gender_search}}
+        </div>
+       
+        <h1 class="travel__header__title__text">
+        Ищу попутчика: 
+        {% if travel.country %}
+            {% for i in travel.country.all %}<span>{{i.name}}, </span>{% endfor %}
+        {% endif %}
+        </h1
+        </div>
+      </div>
+
+      <div class="travel__user__layer">
+        <a href="{% url 'profile' travel.user.id %}">
+        <div class="travel_user">
+          <img src="{{ travel.user.photo.url }}" alt="">
+          <div class="">
+            <div class="travel_user_info">
+              <img src="{% static 'img/pic_location_grey.png' %}" alt="" class="city_img"> {{ travel.user.city.name }}
+            </div>
+            <span class="travel_user_name">{{ travel.user.first_name }}</span>
+          </div>
+          <!-- стрелка -->
+        </div>
+      </a>
+
+        <p>
+          {{ travel.description }}
+        </p>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<style>
+
+</style>
+{% endblock %}

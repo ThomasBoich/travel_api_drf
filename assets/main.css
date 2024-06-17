@@ -1371,3 +1371,66 @@ form.search-sites{
     display: none;
   }
 }
+
+.travel__header{
+  width: 100%;
+  border-bottom: 1px solid #00000025;
+  margin: 0px 0px 25px 0px;
+}
+.travel__header__title{
+  margin-bottom: 25px;
+  border-bottom: 1px solid #00000025;
+  padding-bottom: 25px;
+}
+.travel__header__title__text{
+   font-size: 20px;
+   font-weight: 700;
+}
+
+.travel__header__title__text span{
+  color: #00000070;
+}
+.travel__header__title img{
+  width: 17px;
+  height: 17px;
+}
+
+.travel_user{
+
+  display: flex;
+  align-items: center;
+
+    & img {
+      width: 59px;
+      height: 59px;
+      border-radius: 100px;
+      object-fit: cover;
+      margin: 0px 15px 0px 0px;
+    }
+}
+
+img.city_img{
+  width: 15px;
+  height: 15px;
+  margin: 0px 0px 0px 0px;
+  position: relative;
+  left: -2px;
+}
+.travel_user_name{
+  font-weight: 700;
+  font-size: 17px;
+}
+
+
+
+.travel__user__layer p {
+  margin: 25px 0px 25px 0px;
+  line-height: 1.9;
+}
+
+
+.travel_gender_search{
+  margin: 5px 0px 9px 0px;
+  display: flex;
+  aligin-items: center;
+}

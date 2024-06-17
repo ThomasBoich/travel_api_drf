@@ -10,7 +10,7 @@
         <div class="user-rating">
 
           <h2>{{user.first_name}} {{user.last_name}}, {{user.age}} лет</h2>
-          <img src="~/assets/img/pic_location_grey.png" alt=""><span>{{user.city}}</span>
+          <img src="{% static 'img/pic_location_grey.png' %}" alt=""><span>{{user.city}}</span>
 
           <div class="rating_layout_star" data-total-value="5">
             <div class="rating_star" data-item-value="5">★</div>

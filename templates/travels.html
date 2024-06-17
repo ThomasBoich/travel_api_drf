@@ -16,7 +16,7 @@
   {% for travel in travels %}
 
 
-
+<a href="{% url 'travel' travel.id %}">
 <div class="search-result">
   <img src="{{travel.user.photo.url}}" alt="">
   <div class="search-result-info">
@@ -30,6 +30,7 @@
       <p> {{travel.description}} </p>
     </div>
 </div>
+</a>
 {% empty %}
    Нет результаов
 {% endfor %}

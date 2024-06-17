@@ -184,3 +184,11 @@ def travels(request):
     #   else:
     #     travels = Travel.objects.filter(filters)
     #     travels_title = 'Поиск поездок'
+    
+    
+from travels.models import *
+def travel(request, travel_id):
+    context = {
+        'travel': Travel.objects.get(id=travel_id),
+    }
+    return render(request, 'travel.html', context)
