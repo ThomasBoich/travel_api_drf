@@ -1,12 +1,8 @@
-
-
 <div class="road-view">
     {% for interes in interests %}
         {% if interes.image.url and interes.image %} <span><img src="{{interes.image.url}}" alt="">{{ interes.name }}</span>{% endif %}
     {% endfor %}
 </div>
-
-
 <style>
     .road-view{display: flex;flex-wrap: wrap;gap: 15px;margin:0px 0px 25px 0px;}
     .road-view span{

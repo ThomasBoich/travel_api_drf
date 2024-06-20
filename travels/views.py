@@ -34,3 +34,16 @@ class CountryViewSet(viewsets.ModelViewSet):
     def total_country_count(self, request):
         total_count = Country.objects.count()
         return Response({'total_country_count': total_count})
+    
+from django.shortcuts import render, redirect
+from .forms import TravelForm
+
+def create_travel(request):
+    if request.method == 'POST':
+        form = TravelForm(request.POST, user=request.user)
+        if form.is_valid():
+            new_travel = form.save()
+            return redirect('travel', travel_id=new_travel.id)  # Redirect to the created travel page
+    else:
+        form = TravelForm(user=request.user)
+    return render(request, 'index.html', {'form': form})

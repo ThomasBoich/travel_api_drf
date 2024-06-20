@@ -15,8 +15,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     patronymic = models.CharField(u"Patronymic", max_length=100, blank=True, null=True)
     user_profile_id = models.IntegerField(blank=True, verbose_name='ID User', null=True)
     phone = models.CharField(max_length=24, blank=True, null=True, verbose_name='Phone')
-    photo = models.ImageField(upload_to='media/users/%Y/%m/%d/', blank=True, null=True, default='../static/assets/img/default_avatar.png',
-                              verbose_name='Avatar')
+    photo = models.ImageField(upload_to='media/users/%Y/%m/%d/', blank=True, null=True, verbose_name='Avatar') # default='../static/assets/img/default_avatar.png',
+                              
     is_active = models.BooleanField(default=True, verbose_name='Activate', blank=True, null=True)
     is_admin = models.BooleanField(default=False, verbose_name='Administrator', blank=True, null=True)
     is_staff = models.BooleanField(_('staff status'), default=False, blank=True, null=True)

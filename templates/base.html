@@ -5,8 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travelo</title>
     <link rel="stylesheet" href="{% static 'main.css' %}">
+    <link rel="stylesheet" href="{% static 'animate.css' %}">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 </head>
 <body>
+
 {% include 'navigation.html' %}
 {% block content %}
 {% endblock %}
@@ -38,5 +44,36 @@ $(document).ready(function(){
 	});
 });
 </script>
+<script>
+  $(document).ready(function(){
+    $('.js-chosen3').chosen({
+      width: '100%',
+      no_results_text: 'Совпадений не найдено',
+      placeholder_text_single: 'Выберите город'
+    });
+  });
+  </script>
+  <script>
+  $(document).ready(function(){
+    $('.js-chosen4').chosen({
+      width: '100%',
+      no_results_text: 'Совпадений не найдено',
+      placeholder_text_single: 'Выберите город'
+    });
+  });
+  </script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script>
+                      wow = new WOW(
+                      {
+                      boxClass:     'wow',      // default
+                      animateClass: 'animated', // default
+                      offset:       0,          // default
+                      mobile:       true,       // default
+                      live:         true        // default
+                    }
+                    )
+                    wow.init();
+    </script>
 </body>
 </html>

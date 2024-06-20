@@ -929,6 +929,8 @@ h1{
   box-shadow: none;
   overflow: auto;
   padding: 15px 25px 15px 25px;
+  overflow: hidden;
+  overflow-y: auto;
 }
 .create_travel_window_script form button{
   background-color: #000;
@@ -1396,7 +1398,7 @@ form.search-sites{
 }
 
 .travel_user{
-
+  width:max-content;
   display: flex;
   align-items: center;
 
@@ -1408,6 +1410,10 @@ form.search-sites{
       margin: 0px 15px 0px 0px;
     }
 }
+.travel_user:hover{
+  opacity: 0.7;
+}
+
 
 img.city_img{
   width: 15px;
@@ -1433,4 +1439,10 @@ img.city_img{
   margin: 5px 0px 9px 0px;
   display: flex;
   aligin-items: center;
+}
+
+.where-content-form{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px; 
 }

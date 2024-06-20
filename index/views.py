@@ -10,8 +10,35 @@ from django.contrib.auth import authenticate, login
 from users.forms import LoginForm, CustomUserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from travels.forms import TravelForm
 # Create your views here.
+
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from users.forms import CustomUserRegistrationForm
+
+def register_user(request):
+    if request.method == 'POST':
+        form = CustomUserRegistrationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            
+            # Authenticate and login the user
+            username = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                
+            return redirect('update_user', user_id=user.id)  # Redirect to the index page after successful registration
+    else:
+        form = CustomUserRegistrationForm()
+    
+    return render(request, 'index.html', {'form_reg': form})
+
+
 def index(request):
+    form = TravelForm(user=request.user)
     countries = Country.objects.all()
     travels = Travel.objects.all()
     cities = City.objects.all()
@@ -20,6 +47,7 @@ def index(request):
     interests = Interests.objects.all()
     countries_from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()[0:3]
     context = {
+        'form': form,
         'countries': countries[:12],
         'countries_list': countries,
         'total_popular_countries': countries.count(),
@@ -30,6 +58,7 @@ def index(request):
         'interests': interests,
         'countries_from_moscow': countries_from_moscow,
         'countries_from_moscow_count': countries_from_moscow.count(),
+        'form_reg': CustomUserRegistrationForm(request.POST)
     }
     return render(request, 'index.html', context)
 
@@ -186,9 +215,11 @@ def travels(request):
     #     travels_title = 'Поиск поездок'
     
     
-from travels.models import *
 def travel(request, travel_id):
+    travel = Travel.objects.get(id=travel_id)
+    user = travel.user
     context = {
-        'travel': Travel.objects.get(id=travel_id),
+        'travel': travel,
+        'user_travels': Travel.objects.filter(user=user),
     }
     return render(request, 'travel.html', context)
