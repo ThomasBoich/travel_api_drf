@@ -53,7 +53,7 @@ def index(request):
         'total_popular_countries': countries.count(),
         'travels': travels,
         'cities': cities,
-        'users': users,
+        'users': users[0:5],
         'title': f'Travelo',
         'interests': interests,
         'countries_from_moscow': countries_from_moscow,
