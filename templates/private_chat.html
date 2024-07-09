@@ -1,0 +1,13 @@
+<h1>Private Chat with {{ recipient.username }}</h1>
+
+<ul>
+    {% for message in messages %}
+        <li>{{ message.sender.username }}: {{ message.content }}</li>
+    {% endfor %}
+</ul>
+
+<form method="post" action="{% url 'send_message' recipient.id%}">
+    {% csrf_token %}
+    <input type="text" name="message_content" placeholder="Type your message here" required>
+    <button type="submit">Send</button>
+</form>

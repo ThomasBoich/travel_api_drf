@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
     'users',
     'travels',
     'index',
+    'chat',
     "corsheaders",
     'rest_framework',
     'drf_yasg',
@@ -73,12 +75,16 @@ TEMPLATES = [
                 # 'travels.context_processors.get_cities',
                 # 'travels.context_processors.get_countries',
                 'index.context_processors.get_countries',
+                #'index.context_processors.get_dealog',
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'travelo.wsgi.application'
+
+# ASGI_APPLICATION = 'travelo.routing.application'
+ASGI_APPLICATION = 'travelo.asgi.application'
+# WSGI_APPLICATION = 'travelo.wsgi.application'
 
 
 # Database
@@ -164,3 +170,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = 'TRAVELO'
 ADMIN_SITE_HEADER_COLOR = 'green'
 CSRF_TRUSTED_ORIGINS=["http://travel.deadspace14.net/","https://travel.deadspace14.net/"]
+
+#   REDIS
+# REDIS = False
+
+# if REDIS :
+#     CHANNEL_LAYERS = {
+#         "default": {
+#             "BACKEND": "channels_redis.core.RedisChannelLayer",
+#             "CONFIG": {
+#                 "hosts": [("localhost", 6379)],
+#             },
+#         },
+#     }
+# else:
+#     CHANNEL_LAYERS = {
+#         "default": {
+#             "BACKEND": "channels.layers.InMemoryChannelLayer"
+#         }
+#     }

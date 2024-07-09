@@ -1446,3 +1446,44 @@ img.city_img{
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 10px; 
 }
+
+
+
+
+
+
+
+@media (max-width: 500px){
+
+    form.search-sites{
+        border-radius: 9px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 25px 5px 25px 0px !IMPORTANT;
+        box-sizing: border-box;
+    }
+
+    .search-button{
+        width: 100%;
+        max-width: 100%;
+        max-width: 90%;
+    }
+
+    .where{
+        width: 100%!IMPORTANT;
+        max-width: 100%!IMPORTANT;
+    }
+
+    .where-layout{
+        padding: 19px 17px 5px 17px !IMPORTANT;
+    }
+
+    .other button{
+        max-width: 90%!IMPORTANT;
+        margin: 0 auto!IMPORTANT;
+    }
+    .index-popular-roads-title span{
+        min-width: max-content;
+    }
+
+}

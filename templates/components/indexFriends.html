@@ -12,7 +12,11 @@
       {% for user in users %}    
       <div class="index-friends-user">
         <a href="{% url 'profile' user.id %}" style="display: flex;flex-direction: column;">
-        <img src="{{user.photo.url}}" alt="" />
+        {%if user.photo.url and user.photo%}<img src="{{user.photo.url}}" alt="" />
+        {%else%}
+        <img src="" alt="">
+        {%endif%}
+          
           <span>{{ user.first_name }}</span>
         </a>
         <p>{{ user.small_description }}</p>

@@ -214,7 +214,9 @@ def travels(request):
     #     travels = Travel.objects.filter(filters)
     #     travels_title = 'Поиск поездок'
     
-    
+
+
+
 def travel(request, travel_id):
     travel = Travel.objects.get(id=travel_id)
     user = travel.user
@@ -223,3 +225,126 @@ def travel(request, travel_id):
         'user_travels': Travel.objects.filter(user=user),
     }
     return render(request, 'travel.html', context)
+
+
+
+from chat.models import *
+from django.db.models import Q
+from chat.forms import MessageForm
+def chats(request):
+    user = request.user
+    dialogs = Dialog.objects.filter(Q(user=user) or Q(with_user=user))
+    chats = Message.objects.filter(Q(recipient=request.user) | Q(sender=request.user)).order_by('-timestamp')
+    # people = CustomUser.objects.filter(Q(recipient=request.user) | Q(sender=request.user)).order_by('-timestamp')
+    dialogs_response = Dialog.objects.filter(Q(user=request.user) | Q(with_user=request.user)) #recipient,
+    
+    # messages = Message.objects.filter(sender=request.user, recipient=recipient) | Message.objects.filter(sender=recipient, recipient=request.user).order_by('timestamp')
+    if dialogs_response:
+        #messages = Message.objects.filter(dialog=dialog)
+        message_count = 0
+    else:
+        messages = []
+        message_count = 0
+        
+    context = {
+        'chats': chats,
+        # 'messages': messages,
+        # 'dialog_count': message_count,
+        'dialogs': dialogs_response,
+    }
+    
+    return render(request, 'chats.html', context)
+
+
+def message(request, recipient_id):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            sender = request.user
+            recipient = User.objects.get(id=recipient_id)
+            content = form.cleaned_data['message_content']
+            message = Message(sender=sender, recipient=recipient, content=content)
+            message.save()
+            
+            # Проверяем существующий диалог между отправителем и получателем
+            if not Dialog.objects.filter(user=sender, with_user=recipient).first():            
+                if not Dialog.objects.filter(user=recipient, with_user=sender).first():
+                    dialog = Dialog.objects.create(user=sender, with_user=recipient)
+                
+                        
+            dialog = Dialog.objects.filter(Q(user=sender, with_user=recipient) | Q(user=recipient, with_user=sender)).first()
+            print(dialog)
+            dialog.messages.add(message)  # Добавляем сообщение в диалог
+            dialog.last_message = message
+            dialog.save()
+            
+            return redirect('message', recipient_id=recipient_id)
+    else:
+        form = MessageForm()        
+        # form = MessageForm()
+        recipient = User.objects.get(id=recipient_id)
+        #dialog = Dialog.objects.filter(user=request.user, with_user=recipient).first()
+        messages = Message.objects.filter(sender=request.user, recipient=recipient) | Message.objects.filter(sender=recipient, recipient=request.user).order_by('timestamp')
+        # if dialog:
+        #     messages = Message.objects.filter(dialog=dialog)
+        # else:
+        #     messages = []
+                
+    return render(request, 'message.html', {
+        'recipient': recipient,
+        'messages': messages,
+        'form': form,
+        # 'dialogs': dialogs
+    })
+        
+        # if recipient_id != request.user:
+        #     recipient = User.objects.get(id=recipient_id)
+        #     # Проверяем существующий диалог между отправителем и получателем
+        #     dialog = Dialog.objects.filter(user=sender, with_user=recipient).first()
+        # if not dialog:
+        #     dialog = Dialog.objects.create(user=sender, with_user=recipient)        
+        # dialog.save()
+        
+        # user = request.user
+        # dialogs = Dialog.objects.filter(Q(user=user) | Q(with_user=user))
+        # form = MessageForm()      
+        # recipient = CustomUser.objects.get(Q(id=recipient_id) | Q(id=user.id))           
+         
+        # if not dialogs:
+        #     pass
+        # else:                              
+        #     # Получаем все сообщения между отправителем и получателем
+        #     dialog_message = Dialog.objects.filter(user=request.user, with_user=recipient) | Dialog.objects.filter(user=recipient, with_user=request.user).first()
+            
+        #     if dialog_message:
+        #         messages = dialog_message.messages.all().order_by('timestamp')
+        #     else:
+        #         messages = []
+                    # Получаем все сообщения между отправителем и получателем
+
+
+def display_messages(request, recipient_id):
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+        if form.is_valid():
+            sender = request.user
+            recipient = User.objects.get(id=recipient_id)
+            content = form.cleaned_data['message_content']
+            message = Message(sender=sender, recipient=recipient, content=content)
+            message.save()
+            dialog, created = Dialog.objects.get_or_create(user=sender, with_user=recipient)
+            dialog.last_message = message
+            dialog.save()
+            return redirect('display_messages', recipient_id=recipient_id)
+    else:
+        form = MessageForm()        
+        # form = MessageForm()
+        recipient = User.objects.get(id=recipient_id)
+        #dialog = Dialog.objects.filter(user=request.user, with_user=recipient).first()
+        messages = Message.objects.filter(sender=request.user, recipient=recipient) | Message.objects.filter(sender=recipient, recipient=request.user).order_by('timestamp')
+        # if dialog:
+        #     messages = Message.objects.filter(dialog=dialog)
+        # else:
+        #     messages = []
+    
+    return render(request, 'display_messages.html', {'recipient': recipient, 'messages': messages, 'form': form})

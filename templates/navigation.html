@@ -136,7 +136,12 @@
           </div>          
           <!-- <span class="create-button">+ Создать</span> -->         
           <div class="user-nav">
+            {%if request.user.photo.url and request.user.photo%}
             <img id="user_nav" class="user_nav" src="{{ request.user.photo.url }}" alt="">
+            {%else%}
+            <img id="user_nav" class="user_nav" src="" alt="">
+            {%endif%}
+            
             <div class="user-nav-layer">
               <a href="{% url 'profile' request.user.id %}">Моя страница</a>
               <!-- <a href="">Сообщения</a> -->

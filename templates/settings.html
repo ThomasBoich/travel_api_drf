@@ -12,11 +12,17 @@
 
         <p>
           <!-- <label for="id_photo">Avatar:</label> -->
+          {%if request.user.photo.url and request.user.photo%}
           <img src="{{request.user.photo.url}}" alt="" style="border-radius: 9px 9px 0px 0px;">
-          <!-- На данный момент: <a href="{{request.user.photo.url}}">{{request.user.photo.url}}</a>
+          {%else%}
+          <img src="" alt="">
+          {%endif%}
+      {% comment%}
+      <!-- На данный момент: <a href="{{request.user.photo.url}}">{{request.user.photo.url}}</a>
       <input type="checkbox" name="photo-clear" id="photo-clear_id">
       <label for="photo-clear_id">Очистить</label><br>
       Изменить:   -->
+      {% endcomment %}    
       <input type="file" name="photo" accept="image/*" id="id_photo" style="border-radius: 0px 0px 9px 9px;">
                   
         </p>  

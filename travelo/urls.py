@@ -45,6 +45,9 @@ schema_view = get_schema_view(
    public=True,
    permission_classes=(permissions.AllowAny,),
 )
+
+from chat import views as chat_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('index.urls')),
@@ -52,6 +55,11 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    # APIs
+    # path('online-users/', chat_views.api_online_users, name='online-users'),
+    # path('online-users/<int:id>', chat_views.api_online_users, name='online-users'),
+    # path('chat-messages/<int:id>', chat_views.api_chat_messages, name='chat_messages'),
+    # path('unread/', chat_views.api_unread, name='api_unread'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Travelo</title>
+<!--    <link rel="shortcut icon" href="{%  static 'icon.svg' %}">-->
+<!--    <link rel="stylesheet" href="{%  static 'css/style.css' %}">-->
+<!--    <script src="{%  static 'js/main.js' %}"></script>-->
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <link rel="stylesheet" href="{% static 'animate.css' %}">
     <link
@@ -17,9 +20,15 @@
   {% if request.user.is_authenticated %}
   <div class="vertical-nav">
  
-    <a href="{% url 'profile' request.user.id %}"><img src="{{request.user.photo.url}}" style="border-radius: 50px;"/>{{ request.user.first_name }}</a>
+    <a href="{% url 'profile' request.user.id %}">
+      {%if request.user.photo.url and request.user.photo%}<img src="{{request.user.photo.url}}" style="border-radius: 50px;"/>
+      {%else%}
+      <img src="" alt="">
+      {%endif%}
+      
+      {{ request.user.first_name }}</a>
         <a href="{% url 'travels' %}"><img src="{% static '/img/Search.png' %}" />Поиск поездок</a>
-    <!-- <a href="/chat"><img src="{% static '/img/Communication.png' %}" />Сообщения <span>2</span></a> -->
+     <a href="{% url 'chats' %}"><img src="{% static '/img/Communication.png' %}" />Сообщения <span><!--2-->{{dialog_as}}</span></a>
       <!-- <a><img src="{% static '/img/Commercial.png' %}" />Мои объявления <span>15</span></a> -->
  
     <!-- <span class="no-login button" style="background-color: #000;
@@ -129,5 +138,6 @@ $(document).ready(function(){
                     )
                     wow.init();
       </script>
+<!--      <script src="{%  static 'js/main.js' %}"></script>-->
 </body>
 </html>

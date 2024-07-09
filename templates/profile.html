@@ -4,7 +4,11 @@
     <div class="user-layer">
       <div class="user-info-layer">
 
-      <img src="{{user.photo.url}}" class="user-avatar"/>
+      {%if user.photo.url and user.photo%}<img src="{{user.photo.url}}" class="user-avatar"/>
+      {%else%}
+      <img src="" class="user-avatar" alt="">
+      {%endif%}
+      
 
       <div class="user-info">
         <div class="user-rating">
@@ -29,7 +33,7 @@
       </div>
 
       {% if user.id != request.user.id %}
-        <a to="chat"><button style="max-width: max-content;font-size:15px;"><img src="{% static '/img/Communication.png' %}" /> Написать сообщение</button></a>
+        <a href="{% url 'message' user.id %}"><button style="max-width: max-content;font-size:15px;"><img src="{% static '/img/Communication.png' %}" /> Написать сообщение</button></a>
       {% endif %}
 
     </div>
