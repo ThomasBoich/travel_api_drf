@@ -32,8 +32,10 @@
         </div>
       </div>
 
-      {% if user.id != request.user.id %}
+      {% if user.id != request.user.id and request.user.is_authenticated %}
         <a href="{% url 'message' user.id %}"><button style="max-width: max-content;font-size:15px;"><img src="{% static '/img/Communication.png' %}" /> Написать сообщение</button></a>
+        {% else %}
+        <button>Сообщения доступны после авторизации</button>
       {% endif %}
 
     </div>

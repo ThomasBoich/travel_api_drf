@@ -162,7 +162,9 @@ STATICFILES_DIRS = [
     #os.path.join(BASE_DIR, "static"),
     os.path.join(BASE_DIR, "assets"),
 ]
-
+# Login and logout redirects using django auth app.
+LOGIN_REDIRECT_URL = 'pages:index'
+LOGOUT_REDIRECT_URL = 'pages:index'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 

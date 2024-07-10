@@ -12,7 +12,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from travels.forms import TravelForm
 # Create your views here.
-
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from users.forms import CustomUserRegistrationForm
@@ -231,6 +231,7 @@ def travel(request, travel_id):
 from chat.models import *
 from django.db.models import Q
 from chat.forms import MessageForm
+@login_required
 def chats(request):
     user = request.user
     dialogs = Dialog.objects.filter(Q(user=user) or Q(with_user=user))
@@ -255,7 +256,7 @@ def chats(request):
     
     return render(request, 'chats.html', context)
 
-
+@login_required
 def message(request, recipient_id):
     if request.method == 'POST':
         form = MessageForm(request.POST)
