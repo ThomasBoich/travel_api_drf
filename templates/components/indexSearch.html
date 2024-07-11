@@ -29,7 +29,13 @@
       <div class="popular-country">
     <a href="/travels/?country={{country.name}}" style="width: 100%;display: flex;
   align-items: center;justify-content: flex-start;text-align: left;">
-      <img src="{{country.image.url}}" alt="">
+
+        {%if country.image.url and country.image%}
+        <img src="{{country.image.url}}" alt="">
+        {%endif%}
+      
+
+
       <div class="popular-country-info">
         <div class="popular-country-info-layer">
           <span>{{ country.name }}</span>

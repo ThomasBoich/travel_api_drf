@@ -75,6 +75,15 @@ class Dialog(models.Model):
     def __str__(self):
         return f'от {self.user.email} -> кому {self.with_user.email}'
     
+    
+class Folder(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    dialogs = models.ManyToManyField('Dialog', related_name='dialogs_list', blank=True, null=True)
+    
+    def __str__(self):
+        return f'{self.name}'
+    
     # def save(self, *args, **kwargs):
     #     existing_dialog = Dialog.objects.filter(user=self.user, with_user=self.with_user).first()
     #     if existing_dialog:
