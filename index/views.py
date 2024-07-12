@@ -273,7 +273,7 @@ def folder(request, folder_id):
 
 
 def folderCreate(request):
-    if not user.is_premium and user.folders.count() >= 4:
+    if not request.user.is_premium and request.user.folders.count() >= 4:
         return redirect("chats")
     
     if request.method == 'POST':
