@@ -1,0 +1,99 @@
+{% load static %}
+<div class="chat-nav">
+    <h2>{{title_chat}} <span><!--2-->{{dialog_count}}</span></h2>
+    <div class="prime-chat-menu">
+    <a href="{% url 'chats' %}" class="active">Все <!--2-->{{dialog_count}}</a>
+    <!-- <a to="chat/favorite">Избранные 9</a> -->
+    </div>
+    <div class="chat-folders-layout">
+    <div class="chat-folders">
+      {% for folder in folders %}
+      <a href="{% url 'folder' folder.id %}"><img src="{% static 'img/folder.png' %}" alt="">{{ folder.name }}</a>
+      {% endfor %}
+
+    <!-- <a to=""><img src="{% static 'img/folder.png' %}" alt="">Знакомые</a>
+    <a to=""><img src="{% static 'img/folder.png' %}" alt="">Длинное наз..</a> -->
+
+    </div>
+
+    {%if folders_count > 2%}
+    <button onclick="alert('Чтобы создать больше 2х папок, вам нужна премиум подписка');"><img src="{% static 'img/plus.png' %}" alt=""></button> <!---->
+    {%else%}
+    <button class="fc"><img src="{% static 'img/plus.png' %}" alt=""></button> <!---->
+    {%endif%}
+  
+   <form class="folder-creation" method="post" action="{% url 'folderCreate' %}" style="z-index: 99999;align-items: flex-start;">
+    {% csrf_token %}
+     <div class="p-4 addFavorite" style="z-index: 99999;align-items: flex-start;width:100%;">
+      <input type="text" name="name" id="name_id" placeholder="Название папки..">
+      <div class="users-folder">
+        {% for dialog in dialogs %}
+        <div class="users-folder-add">
+           <label for="{{dialog.id}}">
+
+
+
+
+
+
+            
+
+
+            
+
+
+
+
+            {%if request.user.id == dialog.user.id%}
+              {% if dialog.with_user.photo and dialog.with_user.photo.url %}
+              <img src="{{dialog.with_user.photo.url}}" alt=""> 
+                <!-- <img src="{{dialog.with_user.photo.url}}" alt=""> -->
+              {% else %}
+                <!-- <img src="" alt=""> -->
+
+              <img src="" alt="">
+              {%endif%}                
+            {%endif%}  
+            
+            {%if request.user.id == dialog.with_user.id%}
+              {%if dialog.user.photo.url and dialog.user.photo%}
+              <img src="{{dialog.user.photo.url}}" alt=""> 
+                <!-- <img src="{{dialog.user.photo.url}}" alt=""> -->
+              {%else%}
+                <!-- <img src="" alt=""> -->
+
+                <img src="" alt="">
+              {%endif%}
+            {%endif%}
+
+            {%if dialog.user.id == request.user.id%}
+            {{dialog.with_user.first_name}}
+            {%else%}
+            {{dialog.user.first_name}}
+            {%endif%}
+            
+
+            
+          </label>
+           <input type="checkbox" name="dialog" id="{{dialog.id}}" value="{{dialog.id}}"/>
+        </div>
+        {% endfor %}
+      </div>
+      <button type="submit">Создать папку</button>
+     </div>
+   </form>
+   <script>
+    const form = document.querySelector('.folder-creation');
+    const fc = document.querySelector('.fc');
+
+    fc.addEventListener('click', ()=>{
+      form.classList.toggle('isOpen')
+    })
+
+    // function FolderCreation(){
+    //   form.classList.toggle('isOpen')
+    // }
+
+   </script>
+    </div>
+    </div>

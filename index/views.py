@@ -215,8 +215,6 @@ def travels(request):
     #     travels_title = 'Поиск поездок'
     
 
-
-
 def travel(request, travel_id):
     travel = Travel.objects.get(id=travel_id)
     user = travel.user
@@ -230,7 +228,7 @@ def travel(request, travel_id):
 
 from chat.models import *
 from django.db.models import Q
-from chat.forms import MessageForm
+from chat.forms import MessageForm,FolderForm
 @login_required
 def chats(request):
     user = request.user
@@ -238,7 +236,10 @@ def chats(request):
     chats = Message.objects.filter(Q(recipient=request.user) | Q(sender=request.user)).order_by('-timestamp')
     # people = CustomUser.objects.filter(Q(recipient=request.user) | Q(sender=request.user)).order_by('-timestamp')
     dialogs_response = Dialog.objects.filter(Q(user=request.user) | Q(with_user=request.user)) #recipient,
+    folders = Folder.objects.filter(user=request.user)[0:2]
+    folders_count = Folder.objects.filter(user=request.user).count()
     
+    # recipient = User.objects.get(id=recipient_id)
     # messages = Message.objects.filter(sender=request.user, recipient=recipient) | Message.objects.filter(sender=recipient, recipient=request.user).order_by('timestamp')
     if dialogs_response:
         #messages = Message.objects.filter(dialog=dialog)
@@ -252,9 +253,45 @@ def chats(request):
         # 'messages': messages,
         # 'dialog_count': message_count,
         'dialogs': dialogs_response,
+        'folders': folders,
+        'folders_count': folders_count,
+        'title_chat': 'Мои чаты',
     }
     
     return render(request, 'chats.html', context)
+
+
+@login_required
+def folder(request, folder_id):
+    user = request.user.id
+    folder = Folder.objects.get(user=user, id=folder_id)
+    folders = Folder.objects.filter(user=request.user)[0:2]
+    folders_count = Folder.objects.filter(user=request.user).count()
+    return render(request, 'folder.html', {'folder': folder, 'title_chat': f'{folder.name}', 'folders': folders,'folders_count':folders_count,})
+
+
+def folderCreate(request):
+    if not user.is_premium and user.folders.count() >= 4:
+        return redirect("chats")
+    
+    if request.method == 'POST':
+        form = FolderForm(request.POST)
+        if form.is_valid():
+            new_folder = form.save(commit=False)
+            new_folder.user = request.user  # Установка текущего пользователя
+            new_folder.save()
+            
+            selected_dialogs = request.POST.getlist('dialog')
+            print(selected_dialogs)
+            for dialog_id in selected_dialogs:
+                dialog = Dialog.objects.get(id=dialog_id)
+                new_folder.dialogs.add(dialog)
+                
+            return redirect('chats')
+    else:
+        form = FolderForm()
+    
+    return render(request, 'chats.html', {'form': form})    
 
 @login_required
 def message(request, recipient_id):

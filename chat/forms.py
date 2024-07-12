@@ -10,3 +10,13 @@ class MessageForm(forms.Form):
         kwargs['initial'] = initial
         super(MessageForm, self).__init__(*args, **kwargs)
     
+
+from .models import Folder
+
+class FolderForm(forms.ModelForm):
+    class Meta:
+        model = Folder
+        fields = ['name', 'dialogs']
+        widgets = {
+            'dialogs': forms.CheckboxSelectMultiple
+        }

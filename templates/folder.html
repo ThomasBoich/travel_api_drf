@@ -3,7 +3,7 @@
     <div class="content"  v-if="loaded" data-aos="fade-down" style="display: grid;">
     <div class="chat-layout">
       {% include 'chat_nav.html' %}
-    {% for i in dialogs %}
+    {% for i in folder.dialogs.all %}
       {%if request.user.id == i.user.id %}
       <a href="{% url 'message' i.with_user.id %}" class="message_chat">
       {%else%}
