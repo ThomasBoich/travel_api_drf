@@ -1236,6 +1236,7 @@ form.search-sites{
   position: absolute;
   top: 35px;
   transition: top 0.3s;
+  z-index: 99;
 }
 
 .search-button{
@@ -1487,3 +1488,22 @@ img.city_img{
     }
 
 }
+#id_travel_now{
+  width: max-content!IMPORTANT;
+  border-radius: 15px;
+  padding: 9px 9px 9px 9px;
+  font-size: 15px;
+  margin: 0px 0px 0px 15px;
+  border: 1px solid #979797;
+}
+/*
+
+Copyright © 2024
+
+Автор проекта: Артём Бойко / Thomas Jefferson Boich
+Сайт: boich.ru
+Телеграм: @tom_jefferson
+Телеграм: @cristian_mur
+Гитхаб: GitHub.com/ThomasBoich
+
+*/

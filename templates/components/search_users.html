@@ -1,0 +1,178 @@
+  <!--<template>{% load static %}
+ <div></div> -->
+  <!-- <form action="" method="post">
+    <ButtonsWhatSearch></ButtonsWhatSearch>
+
+    <ButtonsTheWhereSearch></ButtonsTheWhereSearch>
+
+    <USelectMenu
+      class="where"
+      v-model="selected"
+      :loading="loading"
+      :searchable="search"
+      placeholder="Куда?"
+      option-attribute="name"
+      multiple
+      trailing
+      by="id"
+      style="
+        border: none;
+        box-shadow: none;
+        font-size: 17px;
+        padding: 0px 0px 0px 0px;
+        width: 100%!IMPORTANT;
+      "
+    />
+    <Button class="search" label="Найти" severity="contrast" rounded />
+  </form> 
+</template>
+-->
+<form action="{% url 'users' %}" method="GET" class="search-sites wow animate__fadeInDown">
+  <div class="what-search-layout">
+    <div class="what-search-content" onclick="ActiveLayer1()">
+      <span style="font-weight:500;font-size: 15px;">Я ищу:</span>
+      <span class="ff2" style="color:#999999;margin:0px 0px 0px 9px;font-size:500!IMPORTANT;font-size: 15px;">Не важно</span>
+      <span></span>
+    </div>
+
+    <div class="what-navigation">
+      <div class="ff">
+        <select class="what-search"><!-- <option value="Я ищу" selected disabled>Я ищу</option> -->
+          <option value="Мужчину">Мужчину</option>
+          <option value="Женжину">Женщину</option>
+          <option value="Семью">Семью</option>
+          <option value="Не важно" selected="">Не важно</option>
+        </select>
+        <p>Возраст</p>
+        <div class="whatAge">
+          <input type="text" placeholder="от">
+          <input type="text" placeholder="до">
+        </div>
+        <!-- <button class="save">Сохранить</button> -->
+        <span class="save">Сохранить</span>
+        <span class="exit exit1">Отмена</span>
+      </div>
+    </div>
+  </div>
+  <div class="where-layout">
+              <select name="city" id="" class="js-chosen1">
+            {% for city in cities %}
+
+                <option value="{{city.name}}">{{ city.name }}</option>
+
+            {% endfor %}
+            <option value="" selected disabled>Откуда?</option>
+        </select>
+{#    <input type="text" class="placeholder" id="inp2" placeholder="Откуда?" onclick="ActiveLayer2()" readonly="" style="outline:none;cursor:pointer;">#}
+    <div class="where-content" id="where-content">
+{#      <input id="from_city" type="text" name="city" placeholder="Город">#}
+
+      <span class="save2">Сохранить</span>
+      <!-- <button class="save2">Сохранить</button> -->
+      <span class="exit exit2">Отмена</span>
+    </div>
+  </div>
+  <div class="relative where">
+    <div style="display: flex;width: 100%;">
+      <button class="relative w-full" type="button" style="border:none;box-shadow:none;font-size:17px;padding:0px 0px 0px 0px;width:100%!IMPORTANT;" id="nuid-1">
+      <!-- <span>Куда?</span> -->
+      <select class="js-chosen" name="interest" id="" style="font-size: 15px;font-weight: 700;color: #494949;border: none;outline: none;" multiple>
+        {%for interest in interests%}
+        <option value="{{interest.name}}">{{interest.name}}</option>
+        {%endfor%}
+        <option value="" selected disabled>Интересы</option>
+        <option value="">Любые</option>
+      </select>
+      <span>
+        <span class="i-heroicons-arrow-path-20-solid flex-shrink-0 text-gray-400 dark:text-gray-500 h-5 w-5 animate-spin" aria-hidden="true"></span>
+      </span>
+    </button>
+  </div>
+</div>
+
+<button class="search-button" type="submit">
+  Найти
+</button>
+<script>
+  /////////////////////////////////////////////////////////////
+  const button1 = document.querySelector('.what-search-layout')
+  const layer1 = document.querySelector('.what-navigation')
+  const what_search = document.querySelector('.what-search')
+  const ff2 = document.querySelector('.ff2')
+  const save = document.querySelector('.save')
+  // Сохранение результата в инпут
+  save.addEventListener('click', () => {
+    ff2.innerHTML = what_search.value
+    layer1.classList.remove('active')
+  })
+  // Активация и деактивация окна выбора
+  function ActiveLayer1(){
+    layer1.classList.toggle('active')
+    layer2.classList.remove('active')
+  }
+  // Скрытие окна при клике в не его области
+  document.addEventListener('click', function(event){
+    if (!button1.contains(event.target) && event.target !== layer1){
+      layer1.classList.remove('active')
+    }
+  });
+  ///////////////////////////////////////////////////////////////
+//  const button2 = document.querySelector('.what-search-layout')
+    const layer2 = document.querySelector('#where-content');
+//  const what_search = document.querySelector('.what-search')
+//  const ff2 = document.querySelector('.ff2')
+//  const save = document.querySelector('.save')
+
+    // Активация и деактивация окна выбора 2
+    function ActiveLayer2(){
+      layer2.classList.toggle('active')
+  }
+  const save2 = document.querySelector('.save2')
+  const inp2 = document.querySelector('.inp2')
+  const from_city = document.querySelector('#from_city')
+    // Сохранение результата в инпут
+    save2.addEventListener('click', () => {
+    document.querySelector('.placeholder').placeholder = from_city.value
+    layer2.classList.remove('active')
+  })
+
+  const exit1 = document.querySelector('.exit1')
+  const exit2 = document.querySelector('.exit2')
+
+  exit1.addEventListener('click', () => {
+    layer1.classList.remove('active')
+  })
+
+  exit2.addEventListener('click', () => {
+    layer2.classList.remove('active')
+  })
+
+</script>
+</form>
+
+
+
+<style>
+
+
+@media (max-width: 770px){
+  form{
+    display: flex;
+    flex-direction: column;
+    border-radius: 9px;
+  }.search{
+    width: calc(100% - 30px);
+    border-radius: 9px;
+    padding: 9px 5px 9px 5px;
+    margin: 0px 0px 15px 0px;
+  }
+  .where{
+    width: 100%;
+    padding: 15px 0px 15px 15px!IMPORTANT;
+    margin: 0px 0px 0px 0px!IMPORTANT;
+    display: inline-flex;
+    height: 55px;
+  }
+}
+
+</style>

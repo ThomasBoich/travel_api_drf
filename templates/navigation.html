@@ -1,7 +1,7 @@
     <!-- Окно создания путешествия -->
     <div class="create_travel_window_script">{% load static %}
      
-      <form id="create_travel_window_script_form" action="create_travel" method="post" class="create-travel-form">
+      <form id="create_travel_window_script_form" action="{% url 'create_travel' %}" method="post" class="create-travel-form">
         {% csrf_token %}
         <!-- {{form.as_p}} -->
         <h1>Создать путешествие</h1>
@@ -15,12 +15,12 @@
           </div>
         <div>
           <label for="id_gender_search">Ищу</label>
-          <select name="gender_search" id="id_gender_search"><option value="Семью">Семью</option>
+          <select name="gender_search" id="id_gender_search" required><option value="Семью">Семью</option>
             <option value="Женщину">Женщину</option>
             <option value="Мужчину">Мужчину</option>
           </select>
         </div><div style="width: 100%;">
-          <select name="from_city" id="id_from_city" class="js-chosen3" style="">
+          <select name="from_city" id="id_from_city" class="js-chosen3" style="" required>
             {% for city in cities %}
                 <option value="{{city.id}}">{{ city.name }}</option>
             {% endfor %}
@@ -58,7 +58,7 @@
         </div>
       </div>
       <div class="where">
-        <select name="country" id="id_country"  class="js-chosen3" style="" multiple>
+        <select name="country" id="id_country"  class="js-chosen3" style="" multiple required>
           <option value="" selected disabled>Куда?</option>
           {% for country in countries %}
           <option value="{{country.id}}">{{country.name}}</option>
@@ -76,15 +76,15 @@
       </div>
       <div class="form-city">
         <label for="id_city">Город, курорт</label>
-        <input type="text" placeholder="Новосибирск" name="city" id="id_city"></div>
+        <input type="text" placeholder="Новосибирск" name="city" id="id_city" required></div>
         <div class="form-date">
           <div>
             <label for="">Когда</label>
-            <input type="date" id="id_date" name="date" min="2018-01-01" max="3999-12-31">
+            <input type="date" id="id_date" name="date" min="2018-01-01" max="3999-12-31" required>
           </div>
           <div>
             <label for="id_days">Кол-во дней</label>
-            <input type="number" placeholder="15" style="max-width: 70px; text-align: center;" name="days" id="id_days" value="15">
+            <input type="number" placeholder="15" style="max-width: 70px; text-align: center;" name="days" id="id_days" value="15" required>
           </div>
           {% comment %}
           <div style="flex-direction: row; align-items: center; margin: 25px 0px 0px;">
@@ -94,10 +94,10 @@
            </div>
            {% endcomment %}
         </div>
-       <textarea name="description" id="id_description" cols="15" rows="2" placeholder="Опишите ваше путешествие ....."></textarea>
+       <textarea name="description" id="id_description" cols="15" rows="2" placeholder="Опишите ваше путешествие ....." required></textarea>
        <p style="margin: 0px 0px 35px 0px;">
         <label for="id_travel_now">Уже путешествую:</label>
-        <select name="travel_now" id="id_travel_now">
+        <select name="travel_now" id="id_travel_now" required>
       <option value="unknown">Неизвестно</option>
     
       <option value="true">Да</option>

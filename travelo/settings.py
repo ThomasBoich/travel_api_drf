@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'channels',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -45,6 +46,14 @@ INSTALLED_APPS = [
     "corsheaders",
     'rest_framework',
     'drf_yasg',
+    
+    'allauth',
+    'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',
+    # 'allauth.socialaccount.providers.facebook',
+    # 'allauth.socialaccount.providers.twitter',
+    # 'allauth.socialaccount.providers.github',
 ]
 
 MIDDLEWARE = [
@@ -56,6 +65,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'allauth.socialaccount.middleware.SocialAccountMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
+    
 ]
 PASSWORD_VALIDATORS = []
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -113,6 +125,15 @@ else:
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
+
+
+AUTHENTICATION_BACKENDS = [
+    
+    # django's inbuild authentication backend
+    'django.contrib.auth.backends.ModelBackend',
+    # django's allauth authentication backend
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -192,3 +213,5 @@ CSRF_TRUSTED_ORIGINS=["http://travel.deadspace14.net/","https://travel.deadspace
 #             "BACKEND": "channels.layers.InMemoryChannelLayer"
 #         }
 #     }
+
+SITE_ID = 1

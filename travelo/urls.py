@@ -50,6 +50,7 @@ from chat import views as chat_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')), #  <- include the allauth urls here
     path('', include('index.urls')),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),

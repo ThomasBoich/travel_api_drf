@@ -215,7 +215,67 @@ def travels(request):
     #   else:
     #     travels = Travel.objects.filter(filters)
     #     travels_title = 'Поиск поездок'
-    
+
+
+def users(request):
+    if request.method == 'GET':
+        users_list = CustomUser.objects.all()
+        interests = Interests.objects.all()
+        #from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()
+        users_title = f'Поиск друзей - {users_list.count()} шт.'
+        #country_name = request.GET.get('country')
+        city_name = request.GET.get('city')
+        interest_name = request.GET.get('interest')
+        #from_moscow = request.GET.get('from_moscow')
+        cities = City.objects.all()
+        filters = Q()
+        
+        # if country_name:
+        #     travels_title = f'Поиск поездок в {country_name}'
+        #     travels = Travel.objects.filter(country__name=country_name).distinct()
+        
+        if city_name:
+            users_title = f'Поиск друзей из города — {city_name}'
+            users_list = CustomUser.objects.filter(city__name=city_name).distinct()
+        
+        if interest_name and city_name:
+            interests_list = interest_name.split(',')
+            print(interests_list)
+            interests = Interests.objects.filter(name=interests_list)
+            users_list = CustomUser.objects.filter(city__name=city_name, interests__name=interest_name).distinct()
+            users_title = f'Поиск друзей asdasd- {users_list.count()} шт.'
+
+        # if country_name and city_name and interest_name:
+        #     travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name), Q(gender_search=interest_name))
+        #     travels_title = f"Поездки: {city_name} — {country_name}"
+
+        if interest_name:
+            interests_list = interest_name.split(',')
+            print(interests_list)
+            interests = Interests.objects.filter(name=interests_list)
+            users_list = CustomUser.objects.filter(interests__name=interest_name).distinct()
+            users_title = f'Поиск друзей - {users_list.count()} шт.'
+
+        # if from_moscow:
+        #     travels = Country.objects.filter(travels__from_city__name=from_moscow).distinct()
+        #     travels_title = f'Популярные направления из Москвы'
+
+        # if not country_name and not city_name and not interest_name:
+        #     travels = Travel.objects.all()
+        #     travels_title = f'Поиск поездок - {travels.count()} шт.'
+            
+    context = {
+        'title': f'Travelo',
+        'users_title': users_title,
+        #'travels': travels,
+        'users_list': users_list,
+        'cities': cities,
+        'interests': interests,
+    }
+    return render(request, 'users.html', context)
+    #   else:
+    #     travels = Travel.objects.filter(filters)
+    #     travels_title = 'Поиск поездок'
 
 def travel(request, travel_id):
     travel = Travel.objects.get(id=travel_id)
