@@ -90,7 +90,7 @@
         {% for travel in user_travels %}
         <a href="">
           <div class="search-result">
-            <img src="{{travel.country.photo.url}}" alt="">
+            <img src="{{travel.from_city.image.url}}" alt="">
             <div class="search-result-info">
               <h2>
               {% for country in travel.country.all %}
@@ -158,6 +158,90 @@
   color: #4dd8cf;
   border-bottom-color: #4dd8cf;
 
+}
+.what-search-layout {
+  padding: 0px 0px 0px 0px !important;
+}
+form {
+  width: 100%;
+  max-width: 100%;
+  border-radius: 0px;
+  border: none;
+  border-bottom: 2px solid #dddddd;
+  box-shadow: none;
+  margin: 0px 0px 25px 0px;
+  background-color: #ffffff;
+  padding: 0px 0px 15px 0px;
+}
+form:hover {
+  box-shadow: none;
+}
+.where-layout input,
+select {
+  background-color: inherit !important;
+  width: 100%!IMPORTANT;
+}
+.where select {
+  background-color: inherit !important;
+  width: 100%!IMPORTANT;
+}.where{
+  width: 100%!IMPORTANT;
+}
+.search-result {
+  display: flex;
+  width: 100%;
+  margin: 0px 0px 25px 0px;
+  padding: 0px 0px 25px 0px;
+  border-bottom: 1px solid #dddddd;
+  align-items: center;
+  transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+  position: relative;
+  top: 0;
+  opacity: 9;
+}.search-result:hover{
+  position: relative;
+  opacity: 0.7;
+  top: 9px;
+  transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+}
+.search-result img {
+  width: auto;
+  object-fit: cover;
+  width: 135px;
+  height: 135px;
+  border-radius: 15px;
+  margin: 0px 15px 0px 0px;
+}
+.search-result-info {
+  display: flex;
+  flex-direction: column;
+}
+.search-result-info h2 {
+  font-weight: 700;
+  font-size: 17px;
+  margin: 0px 0px 5px 0px;
+}
+.search-result-info p {
+  border-top: 1px solid #dddddd;
+  margin: 9px 0px 9px 0px;
+  padding: 9px 0px 0px 0px;
+  font-size: 15px;
+}
+.search-info-status {
+  display: inline-flex;
+  align-items: center;
+  font-size: 15px;
+}
+.search-info-status img {
+  height: 17px;
+  width: auto;
+}
+.search-info-status img {
+  margin: 0px 5px 0px 0px;
 }
 </style>
 {% endblock %}

@@ -17,6 +17,7 @@
           <label for="id_gender_search">Ищу</label>
           <select name="gender_search" id="id_gender_search"><option value="Семью">Семью</option>
             <option value="Женщину">Женщину</option>
+            <option value="Мужчину">Мужчину</option>
           </select>
         </div><div style="width: 100%;">
           <select name="from_city" id="id_from_city" class="js-chosen3" style="">
@@ -28,10 +29,30 @@
         <style>
           .create_travel_window_script .chosen-container{
             width: 100%;
-    padding: 10px;
-    border: 1px solid #E1E1E1;
-    border-radius: 5px;
-    font-size: 15px;
+            padding: 10px;
+            border: 1px solid #E1E1E1;
+            border-radius: 5px;
+            font-size: 15px;
+          }
+          .where{
+            padding: 0!IMPORTANT;
+            margin: 0!IMPORTANT;
+          }
+          .create_travel_window_script form .where{
+            padding: 0!IMPORTANT;
+            margin: 0!IMPORTANT;
+          }
+          .create_travel_window_script form .where{
+            background-color: inherit;
+            padding: 0!IMPORTANT;
+            margin: 0!IMPORTANT;
+          }
+          .chosen-container-multi .chosen-choices{
+            border: none!IMPORTANT;
+            font-weight: 700;
+          }.create_travel_window_script form textarea{
+            font-family: 'Arial';
+            font-size: 15px;
           }
         </style>
         </div>
@@ -63,16 +84,18 @@
           </div>
           <div>
             <label for="id_days">Кол-во дней</label>
-            <input type="number" placeholder="15" style="max-width: 70px; text-align: center;" name="days" id="id_days">
+            <input type="number" placeholder="15" style="max-width: 70px; text-align: center;" name="days" id="id_days" value="15">
           </div>
+          {% comment %}
           <div style="flex-direction: row; align-items: center; margin: 25px 0px 0px;">
             <label for="" style="margin: 0px 15px 0px 0px;">Уже отдыхаю</label>
         <button class="relative inline-flex flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none h-5 w-9 rounded-full focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 bg-gray-200 dark:bg-gray-700" role="switch" type="button" tabindex="0" aria-checked="false" data-headlessui-state="" id="nuid-2"><span class="pointer-events-none relative inline-block rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200 h-4 w-4 translate-x-0 rtl:-translate-x-0">v-if<!--v-if--></span>
          </button> 
            </div>
+           {% endcomment %}
         </div>
        <textarea name="description" id="id_description" cols="15" rows="2" placeholder="Опишите ваше путешествие ....."></textarea>
-       <p>
+       <p style="margin: 0px 0px 35px 0px;">
         <label for="id_travel_now">Уже путешествую:</label>
         <select name="travel_now" id="id_travel_now">
       <option value="unknown">Неизвестно</option>

@@ -57,7 +57,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
+PASSWORD_VALIDATORS = []
 AUTH_USER_MODEL = 'users.CustomUser'
 ROOT_URLCONF = 'travelo.urls'
 
@@ -75,6 +75,7 @@ TEMPLATES = [
                 # 'travels.context_processors.get_cities',
                 # 'travels.context_processors.get_countries',
                 'index.context_processors.get_countries',
+                'index.context_processors.get_registration',
                 #'index.context_processors.get_dealog',
             ],
         },

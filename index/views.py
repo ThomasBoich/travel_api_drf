@@ -82,12 +82,14 @@ def profile(request, user_id):
     user = CustomUser.objects.get(id=user_id)
     interests = Interests.objects.filter(users_interests=user)
     habits = Habits.objects.filter(user_habits=user)
+    user_travels = Travel.objects.filter(user=user)
     context = {
         'travels': travels,
         'habits': habits,
         'interests': interests,
         'user': user,
         'title': f'{user.first_name}',
+        'user_travels': user_travels,
     }
     return render(request, 'profile.html', context)
 

@@ -1,9 +1,13 @@
 from typing import Any
 from django.db.models import QuerySet
-from travels.models import City, Country
+from travels.models import City, Country, Travel
 from chat.models import Dialog, Message
 from chat.models import *
 from django.db.models import Q
+
+
+from travels.forms import TravelForm
+
 
 def get_cities(request):
     cities_as: QuerySet[Any] = City.objects.all()
@@ -20,3 +24,11 @@ def get_dealog(request):
     else:
         messages = []
     return {'dialog_as': messages}
+
+
+def get_registration(request):
+    form = TravelForm(user=request.user)
+    cities = City.objects.all()
+    travels = Travel.objects.all()
+    countries = Country.objects.all()
+    return {'form': form, 'cities': cities, 'travels': travels,'countries': countries,}#()
