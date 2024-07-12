@@ -88,7 +88,7 @@
       </div>
       <div class="tab-content" id="content-3">
         {% for travel in user_travels %}
-        <a href="">
+        <a href="{% url 'travel' travel.id %}">
           <div class="search-result">
             <img src="{{travel.from_city.image.url}}" alt="">
             <div class="search-result-info">
