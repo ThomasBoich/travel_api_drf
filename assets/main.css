@@ -1117,7 +1117,7 @@ form.search-sites{
   height: 40px;
   display: flex;
   z-index: 145;
-  padding: 0px 0px 0px 25px ! IMPORTANT;
+  padding: 0px 0px 0px 25px !IMPORTANT;
     margin: 0px 15px 0px 0px;
 }
 .where {
@@ -1433,6 +1433,20 @@ img.city_img{
 
 /* мобильная версия */
 @media (max-width: 770px){
+    .search-result-info h2 {
+        font-weight: 700;
+        font-size: 17px;
+        margin: 0px 0px 5px 0px;
+        line-height: 4.9vw;
+    }
+    .search-result img {
+        width: auto;
+        object-fit: cover;
+        width: 15vw!IMPORTANT;
+        height: 15vw!IMPORTANT;
+        border-radius: 15px;
+        margin: 0px 15px 0px 0px;
+    }
     .user_search_status{
         display: flex;
         flex-direction: column;
@@ -1469,8 +1483,8 @@ img.city_img{
     }
     .where {
         width: 100%;
-        padding: 15px 15px 15px 15px ! IMPORTANT;
-        margin: 0px 0px 0px 0px ! IMPORTANT;
+        padding: 0px 15px 15px 0px !IMPORTANT;
+        margin: 0px 0px 0px 0px !IMPORTANT;
         display: inline-flex;
         height: max-content!IMPORTANT;
     }
@@ -1500,7 +1514,7 @@ img.city_img{
 
     .popular-road {
         min-width: 75vw!IMPORTANT;
-        margin: 0px 15px 0px 0!IMPORTANT;
+        margin: 0px 15px 0px 0px!IMPORTANT;
         height: 75vw!IMPORTANT;
     }
 
@@ -1532,7 +1546,7 @@ img.city_img{
         font-weight: 700;
     }
     .where select {
-        padding: 15px 15px 15px 0px ! IMPORTANT;
+        padding: 15px 15px 15px 19px!IMPORTANT;
         width: 100% ! IMPORTANT;
         border: none ! IMPORTANT;
         font-size: 15px;
@@ -1554,6 +1568,16 @@ img.city_img{
     .profile_left{
         width: 100%;
     }
+    -layout {
+        padding: 0px 17px 5px 17px !IMPORTANT;
+    }
+    form.search-sites {
+        border-radius: 9px;
+        width: 90%;
+        margin: 0 auto;
+        padding: 15px 5px 25px 0px !IMPORTANT;
+        box-sizing: border-box;
+    }
 }
 
 
@@ -1565,7 +1589,7 @@ img.city_img{
         border-radius: 9px;
         width: 90%;
         margin: 0 auto;
-        padding: 25px 5px 25px 0px !IMPORTANT;
+        padding: 15px 5px 25px 0px !IMPORTANT;
         box-sizing: border-box;
     }
 
@@ -1575,13 +1599,14 @@ img.city_img{
         max-width: 90%;
     }
 
-    .where{
+    {
         width: 100%!IMPORTANT;
         max-width: 100%!IMPORTANT;
     }
 
     .where-layout{
         padding: 19px 17px 5px 17px !IMPORTANT;
+        padding: 0px 17px 5px 17px !IMPORTANT;
     }
 
     .other button{
