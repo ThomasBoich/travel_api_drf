@@ -26,20 +26,24 @@
     {%endfor%}
   </h2>
     <div class="search-info-status">
-      <span>{{travel.user.first_name}}, {{travel.user.age}}</span>&nbsp; · &nbsp;           
+      <span>{{travel.user.first_name}}, {{travel.user.age}}  · &nbsp; ·</span>&nbsp;
+
+        <div class="user_search_status">
       {% if travel.gender == 'Мужчина' and travel.gender_search == 'Женщину' %}
-      <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;
+      <div class="user_status"><img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;</div>
       {% elif travel.gender == 'Женщина' and travel.gender_search == 'Мужчину' %}
-      <img src="{% static 'img/pic_female.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;
+          <div class="user_status">  <img src="{% static 'img/pic_female.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;</div>
       {% elif travel.gender == 'Мужчина' and travel.gender_search == 'Семью' %}
-      <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;
+          <div class="user_status"> <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;</div>
       {% elif travel.gender == 'Женщина' and travel.gender_search == 'Семью' %}
-      <img src="{% static 'img/pic_female.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;
+          <div class="user_status"> <img src="{% static 'img/pic_female.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_female.png' %}" alt="">&nbsp;</div>
       {% elif travel.gender == 'Мужчина' and travel.gender_search == 'Мужчину' %}
-      <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;
+          <div class="user_status"> <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;</div>
       {% else %}
-      <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;
-  {% endif %}  · &nbsp;{{travel.gender}} ищет {{travel.gender_search}} · на {{travel.days}} дней{% if travel.travel_now %}уже отдыхаю {% endif %}</div>
+          <div class="user_status"> <img src="{% static 'img/pic_male.png' %}" alt="">&nbsp; > &nbsp;<img src="{% static 'img/pic_male.png' %}" alt="">&nbsp;</div>
+  {% endif %} &nbsp;{{travel.gender}} ищет {{travel.gender_search}} · на {{travel.days}} дней
+        </div>
+    </div>
       <p> {{travel.description}} </p>
     </div>
 </div>
@@ -50,9 +54,9 @@
   </div>
 </div>
 <style>
-  .what-search-layout {
-  padding: 0px 0px 0px 0px !important;
-}
+{#  .what-search-layout {#}
+{#  padding: 0px 0px 0px 0px !important;#}
+{#}#}
 form {
   width: 100%;
   max-width: 100%;

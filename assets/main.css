@@ -1325,55 +1325,6 @@ form.search-sites{
 
 
 
-/* мобильная версия */
-@media (max-width: 770px){
-  .hello-layout{
-
-  }
-  .hello-layout p{
-      text-align: center;
-      margin: 0px 0px 50px 0px;
-  }
-  .hello-layout h1{
-      margin: 75px 0px 0px 0px;
-  }
-  .where{
-      width: calc(100% - 30px)!IMPORTANT;
-      padding: 15px 0px 15px 0px!IMPORTANT;
-      margin: 0px 0px 0px 0px!IMPORTANT;
-    }
-    .footer{
-      padding: 50px 15px 25px 15px;
-    }
-    .footer-nav-layout{
-      flex-direction: column;
-      display: flex;
-      margin: 0px 0px 25px 0px;
-    }
-}
-
-@media (max-width: 490px){
-  .hello-layout h1{
-    width: 99%;
-    text-align: center;
-    font-size: 6.5vw;
-    margin: 35px 0px 0px 0px;
-  }
-  .hello-layout p{
-    width: 95%;
-    font-size: 4.5vw;
-    margin: 0px 0px 35px 0px;
-  }
-  .popular-country-info p{
-    min-width: max-content;
-  }
-}
-
-@media(max-width: 350px){
-  .no-login button{
-    display: none;
-  }
-}
 
 .travel__header{
   width: 100%;
@@ -1454,6 +1405,160 @@ img.city_img{
 
 
 
+#id_travel_now{
+  width: max-content!IMPORTANT;
+  border-radius: 15px;
+  padding: 9px 9px 9px 9px;
+  font-size: 15px;
+  margin: 0px 0px 0px 15px;
+  border: 1px solid #979797;
+}
+
+
+.user_city{
+    display: inline-flex;
+    align-items: center;
+    padding: 0px 0px 0px 0px;
+}
+
+
+
+.where-layout select{
+    font-size: 15px;
+    font-weight: 700;
+    color: #494949;
+    border: none;
+    outline: none;
+}
+
+/* мобильная версия */
+@media (max-width: 770px){
+    .user_search_status{
+        display: flex;
+        flex-direction: column;
+    }
+    form.search-sites{
+        margin: 0px 0px 25px 0px!IMPORTANT;
+        width: 100%!IMPORTANT;
+    }
+    .interest_list{
+        flex-wrap: wrap;
+    }
+    .search-result{
+        align-items: flex-start!IMPORTANT;
+    }.search-info-status img {
+         height: 15px!IMPORTANT;
+         width: 15px!IMPORTANT;
+     }
+    .user_city{
+        display: inline-flex;
+        align-items: center;
+        padding: 15px 0px 0px 0px;
+    }.search-info-status{
+    flex-direction: column;
+         }
+    .hello-layout{
+
+    }
+    .hello-layout p{
+        text-align: center;
+        margin: 0px 0px 50px 0px;
+    }
+    .hello-layout h1{
+        margin: 75px 0px 0px 0px;
+    }
+    .where {
+        width: 100%;
+        padding: 15px 15px 15px 15px ! IMPORTANT;
+        margin: 0px 0px 0px 0px ! IMPORTANT;
+        display: inline-flex;
+        height: max-content!IMPORTANT;
+    }
+    .footer{
+        padding: 50px 15px 25px 15px;
+    }
+    .footer-nav-layout{
+        flex-direction: column;
+        display: flex;
+        margin: 0px 0px 25px 0px;
+    }
+
+
+    .vertical-nav{
+        display: none!important;
+    }
+
+    .what-search-layout{
+        padding: 15px 15px 15px 19px!IMPORTANT;
+        width: 100%!IMPORTANT;
+        display: flex;
+    }
+
+    .what-navigation{
+        z-index: 9999!IMPORTANT;
+    }
+
+    .popular-road {
+        min-width: 75vw!IMPORTANT;
+        margin: 0px 15px 0px 0!IMPORTANT;
+        height: 75vw!IMPORTANT;
+    }
+
+    .index-popular-roads-title h2 {
+        font-size: 5vw!IMPORTANT;
+        line-height: 6.5vw!IMPORTANT;
+    }
+    .search-info-status span{
+        width: 100%;
+    }
+    .user-layer{
+        flex-direction: column;
+    }
+    .user-info-layer,.user-info,.user-rating{
+        flex-direction: column;
+    }
+    .user-info{
+        align-items: center;
+        margin: 0px 0px 15px 0px;
+    }
+    .user-avatar{
+        margin: 25px 0px 25px 0px;
+    }
+    .where-layout select{
+        padding: 15px 15px 15px 0px!IMPORTANT;
+        width: 100%!IMPORTANT;
+        border: none!IMPORTANT;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .where select {
+        padding: 15px 15px 15px 0px ! IMPORTANT;
+        width: 100% ! IMPORTANT;
+        border: none ! IMPORTANT;
+        font-size: 15px;
+        font-weight: 700;
+    }
+    .index-friends-user {
+        margin: 0px 15vw 0px 0px!IMPORTANT;
+    }
+    .info-slide span {
+        font-size: 9vw;
+        font-weight: 900;
+        line-height: 9vw;
+        margin: 0 0 25px;
+        max-width: 50%;
+    }
+    .form_layer form{
+        flex-direction: column!IMPORTANT;
+    }
+    .profile_left{
+        width: 100%;
+    }
+}
+
+
+
+
 @media (max-width: 500px){
 
     form.search-sites{
@@ -1488,14 +1593,32 @@ img.city_img{
     }
 
 }
-#id_travel_now{
-  width: max-content!IMPORTANT;
-  border-radius: 15px;
-  padding: 9px 9px 9px 9px;
-  font-size: 15px;
-  margin: 0px 0px 0px 15px;
-  border: 1px solid #979797;
+
+@media (max-width: 490px){
+    .hello-layout h1{
+        width: 99%;
+        text-align: center;
+        font-size: 6.5vw;
+        margin: 35px 0px 0px 0px;
+    }
+    .hello-layout p{
+        width: 95%;
+        font-size: 4.5vw;
+        margin: 0px 0px 35px 0px;
+    }
+    .popular-country-info p{
+        min-width: max-content;
+    }
 }
+
+@media(max-width: 350px){
+    .no-login button{
+        display: none;
+    }
+}
+
+
+
 /*
 
 Copyright © 2024

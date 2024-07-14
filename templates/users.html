@@ -22,7 +22,7 @@
       {{user.first_name}} {{user.last_name}}
   </h2>
       <p> {{user.description}} </p>
-      <div class="user_inteterests">
+      <div class="user_inteterests interest_list">
       {%for i in user.interests.all%}
       
       <span class="user_interes"><img src="{{i.image.url}}" alt=""> {{i.name}}</span>
@@ -56,9 +56,9 @@
     display: flex;
     margin: 0px 5px 0px 0px!IMPORTANT;
   }
-  .what-search-layout {
-  padding: 0px 0px 0px 0px !important;
-}
+{#  .what-search-layout {#}
+{#  padding: 0px 0px 0px 0px !important;#}
+{#}#}
 form {
   width: 100%;
   max-width: 100%;
