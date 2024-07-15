@@ -1483,11 +1483,13 @@ img.city_img{
     }
     .where {
         width: 100%;
-        padding: 0px 15px 15px 0px !IMPORTANT;
+        padding: 0px 15px 15px 12px !IMPORTANT;
         margin: 0px 0px 0px 0px !IMPORTANT;
         display: inline-flex;
         height: max-content!IMPORTANT;
-    }
+    }.user-layer button{
+    font-size: 3.5vw;
+         }
     .footer{
         padding: 50px 15px 25px 15px;
     }
@@ -1546,7 +1548,7 @@ img.city_img{
         font-weight: 700;
     }
     .where select {
-        padding: 15px 15px 15px 19px!IMPORTANT;
+        padding: 15px 15px 15px 7px!IMPORTANT;
         width: 100% ! IMPORTANT;
         border: none ! IMPORTANT;
         font-size: 15px;
@@ -1639,6 +1641,7 @@ img.city_img{
 @media(max-width: 350px){
     .no-login button{
         display: none;
+        display: block!IMPORTANT;
     }
 }
 
