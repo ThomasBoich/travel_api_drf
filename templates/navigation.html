@@ -4,7 +4,7 @@
       <form id="create_travel_window_script_form" action="{% url 'create_travel' %}" method="post" class="create-travel-form">
         {% csrf_token %}
         <!-- {{form.as_p}} -->
-        <h1>Создать путешествие</h1>
+        <h1>Создать путешествие</h1> <span onclick="close_form()" class="close_form">X</span>
         <div class="form-user-info">
           <div>
             <label for="id_gender">Я</label>
@@ -154,6 +154,11 @@
                     create_modal.classList.remove('active')
                   }
                 })
+
+                function close_form(){
+                    html.style.overflow = 'auto'
+                    create_modal.classList.remove('active')
+                }
 
               </script>
             </div>

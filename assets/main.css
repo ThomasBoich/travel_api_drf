@@ -931,6 +931,7 @@ h1{
   padding: 15px 25px 15px 25px;
   overflow: hidden;
   overflow-y: auto;
+    position: relative;
 }
 .create_travel_window_script form button{
   background-color: #000;
@@ -940,7 +941,7 @@ h1{
   margin: 0 auto;
   justify-content: center;
   padding: 9px 15px 9px 15px;
-}
+}.close_form{position: absolute;cursor: pointer;top: 25px; right: 25px;}.close_form:hover{color: #00c7bb;}
 .create_travel_window_script .form-user-info{
   display: flex;
   justify-content: space-between;
