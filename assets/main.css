@@ -1580,6 +1580,36 @@ img.city_img{
         padding: 15px 5px 25px 0px !IMPORTANT;
         box-sizing: border-box;
     }
+    .create_travel_window_script {
+        & h1 {
+            font-size: 5vw;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 1px solid #E1E1E1;
+            padding: 15px 0px 25px 0px;
+            margin: 0px 0px 15px 0px;
+        }
+    }.create_travel_window_script {
+         & form {
+             background-color: #FFFFFF;
+             margin: 0 auto;
+             height: 95dvh;
+             margin: 0 auto;
+             max-width: 569px;
+             --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+             --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+             box-shadow: 0 0 #0000, 0 0 #0000, 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+             box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+             font-size: 19px ! IMPORTANT;
+         }
+     }#id_travel_now {
+          width: max-content ! IMPORTANT;
+          border-radius: 15px;
+          padding: 9px 9px 9px 9px;
+          font-size: 15px;
+          margin: 15px 0px 0px 0px;
+          border: 1px solid #979797;
+      }
 }
 
 
