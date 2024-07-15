@@ -132,3 +132,16 @@ class City(models.Model):
     class Meta:
         verbose_name = 'Город'
         verbose_name_plural = 'Города'
+
+
+
+class Friends(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    friends = models.ManyToManyField(CustomUser, related_name='users_friends')
+
+    def __str__(self):
+        return f'{self.user} - {self.friend}'
+
+    class Meta:
+        verbose_name = 'Друг'
+        verbose_name_plural = 'Друзья'

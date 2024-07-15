@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
-from users.models import CustomUser, Profile, Habits, Interests, City
+from users.models import CustomUser, Profile, Habits, Interests, City, Friends
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -98,8 +98,15 @@ admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Habits, HabitsAdmin)
 admin.site.register(Interests, InterestsAdmin)
 
+
 class CityAdmin(admin.ModelAdmin):
     list_display = ('name',)
     search_fields = ('name',)
 
+class FriendsAdmin(admin.ModelAdmin):
+    list_display = ('user',)
+    search_fields = ('user',)
+
+
 admin.site.register(City,CityAdmin)
+admin.site.register(Friends,FriendsAdmin)
