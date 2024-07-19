@@ -137,11 +137,23 @@ class City(models.Model):
 
 class Friends(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    friends = models.ManyToManyField(CustomUser, related_name='users_friends')
+    friends = models.ManyToManyField(CustomUser, related_name='users_friends', blank=True, null=True)
 
     def __str__(self):
-        return f'{self.user} - {self.friend}'
+        return f'{self.user} - {self.friends.all()}'
 
     class Meta:
         verbose_name = 'Друг'
         verbose_name_plural = 'Друзья'
+
+
+class Favorites(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    favorites = models.ManyToManyField(CustomUser, related_name='users_favorites', blank=True, null=True)
+
+    def __str__(self):
+        return f'{self.user} - {self.favorites.all()}'
+
+    class Meta:
+        verbose_name = 'Избранный'
+        verbose_name_plural = 'Избранные'

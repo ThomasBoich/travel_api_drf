@@ -5,6 +5,7 @@ from travels.views import create_travel
 from chat.views import private_chat, send_message
 
 from chat.views import display_messages
+from users.views import addToFriends, addFavorites
 
 urlpatterns = [
     path('', index, name='index'),
@@ -25,5 +26,7 @@ urlpatterns = [
     path('private_chat/<int:recipient_id>/', private_chat, name='private_chat'),
     path('send_message/<int:recipient_id>/', send_message, name='send_message'),
     path('display_messages/<int:recipient_id>/', display_messages, name='display_messages'),
+    path('add_friend/<int:user_id>/', addToFriends, name="addToFriends"),
+    path('add_favorites/<int:user_id>/', addFavorites, name="addFavorites")
     # path('display_messages/<int:recipient_id>/', display_messages, name='display_messages'),
 ]
