@@ -93,7 +93,10 @@
         {% for travel in user_travels %}
         <a href="{% url 'travel' travel.id %}">
           <div class="search-result">
+            {%if travel.from_city.image and travel.from_city.image.url%}
             <img src="{{travel.from_city.image.url}}" alt="">
+            {%else%}
+            {%endif%}            
             <div class="search-result-info">
               <h2>
               {% for country in travel.country.all %}
