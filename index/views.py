@@ -62,6 +62,31 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
+def travelers(request):
+    form = TravelForm(user=request.user)
+    countries = Country.objects.all()
+    travels = Travel.objects.all()
+    cities = City.objects.all()
+    users = CustomUser.objects.all()
+    users = CustomUser.objects.all()
+    interests = Interests.objects.all()
+    countries_from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()[0:3]
+    context = {
+        'form': form,
+        'countries': countries[:12],
+        'countries_list': countries,
+        'total_popular_countries': countries.count(),
+        'travels': travels,
+        'cities': cities,
+        'users': users[0:5],
+        'title': f'Travelo',
+        'interests': interests,
+        'countries_from_moscow': countries_from_moscow,
+        'countries_from_moscow_count': countries_from_moscow.count(),
+        'form_reg': CustomUserRegistrationForm(request.POST)
+    }
+    return render(request, 'travelers.html', context)
+
 def about(request):
     context = {}
     return render(request, 'about.html', context)

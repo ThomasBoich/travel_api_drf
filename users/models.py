@@ -114,7 +114,7 @@ class Interests(models.Model):
 
 
 class Habits(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Привычка')
+    name = models.CharField(max_length=255, verbose_name='Привычка')#
     image = models.ImageField(upload_to='habits/%Y/m/%d/', blank=True, null=True)
 
     def __str__(self):

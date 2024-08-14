@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites
+from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites,travelers
 from travels.views import create_travel
 
 from chat.views import private_chat, send_message
@@ -9,6 +9,7 @@ from users.views import addToFriends, addFavorites
 
 urlpatterns = [
     path('', index, name='index'),
+    path('travelers/', travelers, name='travelers'),
     path('about/', about, name='about'),
     path('tarifs/', tarifs, name='tarifs'),
     path('friends/', friends, name='friends'),
