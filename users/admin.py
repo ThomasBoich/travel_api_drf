@@ -27,7 +27,7 @@ class CustomUserAdmin(UserAdmin):
         # 'interests',
         # 'habits'
     )
-    list_filter = ('email', 'is_staff', 'is_active',)
+    list_filter = ('email', 'is_staff', 'is_active', 'groups')
     fieldsets = (
         (None, {'fields': (
             'email',
@@ -47,7 +47,7 @@ class CustomUserAdmin(UserAdmin):
             'premium',
         )}),
         ('Permissions', {
-            'fields': ('is_superuser', 'ban', 'type', 'is_staff', 'is_active',)}),
+            'fields': ('is_superuser', 'ban', 'type', 'is_staff', 'is_active', 'groups')}),
     )
     add_fieldsets = (
         (None, {
@@ -71,7 +71,8 @@ class CustomUserAdmin(UserAdmin):
                 'city',
                 'interests',
                 'habits',
-                'premium'
+                'premium', 
+                'groups'
 
             )}
         ),

@@ -9,10 +9,10 @@ from django.db.models.signals import post_save
 from .managers import CustomUserManager
 # Create your models here.
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=254, unique=True, verbose_name='Email adress')
-    first_name = models.CharField(u"First Name", max_length=100)
-    last_name = models.CharField(u"Last Name", max_length=100)
-    patronymic = models.CharField(u"Patronymic", max_length=100)
+    email = models.EmailField(max_length=254, unique=True, verbose_name='Email adress', blank=True, null=True)
+    first_name = models.CharField(u"First Name", max_length=100, blank=True, null=True)
+    last_name = models.CharField(u"Last Name", max_length=100, blank=True, null=True)
+    patronymic = models.CharField(u"Patronymic", max_length=100, blank=True, null=True)
     user_profile_id = models.IntegerField(blank=True, verbose_name='ID User', null=True, default=0)
     phone = models.CharField(max_length=24, blank=True, null=True, verbose_name='Phone')
     photo = models.ImageField(upload_to='media/users/%Y/%m/%d/', blank=True, null=True, verbose_name='Avatar') # default='../static/assets/img/default_avatar.png',
@@ -49,6 +49,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     type = models.CharField(max_length=6, choices=TYPE_ROLE, default=CLIENT, verbose_name='Type User')
     ban = models.BooleanField(default=False, verbose_name='Baned')
     city = models.ForeignKey('City', blank=True, null=True, on_delete=models.CASCADE)
+    groups = models.ManyToManyField(Group, verbose_name=_('groups'), blank=True, null=True, related_name='customuser_groups')
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
