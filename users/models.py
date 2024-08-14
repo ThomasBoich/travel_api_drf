@@ -9,11 +9,11 @@ from django.db.models.signals import post_save
 from .managers import CustomUserManager
 # Create your models here.
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    email = models.EmailField(max_length=254, unique=True, verbose_name='Email adress', blank=True, null=True)
-    first_name = models.CharField(u"First Name", max_length=100, blank=True, null=True)
-    last_name = models.CharField(u"Last Name", max_length=100, blank=True, null=True)
-    patronymic = models.CharField(u"Patronymic", max_length=100, blank=True, null=True)
-    user_profile_id = models.IntegerField(blank=True, verbose_name='ID User', null=True)
+    email = models.EmailField(max_length=254, unique=True, verbose_name='Email adress')
+    first_name = models.CharField(u"First Name", max_length=100)
+    last_name = models.CharField(u"Last Name", max_length=100)
+    patronymic = models.CharField(u"Patronymic", max_length=100)
+    user_profile_id = models.IntegerField(blank=True, verbose_name='ID User', null=True, default=0)
     phone = models.CharField(max_length=24, blank=True, null=True, verbose_name='Phone')
     photo = models.ImageField(upload_to='media/users/%Y/%m/%d/', blank=True, null=True, verbose_name='Avatar') # default='../static/assets/img/default_avatar.png',
                               

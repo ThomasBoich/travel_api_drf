@@ -1432,6 +1432,40 @@ img.city_img{
     outline: none;
 }
 
+.select_service{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  max-width: max-content;
+  margin: 0px 0px 25px 0px;
+}
+
+.select_service a{
+  display: inline-flex;
+  align-items: center;
+  margin: 0px 15px 0px 15px;
+  padding: 0px 0px 15px 0px;
+  font-weight: 700;
+}
+
+.select_service img,svg{
+  margin: 0px 5px 0px 0px;
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+}
+
+.select_service a.active{
+  border-bottom: 2px solid #00c7bb;
+  padding: 0px 0px 15px 0px;
+  color: #00c7bb!IMPORTANT;
+  font-weight: 700;
+}
+
+.opacity02{
+  opacity: 0.2;
+}
+
 /* мобильная версия */
 @media (max-width: 770px){
     .search-result-info h2 {
