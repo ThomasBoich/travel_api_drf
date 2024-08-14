@@ -66,6 +66,18 @@ def about(request):
     context = {}
     return render(request, 'about.html', context)
 
+def tarifs(request):
+    context = {}
+    return render(request, 'tarifs.html', context)
+
+def favorites(request):
+    context = {}
+    return render(request, 'favorites.html', context)
+
+def friends(request):
+    context = {}
+    return render(request, 'friends.html', context)
+
 def me(request):
     travels = Travel.objects.all()
     user = CustomUser.objects.get(id=request.user.id)

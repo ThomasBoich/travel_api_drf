@@ -23,6 +23,7 @@ class CustomUserAdmin(UserAdmin):
         'description',
         'small_description',
         'city',
+        'premium',
         # 'interests',
         # 'habits'
     )
@@ -42,7 +43,8 @@ class CustomUserAdmin(UserAdmin):
             'small_description',
             'city',
             'interests',
-            'habits'
+            'habits',
+            'premium',
         )}),
         ('Permissions', {
             'fields': ('is_superuser', 'ban', 'type', 'is_staff', 'is_active',)}),
@@ -68,7 +70,8 @@ class CustomUserAdmin(UserAdmin):
                 'small_description',
                 'city',
                 'interests',
-                'habits'
+                'habits',
+                'premium'
 
             )}
         ),

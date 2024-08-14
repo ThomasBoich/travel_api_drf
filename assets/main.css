@@ -1391,7 +1391,7 @@ img.city_img{
 .travel_gender_search{
   margin: 5px 0px 9px 0px;
   display: flex;
-  aligin-items: center;
+  align-items: center;
 }
 
 .where-content-form{
@@ -1403,8 +1403,55 @@ img.city_img{
 
 
 
+.tarif-layer{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 969px;
+  margin: 0 auto;
+}
+
+.tarif{
+  padding: 25px 25px 25px 25px;
+  width: 47%;
+  border-radius: 15px;
+  border: 1px solid #00000015;
+  display: flex;
+  flex-direction: column;
+}
 
 
+.select-tarif{
+  background-color: #00c7bb;
+  border-radius: 15px;
+  text-align: center;
+  border-radius: 12px;
+  padding: 15px 25px 15px 25px;
+  width: max-content;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.tarif-premium{
+  display: flex;
+  flex-direction: column;
+  margin: 49px auto;
+  max-width: 100%;
+  padding: 25px 25px 25px;
+  background: #f0faf9;
+  border-radius: 15px;
+}
+
+.tarif-premium h2{
+  font-size: 35px;
+  margin: 0px 0px 25px 0px;
+}
+
+.tarif-premium p{margin: 0px 0px 15px 0px;}
+.tarif-premium span{font-size: 25px;font-weight: 700;margin: 25px 0px 25px 0px;}
 
 #id_travel_now{
   width: max-content!IMPORTANT;
