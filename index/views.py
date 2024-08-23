@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login
 from users.forms import LoginForm, CustomUserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from travels.forms import TravelForm
+from travels.forms import TravelForm, TravelersForm
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -63,7 +63,7 @@ def index(request):
     return render(request, 'index.html', context)
 
 def travelers(request):
-    form = TravelForm(user=request.user)
+    form = TravelersForm(user=request.user)
     countries = Country.objects.all()
     travels = Travel.objects.all()
     cities = City.objects.all()

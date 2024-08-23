@@ -25,6 +25,16 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
 .user-nav{
   position: relative;
 }
+.date_travelers{
+  display: flex;
+  overflow: hidden;
+  margin-right: 26px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: 1px solid #d9d9d9;
+  width: max-content;
+  padding: 2px 90px 2px 22px;
+}
 .user-nav-layer{  
   visibility: hidden;
   position: absolute;
