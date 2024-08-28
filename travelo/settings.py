@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'travels',
     'index',
     'chat',
+    'trips',
     "corsheaders",
     'rest_framework',
     'drf_yasg',

@@ -33,6 +33,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     habits = models.ManyToManyField('Habits', related_name='user_habits', blank=True)
     interests = models.ManyToManyField('Interests', related_name='users_interests', blank=True)
     premium = models.BooleanField(default=False, verbose_name='premium', blank=True, null=True)
+    cars = models.ManyToManyField('UserCar', related_name='user_cars')
     
     ADMINISTRATOR = 'AD'
     MANAGER = 'OA'
@@ -160,3 +161,12 @@ class Favorites(models.Model):
     class Meta:
         verbose_name = 'Избранный'
         verbose_name_plural = 'Избранные'
+        
+
+
+    
+class CarBrand(models.Model):
+    name = models.CharField(max_length=200)
+    
+class UserCar(models.Model):
+    model = models.ForeignKey(CarBrand, on_delete=models.CASCADE)

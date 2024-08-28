@@ -36,7 +36,7 @@
       {% include 'components/search.html' %}
       {% include 'components/indexSearch.html' %}
       <style>
-        .search-sites{max-width: 768px!IMPORTANT;padding: 9px 5px 9px 5px!IMPORTANT;}
+        /* .search-sites{max-width: 768px!IMPORTANT;padding: 9px 5px 9px 5px!IMPORTANT;} */
       </style>
       <a href="{% url 'travels' %}" style="width:100%;"><button class="other">Ещё варианты</button></a>
     </div>
@@ -63,9 +63,18 @@
   </div>
 <style></style>
     <style>
-        {#  .what-search-layout {#}
+        /* {#  .what-search-layout {#}
         {#  padding: 0px 0px 0px 0px !important;#}
-        {#}#}
+        {#}#} */
+        .footer-nav-layout {
+    border-bottom: 1px solid #DDDDDD;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 95px 0px 95px 0px;
+    margin: 0px 0px 50px 0px;
+    border-top: 1px solid #f1f1f1;
+}
         form {
             width: 100%;
             max-width: 100%;

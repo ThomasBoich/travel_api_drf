@@ -16,7 +16,12 @@ h2{
   line-height: 0.9;
 }
 ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decoration: none;color: #000;background-color: inherit;min-width:max-content;}
-
+.base-content{
+  background-color: #FFFFFF!IMPORTANT;
+  padding: 25px 25px 25px 25px!IMPORTANT;
+  border-radius: 15px!IMPORTANT;
+  margin: 25px auto!IMPORTANT;
+}
 .no_active{opacity: 0.2;cursor: not-allowed;}
 /*навигация*/
 .text-layout{
@@ -28,12 +33,23 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
 .date_travelers{
   display: flex;
   overflow: hidden;
-  margin-right: 26px;
+  margin-right: 25px;
+  margin-right: 0px;
   text-overflow: ellipsis;
   white-space: nowrap;
   border-left: 1px solid #d9d9d9;
   width: max-content;
   padding: 2px 90px 2px 22px;
+  padding: 2px 90px 2px 0px;
+}
+.date_travelers{
+  display: flex;
+  width: max-content;
+  min-width: max-content;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  outline: none;
 }
 .user-nav-layer{  
   visibility: hidden;
@@ -276,9 +292,17 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
 }
 .logo a {
   color: #000000;
+  display: flex;
+  align-items: center;
 }
 .logo span {
   color: #4dd8cf;
+}.logo img{
+  height: 40px;
+  width: auto;
+  object-fit: cover;
+  display: flex;
+  margin: 0px 15px 0px 0px;
 }
 .no-login .create-button {
   border-right: 1px solid #d6d6d6;
@@ -706,16 +730,22 @@ textarea{
 }
 /*настройки*/
 
-
-
-
+.user_search_status{
+  display: flex;
+  align-items: center;
+}
+.user_status{
+  display: flex;
+  align-items: center;
+}
+{}
 
 .footer{
     width: 100%;
     display: flex;
     justify-content: center;
     padding: 75px 50px 50px 50px;
-    background-color: #F1F1F1;
+    /* background-color: #F1F1F1; */
 }
 .footer-layout{
     max-width: 1279px;
@@ -725,12 +755,13 @@ textarea{
 }
 
 .footer-nav-layout{
-    border-bottom: 1px solid #DDDDDD;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 0px 50px 0px;
-    margin: 0px 0px 50px 0px;
+  border-bottom: 1px solid #DDDDDD;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 95px 0px 95px 0px;
+  margin: 0px 0px 50px 0px;
+  border-top: 1px solid #d5d5d5d5;
 }
 
 .footer-nav-layout a{
@@ -857,8 +888,6 @@ h1{
 }.user-rating span{
   margin: 0px 25px 0px 0px;
 }
-
-
 
 .create_travel_window_script .form-date{
   display: flex;
@@ -1066,11 +1095,102 @@ h1{
 
     }
 
-
-
-
-    
 }
+
+.create_trip_window_script{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background-color: #e0e0e0f0;
+  visibility: hidden;
+}
+
+.create-trip-form{
+  margin: 0 auto;
+  max-width: 579px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 25px 25px 25px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  overflow-x: auto;
+}
+.create_trip_window_script.active{
+  visibility: visible;
+}
+.create-trip-form h1{
+  font-size: clamp(25px, 49px, 4vw);
+  margin: 25px 0px 25px 0px;
+}
+
+.create-trip-form .form-city,.form-date{
+  display: flex;
+  width: 100%;
+  margin: 0px 0px 15px 0px;
+  border-bottom: 1px solid #00000020;
+  padding: 0px 0px 15px 0px;
+  flex-wrap: wrap;
+}
+.create-trip-form div{
+  display: flex;
+  width: 100%;
+  margin: 0px 0px 15px 0px;
+  padding: 0px 0px 15px 0px;
+  flex-wrap: wrap;
+}
+.create-trip-form button{
+  width: 100%;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 17px;
+  border-radius: 9px;
+  padding: 15px 15px 15px 15px;
+}
+.create-trip-form input,select{
+  width: 100%;
+  padding: 15px;
+  border-radius: 9px;
+  border: 1px solid #00000045;
+  border: 1px solid #00000045;
+  font-size: 15px;
+  margin: 9px 0px 0px 0px;
+}
+
+.close_form_trip{
+  position: absolute;
+  right: 25px;
+  top: 19px;
+  cursor: pointer;
+}
+
+.create-trip-form label{
+  width: 100%;
+  clear: both;
+}
+
+.date_travelers input{
+  padding: 0px 0px 0px 25px;
+  border: none;
+  font-size: 15px;
+  font-size: 18px;
+  font-weight: 700;
+  border-left: 1px solid #d9d9d9;
+  margin: 0px 0px 0px 0px;
+  outline: none;
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: -2px;
+}
+.search-result-info{width: 100%;}
+.search-result{background-color: #FFFFFF;padding: 15px 15px 15px 15px!IMPORTANT;border-radius: 15px;margin: 0px 0px 15px 0px!IMPORTANT;}
 
 form.search-sites{
   display: flex;
@@ -1081,6 +1201,7 @@ form.search-sites{
   border-radius: 50px;
   border: 1px solid #00000015;
   padding: 5px 5px 5px 25px;
+  padding: 5px 5px 5px 15px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.05);
   font-weight: 500;
   font-size: 17px ! IMPORTANT;
@@ -1129,7 +1250,8 @@ form.search-sites{
   display: flex;
   z-index: 145;
   padding: 0px 0px 0px 25px !IMPORTANT;
-    margin: 0px 15px 0px 0px;
+  margin: 0px 15px 0px 0px;
+  margin: 0px 0px 0px 0px;
 }
 .where {
   width: 100%;
@@ -1252,18 +1374,36 @@ form.search-sites{
 
 .search-button{
   background-color: #00c7bb;
-  padding: 15px;
+  background-color: #7e52c7;
+  color: #FFFFFF;
+  padding: 20px 35px 20px 35px;
   min-width: 125px;
+  min-width: 145px;
   display: flex;
   font-weight: 500 !important;
+  font-weight: 700 !important;
   border-radius: 50px;
   text-align: center;
   justify-content: center;
   font-size: 1rem;
+  font-size: 18px;
+  background: rgb(243,79,188);
+  background: -moz-linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
+  background: -webkit-linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
+  background: linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f34fbc",endColorstr="#7e52c7",GradientType=1);  
 }
 
-
-
+.search-links{
+  position: absolute;
+  right: -9px;
+  margin: 0;
+  top: -2px;
+}
+.search-links path{
+  fill: #7e52c7;
+  fill: #d1d1d1;
+}
 
 
 
@@ -1324,12 +1464,61 @@ form.search-sites{
 
 
 
-
-
-
-
-
-
+.advantage-layout{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+}
+.advantage{
+  background: rgba(11, 21, 36, .05);
+  border-radius: 15px;
+  padding: 25px 15px 25px 15px;
+  width: 49%;
+  text-align: center;
+}
+.advantage a{
+  width: max-content;
+  border-radius: 100px;
+  padding: 12px 19px 12px 19px;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+}
+.advantage-content{
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  padding: 15px 15px 15px 15px;
+  margin: 25px auto;
+}
+.advantage-content img{
+  display: flex;
+  border-radius: 99px;
+  padding: 15px;
+  background-color: #f6f6f6;
+  object-fit: cover;
+}
+.advantage-cart{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: left;
+  justify-content: flex-start;
+}.advantage-cart p{
+  padding: auto;
+  margin: auto;
+  font-size: 15px;
+}
+.advantage-cart span{
+  font-size: 17px;
+  font-weight: 700;
+  float: left;
+}
+.advantage-layout{
+  display: flex;
+  align-items: center;
+}
 
 
 
@@ -1340,6 +1529,7 @@ form.search-sites{
 .travel__header{
   width: 100%;
   border-bottom: 1px solid #00000025;
+  border-bottom: none;
   margin: 0px 0px 25px 0px;
 }
 .travel__header__title{
@@ -1514,8 +1704,10 @@ img.city_img{
 
 .select_service a.active{
   border-bottom: 2px solid #00c7bb;
+  border-bottom: 2px solid #7e52c7;
   padding: 0px 0px 15px 0px;
   color: #00c7bb!IMPORTANT;
+  color: #7e52c7 !IMPORTANT;
   font-weight: 700;
 }
 

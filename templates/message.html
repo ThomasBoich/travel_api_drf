@@ -97,7 +97,11 @@
   </div>
 </div>
 <style>
-
+.content {
+    max-width: 1279px;
+    margin: auto auto 100px;
+    margin: 9px auto 15px;
+}
 
 .message-user-nav-layout a{
   width: max-content;
@@ -322,13 +326,21 @@ img.message-chat:hover{
 }
 .chat-layout{
   background-color: #F9F9F9;
+  background-color: #FFFFFF;
   width: 100%;
   border-radius: 15px;
   padding: 15px 15px 15px 15px;
+  padding: 9px 15px 0px 15px;
   display: flex;
   flex-direction: column;
-  /* min-height: 70dvh; */
-}.chat-layout a{
+  min-height: 70dvh;
+  position: relative;
+  max-width: 1009px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.base-content{padding: 0px 0px 0px 0px!IMPORTANT;}
+.chat-layout a{
   width: 100%;
   display: flex;
 }

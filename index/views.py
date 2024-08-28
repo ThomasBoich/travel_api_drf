@@ -10,7 +10,8 @@ from django.contrib.auth import authenticate, login
 from users.forms import LoginForm, CustomUserCreationForm
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from travels.forms import TravelForm, TravelersForm
+from travels.forms import TravelForm
+from trips.forms import TravelersForm
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -39,6 +40,7 @@ def register_user(request):
 
 def index(request):
     form = TravelForm(user=request.user)
+    form_travelers = TravelersForm(user=request.user)
     countries = Country.objects.all()
     travels = Travel.objects.all()
     cities = City.objects.all()
@@ -48,6 +50,7 @@ def index(request):
     countries_from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()[0:3]
     context = {
         'form': form,
+        'form_travelers': form_travelers,
         'countries': countries[:12],
         'countries_list': countries,
         'total_popular_countries': countries.count(),

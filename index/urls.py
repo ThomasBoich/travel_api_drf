@@ -1,10 +1,8 @@
 from django.urls import path, include
-from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites,travelers
+from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites
+from trips.views import travelers,create_trip
 from travels.views import create_travel
-
-from chat.views import private_chat, send_message
-
-from chat.views import display_messages
+from chat.views import private_chat, send_message, display_messages
 from users.views import addToFriends, addFavorites
 
 urlpatterns = [
@@ -23,6 +21,7 @@ urlpatterns = [
     path('users/', users, name='users'),
     path('travel/<travel_id>/', travel, name='travel'),
     path('create_travel', create_travel, name='create_travel'),
+    path('create_trip', create_trip, name='create_trip'),
     path('chats/', chats, name='chats'),
     path('chats/folder/<int:folder_id>/', folder, name='folder'),
     path('chats/folderCreate/', folderCreate, name='folderCreate'),

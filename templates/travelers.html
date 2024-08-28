@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %}{% load static %}
 {% block content %}
 
     <div class="content">
@@ -34,9 +34,63 @@
       </div>
 
       {% include 'components/search_travelers.html' %}
+
+
+      <div class="advantage-layout">
+        <div class="advantage">
+            <h2>Если вы пассажир</h2>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="{% static 'img/icon-shield.webp' %}" alt="">
+                    <div class="advantage-cart">
+                        <span>
+                            Легкость путешествия
+                        </span>
+                        <p>
+                            Больше никаких пересадок и ожиданий на остановках. Под рукой всегда комфортабельный автомобиль.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <a href=""><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.8 20.3C20.4134 20.6866 19.7866 20.6866 19.4 20.3L13.8 14.7C13.3 15.1 12.725 15.4167 12.075 15.65C11.425 15.8833 10.7333 16 10 16C8.18333 16 6.646 15.371 5.388 14.113C4.12933 12.8543 3.5 11.3167 3.5 9.5C3.5 7.68333 4.12933 6.14567 5.388 4.887C6.646 3.629 8.18333 3 10 3C11.8167 3 13.3543 3.629 14.613 4.887C15.871 6.14567 16.5 7.68333 16.5 9.5C16.5 10.2333 16.3833 10.925 16.15 11.575C15.9167 12.225 15.6 12.8 15.2 13.3L20.8 18.9C21.1866 19.2866 21.1866 19.9134 20.8 20.3ZM10 14C11.25 14 12.3127 13.5627 13.188 12.688C14.0627 11.8127 14.5 10.75 14.5 9.5C14.5 8.25 14.0627 7.18733 13.188 6.312C12.3127 5.43733 11.25 5 10 5C8.75 5 7.68733 5.43733 6.812 6.312C5.93733 7.18733 5.5 8.25 5.5 9.5C5.5 10.75 5.93733 11.8127 6.812 12.688C7.68733 13.5627 8.75 14 10 14Z" fill="#0B1524"></path>
+            </svg> Найти поездку</a>
+        </div>
+        <div class="advantage">
+            <h2>Если вы водитель</h2>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="{% static 'img/icon-shield.webp' %}" alt="">
+                    <div class="advantage-cart">
+                    <span>
+                        Много попутчиков
+                    </span>
+                    <p>
+                        Среди огромной базы наших пассажиров вы точно найдете попутчиков, которым с вами по пути.
+                    </p>
+                </div>
+                </div>
+
+            </div>
+            <a href=""><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.5 13H13.5V18C13.5 18.55 13.05 19 12.5 19C11.95 19 11.5 18.55 11.5 18V13H6.5C5.95 13 5.5 12.55 5.5 12C5.5 11.45 5.95 11 6.5 11H11.5V6C11.5 5.45 11.95 5 12.5 5C13.05 5 13.5 5.45 13.5 6V11H18.5C19.05 11 19.5 11.45 19.5 12C19.5 12.55 19.05 13 18.5 13Z" fill="#0B1524"></path>
+            </svg> Создать поездку</a>
+        </div>        
+      </div>
+
+
+
+
       {% include 'components/indexSearch.html' %}
+
+
+      
       <style>
-        .search-sites{max-width: 768px!IMPORTANT;padding: 9px 5px 9px 5px!IMPORTANT;}
+       .search-sites {
+    max-width: 100% ! IMPORTANT;
+    padding: 5px 5px 5px 5px ! IMPORTANT;
+}
       </style>
       <a href="{% url 'travels' %}" style="width:100%;"><button class="other">Ещё варианты</button></a>
     </div>
@@ -63,9 +117,10 @@
   </div>
 <style></style>
     <style>
-        {#  .what-search-layout {#}
+        /* {#  .what-search-layout {#}
         {#  padding: 0px 0px 0px 0px !important;#}
-        {#}#}
+        {#}#} */
+        .base-content{background-color: inherit!IMPORTANT;}
         form {
             width: 100%;
             max-width: 100%;

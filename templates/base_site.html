@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Travelo</title>
+    <title>«Travelo» — Портал для поиска попутчиков куда угодно</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="shortcut icon" href="{%  static 'img/favicons/faviicon.ico' %}">
+    <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}" type="image/x-icon">
 <!--    <link rel="shortcut icon" href="{%  static 'icon.svg' %}">-->
 <!--    <link rel="stylesheet" href="{%  static 'css/style.css' %}">-->
 <!--    <script src="{%  static 'js/main.js' %}"></script>-->
@@ -16,11 +17,13 @@
   />
 </head>
 <body>
-
+<style>
+  body{background-color: #f1f1f1f1;}
+</style>
   {% include 'navigation.html' %}
   <div class="base-content">
   {% if request.user.is_authenticated %}
-  <div class="vertical-nav">
+{% comment %}  <div class="vertical-nav">
  
     <a href="{% url 'profile' request.user.id %}">
       {%if request.user.photo.url and request.user.photo%}<img src="{{request.user.photo.url}}" style="border-radius: 50px;"/>
@@ -41,6 +44,7 @@
     width: max-content;">Авторизироваться</span> -->
 
   </div>
+  {%endcomment%}
   {% endif %}
 {% block content %}
 {% endblock %}
