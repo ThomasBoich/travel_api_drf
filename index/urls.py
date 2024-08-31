@@ -1,5 +1,5 @@
 from django.urls import path, include
-from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites
+from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites,trips,trip
 from trips.views import travelers,create_trip
 from travels.views import create_travel
 from chat.views import private_chat, send_message, display_messages
@@ -18,8 +18,10 @@ urlpatterns = [
     path('login/', AppLoginView.as_view(), name='custom_login'),
     path('registration/', register_user, name='register_user'),
     path('travels/', travels, name='travels'),
+    path('trips/', trips, name='trips'),
     path('users/', users, name='users'),
     path('travel/<travel_id>/', travel, name='travel'),
+    path('trip/<trip_id>/', trip, name='trip'),
     path('create_travel', create_travel, name='create_travel'),
     path('create_trip', create_trip, name='create_trip'),
     path('chats/', chats, name='chats'),

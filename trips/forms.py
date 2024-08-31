@@ -1,14 +1,16 @@
 from django import forms
-from travels.models import Travel, Country
+from .models import Trip
 
 
 class TravelersForm(forms.ModelForm):
-    country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), required=False)
+    #country = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), required=False)
 
     class Meta:
-        model = Travel
+        model = Trip
         fields = '__all__'
-        exclude = ['user', 'tipr_users']  # Exclude the 'user' field from the form
+        exclude = ['user', 'trip_users','tipr_users','trip_date','free_seats','city','price','status','finish','cityin','trip_in_time','trip_out_time','trip_car','trip_baggage','trip_smoking','trip_hild_seat','trip_animals',]  # Exclude the 'user' field from the form
+        
+
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

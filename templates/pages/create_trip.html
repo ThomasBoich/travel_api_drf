@@ -1,0 +1,94 @@
+{% extends 'base_site.html' %}{% load static %}
+{% block content %}
+
+ <div class="wow animate__fadeInDown"></div>
+<div class="content" style="width:100%;max-width: 100%;" v-if="loaded" data-aos="fade-down">
+    <div class="travel__header">
+      <div class="travel__header__title">
+       
+        <h1 class="travel__header__title__text">
+        Поездка: <span style="color: blueviolet;">{{trip.city}} — {{trip.cityin}}</span> ({{trip.trip_date}})
+
+        </h1>
+        </div>
+      </div>
+
+      <div class="travel__user__layer">
+        <a href="{% url 'profile' trip.user.id %}">
+        <div class="travel_user">
+          <img src="{{ trip.user.photo.url }}" alt="">
+          <div class="">
+            <div class="travel_user_info">
+              Водитель:
+            </div>
+            <span class="travel_user_name">{{ trip.user.first_name }}</span>
+          </div>
+          <!-- стрелка -->
+        </div>
+      </a>
+
+        <p>
+
+        </p>
+        <div class="road-view">
+
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<style>
+    .road-view{display: flex;flex-wrap: wrap;gap: 15px;margin:0px 0px 25px 0px;}
+    .road-view span{
+        border-radius: 50px;
+        border:1px solid #EBEBEB;
+        padding: 9px 15px 9px 15px;
+        min-width: max-content;
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+    }
+    .road-view span img{
+        margin: 0px 5px 0px 0px;
+    }
+
+    @media (max-width: 770px){
+    .index-friends-layout{
+        margin: 0px auto 35px;
+    }
+    .index-friends-title{
+        width: calc(100% -30px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 0px 0px 15px;
+    }
+    .index-friends-title h2{
+        font-size: 5vw;
+    }
+    .road-view{
+        overflow: hidden;
+        overflow-x: auto;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(2, auto);
+    padding: 0px 15px 0px 15px;
+    }
+    .index-friends-user{
+        margin: 0px 15px 0px 0px;
+    }
+    .index-friends-user img{
+        max-width: 135px;
+    }.index-friends-user p{
+        font-size: 12px;
+        padding: 0px;
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+    }
+    .index-friends-users{
+        padding: 0px 15px 0px 15px;
+        margin: 0px 0px 35px 0px;
+    }
+}
+</style>
+{% endblock %}

@@ -12,6 +12,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from travels.forms import TravelForm
 from trips.forms import TravelersForm
+from trips.models import Trip
 # Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
@@ -69,6 +70,7 @@ def travelers(request):
     form = TravelersForm(user=request.user)
     countries = Country.objects.all()
     travels = Travel.objects.all()
+    trips = Trip.objects.all()
     cities = City.objects.all()
     users = CustomUser.objects.all()
     users = CustomUser.objects.all()
@@ -80,6 +82,7 @@ def travelers(request):
         'countries_list': countries,
         'total_popular_countries': countries.count(),
         'travels': travels,
+        'trips': trips,
         'cities': cities,
         'users': users[0:5],
         'title': f'Travelo',
@@ -256,6 +259,52 @@ def travels(request):
     #     travels = Travel.objects.filter(filters)
     #     travels_title = 'Поиск поездок'
 
+def trips(request):
+    if request.method == 'GET':
+        trips = Trip.objects.all()
+        travels_title = f'Поиск поездок - {trips.count()} шт.'
+        city_name = request.GET.get('city')
+        from_city = request.GET.get('from_city')
+        cities = City.objects.all()
+        filters = Q()
+        
+     
+        # if city_name:
+        #     travels_title = f'Поиск поездок из города {city_name}'
+        #     travels = Travel.objects.filter(from_city__name=city_name).distinct()
+        
+        # if country_name and city_name:
+        #     travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name))
+        #     travels_title = f"Поездки: {city_name} — {country_name}"
+
+        # if country_name and city_name and interest_name:
+        #     travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name), Q(gender_search=interest_name))
+        #     travels_title = f"Поездки: {city_name} — {country_name}"
+
+        # if interest_name:
+        #     interest = get_object_or_404(Interests, name=interest_name)
+        #     filters &= Q(interests=interest)
+
+        # if from_moscow:
+        #     travels = Country.objects.filter(travels__from_city__name=from_moscow).distinct()
+        #     travels_title = f'Популярные направления из Москвы'
+
+        # if not country_name and not city_name and not interest_name:
+        #     travels = Travel.objects.all()
+        #     travels_title = f'Поиск поездок - {travels.count()} шт.'
+            
+    context = {
+        'title': f'Travelo',
+        'travels_title': travels_title,
+        'trips': trips,
+        # 'countries_list': Country.objects.all(),
+        'cities': cities,
+    }
+    return render(request, 'trips.html', context)
+    #   else:
+    #     travels = Travel.objects.filter(filters)
+    #     travels_title = 'Поиск поездок'
+
 
 def users(request):
     if request.method == 'GET':
@@ -326,6 +375,14 @@ def travel(request, travel_id):
     }
     return render(request, 'travel.html', context)
 
+def trip(request, trip_id):
+    trip = Trip.objects.get(id=trip_id)
+    user = trip.user
+    context = {
+        'trip': trip,
+        'user_trips': Trip.objects.filter(user=user),
+    }
+    return render(request, 'trip.html', context)
 
 
 from chat.models import *

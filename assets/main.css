@@ -116,7 +116,10 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
 }
 .add-layer{
   position: relative;
-}
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}.add-layer svg,path{height: 19px!IMPORTANT;width: auto!IMPORTANT;}
 .add-layer-content{
   visibility: hidden;
   position: absolute;
@@ -332,6 +335,8 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
   border-right: 1px solid #d6d6d6;
   padding: 0px 25px 0px 0px;
   cursor: pointer;
+  display: flex;
+  align-items: center;
   transition: opacity 0.3s;
   -moz-transition: opacity 0.3s;
   -webkit-transition: opacity 0.3s;
@@ -1391,9 +1396,17 @@ form.search-sites{
   background: -moz-linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
   background: -webkit-linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
   background: linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f34fbc",endColorstr="#7e52c7",GradientType=1);  
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f34fbc",endColorstr="#7e52c7",GradientType=1);
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s; 
 }
-
+.search-button:hover{
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  opacity: 0.7;
+}
 .search-links{
   position: absolute;
   right: -9px;
@@ -1458,18 +1471,90 @@ form.search-sites{
 }
 
 
+.trip_time_layer{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  column-gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 16px));
+  justify-content: space-between;
+  overflow: hidden;
+  width: 69%;
+  min-width: 300px;
+}
+.trip_time_layer span{
+  font-size: 12px;
+  background-color: #00000015;
+  border-radius: 15px;
+  padding: 2px 5px 2px 5px;
+  color: #000;
+  font-weight: 700;
+  margin: 0px 0px 0px 5px;
+}
+.trip_in_time,.trip_out_time{
+  font-size: 25px;
+  font-weight: 500;
+  min-width: max-content;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.trip_city{
+  width: 100%;
+  font-size: 15px;
+  color: #00000079;
+}
+.time__layer{
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
 
+.trip_driver_photo{}
+.trip_driver_photo img{
+  height: 49px!IMPORTANT;
+  width: 49px!IMPORTANT;
+  object-fit: cover!IMPORTANT;
+  border-radius: 101px!IMPORTANT;
+}
+.trip_driver{
+  display: flex;
+  align-items: center;
+  width: 33.333333%;
+}
+.trip_driver_info{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  font-weight: 500;
+  font-size: 15px;
+  width: 100%;
+}
+.trip_driver_info span{
+  color: #00000079;
+}
 
+.trip_price{
+  display: flex;
+  flex-direction: column;
+}
+.trip_price span{
+  font-size: 25px;
+  font-weight: 700;
+}
 
+.trip_info{
+  width: 33%;
+}
 
-
-
-.advantage-layout{
+.advantage-layout-list{
   display: flex;
   justify-content: space-between;
   width: 100%;
   max-width: 1260px;
-  margin: 0 auto;
+  margin: 75px auto 50px auto;
 }
 .advantage{
   background: rgba(11, 21, 36, .05);
@@ -1485,12 +1570,24 @@ form.search-sites{
   display: flex;
   align-items: center;
   margin: 0 auto;
+  margin: 25px auto 5px auto;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}.advantage a:hover{
+  opacity: 0.7;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+.advantage h2{
+  margin: 0px 0px 25px 0px;
 }
 .advantage-content{
   background-color: #FFFFFF;
   border-radius: 15px;
   padding: 15px 15px 15px 15px;
-  margin: 25px auto;
+  margin: 9px 0px 9px 0px;
 }
 .advantage-content img{
   display: flex;
@@ -1498,6 +1595,7 @@ form.search-sites{
   padding: 15px;
   background-color: #f6f6f6;
   object-fit: cover;
+  margin: 0px 15px 0px 0px;
 }
 .advantage-cart{
   display: flex;
@@ -1514,6 +1612,8 @@ form.search-sites{
   font-size: 17px;
   font-weight: 700;
   float: left;
+  width: 100%;
+  margin: 0px 0px 5px 0px;
 }
 .advantage-layout{
   display: flex;
@@ -1620,7 +1720,6 @@ img.city_img{
   flex-direction: column;
 }
 
-
 .select-tarif{
   background-color: #00c7bb;
   border-radius: 15px;
@@ -1669,8 +1768,6 @@ img.city_img{
     padding: 0px 0px 0px 0px;
 }
 
-
-
 .where-layout select{
     font-size: 15px;
     font-weight: 700;
@@ -1693,6 +1790,16 @@ img.city_img{
   margin: 0px 15px 0px 15px;
   padding: 0px 0px 15px 0px;
   font-weight: 700;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+}
+
+.select_service a:hover{
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  opacity: 0.5;
 }
 
 .select_service img,svg{
