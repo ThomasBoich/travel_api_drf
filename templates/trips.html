@@ -10,15 +10,16 @@
 </form> -->
 
 
-{% include 'components/search.html' %}
+{% include 'components/search_travelers.html' %}
 
 <ul></ul>
   {% for trip in trips %}
 
 
 <a href="{% url 'trip' trip.id %}">
-<div class="search-result wow animate__fadeInDown">
+<div class="search-result trips wow animate__fadeInDown">
 
+  <div class="search_trip_one_layer">
 <div class="trip_time_layer">
   <div class="trip_in_time">
     <div class="time__layer">
@@ -28,6 +29,7 @@
     <div class="trip_city">
       {{trip.city}}
     </div>
+
   </div>
   <div class="trip_out_time">
     <div class="time__layer">
@@ -38,6 +40,9 @@
       {{trip.cityin}}
     </div>
   </div>
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="3" x2="100%" y2="3"></line>
+</svg>
 </div>
 
 <div class="trip_driver">
@@ -46,7 +51,9 @@
   </div>
   <div class="trip_driver_info">
     {{trip.user.first_name}}
-    <span>{{trip.user.}}Audi Q9</span>
+    <span>{{trip.trip_car.car.brand.name}} {{trip.trip_car.car.name}}
+      <!-- Audi Q9 -->
+    </span>
   </div>
 </div>
 
@@ -65,8 +72,14 @@
 </div>
 
 
-
-
+</div>
+<div class="search_trip_two_layer">
+  {% for other in trip.trip_others.all %}
+    <span><img src="{{other.image.url}}" alt="">
+      <!-- {{other.name}} -->
+    </span>
+  {% endfor %}  
+</div>
 
 
 

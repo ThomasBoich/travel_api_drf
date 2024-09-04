@@ -18,7 +18,7 @@
 </template>-->
 <form action="{% url 'trips' %}" method="GET" class="search-sites wow animate__fadeInDown">
   <div class="where-layout">
-              <select name="city" id="" class="js-chosen1">
+              <select name="from_city" id="" class="js-chosen1">
             {% for city in cities %}
 
                 <option value="{{city.name}}">{{ city.name }}</option>
@@ -48,7 +48,7 @@
     </svg>
       <button class="relative w-full" type="button" style="border:none;box-shadow:none;font-size:17px;padding:0px 0px 0px 0px;width:100%!IMPORTANT;" id="nuid-1">
       <!-- <span>Куда?</span> -->
-      <select class="js-chosen" name="country" id="" style="font-size: 15px;font-weight: 700;color: #494949;border: none;outline: none;">
+      <select class="js-chosen" name="city" id="" style="font-size: 15px;font-weight: 700;color: #494949;border: none;outline: none;">
         {%for city in cities%}
         <option value="{{city.name}}">{{city.name}}</option>
         {%endfor%}
@@ -62,7 +62,7 @@
   </div>
 </div>
 <div class="date_travelers">
-  <input type="date">
+  <input type="date" name="date" id="id_date">
 </div>
 <button class="search-button" type="submit">
   Найти

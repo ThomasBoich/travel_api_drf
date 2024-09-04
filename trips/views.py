@@ -40,7 +40,7 @@ def create_trip(request):
         form = TravelersForm(request.POST, user=request.user)
         if form.is_valid():
             new_trip = form.save()
-            return redirect('trip', travel_id=new_trip.id)  # Redirect to the created travel page
+            return redirect('trip', trip_id=new_trip.id)  # Redirect to the created travel page
     else:
         form = TravelersForm(user=request.user)
-    return render(request, 'index.html', {'trip_form': form})
+    return render(request, 'pages/create_trip.html', {'trip_form': form})

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from users.forms import CustomUserChangeForm, CustomUserCreationForm
-from users.models import CustomUser, Profile, Habits, Interests, City, Friends, Favorites
+from users.models import CustomUser, Profile, Habits, Interests, City, Friends, Favorites,CarBrand,CarModel,UserCar
 
 class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
@@ -44,6 +44,7 @@ class CustomUserAdmin(UserAdmin):
             'city',
             'interests',
             'habits',
+            'cars',
             'premium',
         )}),
         ('Permissions', {
@@ -71,6 +72,7 @@ class CustomUserAdmin(UserAdmin):
                 'city',
                 'interests',
                 'habits',
+                'cars',
                 'premium', 
                 'groups'
 
@@ -112,12 +114,22 @@ class FriendsAdmin(admin.ModelAdmin):
     search_fields = ('user',)
 
 
-
 class FavoritesAdmin(admin.ModelAdmin):
     list_display = ('user',)
     search_fields = ('user',)
+    
+class CarBrandAdmin(admin.ModelAdmin):
+    pass
 
-
+class CarModelAdmin(admin.ModelAdmin):
+    pass
+    
+class UserCarAdmin(admin.ModelAdmin):
+    pass
+    
 admin.site.register(City,CityAdmin)
 admin.site.register(Friends,FriendsAdmin)
 admin.site.register(Favorites,FavoritesAdmin)
+admin.site.register(CarBrand, CarBrandAdmin)
+admin.site.register(CarModel, CarModelAdmin)
+admin.site.register(UserCar, UserCarAdmin)

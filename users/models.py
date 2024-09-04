@@ -33,7 +33,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     habits = models.ManyToManyField('Habits', related_name='user_habits', blank=True)
     interests = models.ManyToManyField('Interests', related_name='users_interests', blank=True)
     premium = models.BooleanField(default=False, verbose_name='premium', blank=True, null=True)
-    cars = models.ManyToManyField('UserCar', related_name='user_cars')
+    cars = models.ManyToManyField('UserCar', related_name='user_cars', blank=True, null=True)
     
     ADMINISTRATOR = 'AD'
     MANAGER = 'OA'
@@ -138,7 +138,6 @@ class City(models.Model):
         verbose_name_plural = 'Города'
 
 
-
 class Friends(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     friends = models.ManyToManyField(CustomUser, related_name='users_friends', blank=True, null=True)
@@ -162,11 +161,25 @@ class Favorites(models.Model):
         verbose_name = 'Избранный'
         verbose_name_plural = 'Избранные'
         
-
-
-    
+   
 class CarBrand(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class CarModel(models.Model):
+    name = models.CharField(max_length=200)
+    brand = models.ForeignKey(CarBrand,on_delete=models.CASCADE, blank=True, null=True)
     
+    def __str__(self):
+        return self.name
+
+# class CarItem(models.Model):
+#     model = models.ForeignKey(CarBrand)
+#     brand = models.ForeignKey(CarModel)
+
 class UserCar(models.Model):
-    model = models.ForeignKey(CarBrand, on_delete=models.CASCADE)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
+    car = models.ForeignKey(CarModel, on_delete=models.CASCADE, blank=True, null=True)
+    image = models.ImageField(upload_to="usercars/%Y/%m/%d/", blank=True, null=True)

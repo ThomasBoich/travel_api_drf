@@ -1116,7 +1116,7 @@ h1{
   visibility: hidden;
 }
 
-.create-trip-form{
+.create-trip-form,.create-travel-form{
   margin: 0 auto;
   max-width: 579px;
   display: flex;
@@ -1132,7 +1132,7 @@ h1{
 }
 .create-trip-form h1{
   font-size: clamp(25px, 49px, 4vw);
-  margin: 25px 0px 25px 0px;
+  margin: 0px 0px 25px 0px;
 }
 
 .create-trip-form .form-city,.form-date{
@@ -1164,6 +1164,7 @@ h1{
   border-radius: 9px;
   border: 1px solid #00000045;
   border: 1px solid #00000045;
+  border: 2px solid #E1E1E1;
   font-size: 15px;
   margin: 9px 0px 0px 0px;
 }
@@ -1196,6 +1197,66 @@ h1{
 }
 .search-result-info{width: 100%;}
 .search-result{background-color: #FFFFFF;padding: 15px 15px 15px 15px!IMPORTANT;border-radius: 15px;margin: 0px 0px 15px 0px!IMPORTANT;}
+
+.create-travel-form{
+  margin: 0 auto;
+  max-width: 779px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px 25px 25px 25px;
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+  background-color: #FFFFFF;
+  height: 79dvh;
+}
+.create-travel-form h1{
+  font-size: clamp(25px, 49px, 4vw);
+    margin: 0px 0px 25px 0px;
+}
+.create-travel-form button{
+  width: 100%;
+  background-color: #000000;
+  color: #FFFFFF;
+  font-size: 17px;
+  border-radius: 9px;
+  padding: 15px 15px 15px 15px;
+}.create-travel-form textarea{
+  width: 100%;
+  margin: 0px 0px 25px 0px;
+  font-size: 15px;
+  font-family: inherit;
+}
+.form-user-info div{
+  margin: 0px 0px 25px 0px;
+}
+
+.form-city label{
+  width: 100%;
+  display: flex;
+}
+
+.form-city input{
+  width: 100%;
+  padding: 15px;
+  border-radius: 9px;
+  border: 1px solid #00000045;
+  border: 1px solid #00000045;
+  font-size: 15px;
+  margin: 9px 0px 25px 0px;
+}
+
+.chosen-container-single .chosen-single{
+  height: max-content!IMPORTANT;
+}
+
+.create_travel_layer_content{
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  width: 100%;
+  padding: 0px 15px 0px 0px;
+}
 
 form.search-sites{
   display: flex;
@@ -1482,6 +1543,7 @@ form.search-sites{
   overflow: hidden;
   width: 69%;
   min-width: 300px;
+  position: relative;
 }
 .trip_time_layer span{
   font-size: 12px;
@@ -1495,11 +1557,17 @@ form.search-sites{
 .trip_in_time,.trip_out_time{
   font-size: 25px;
   font-weight: 500;
-  min-width: max-content;
+  width: max-content;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
+  position: relative;
+  background-color: #FFFFFF;
+  z-index: 9;
+  padding: 0px 9px 0px 9px;
+}.trip_out_time{
+  min-width: 100%;
 }
 .trip_city{
   width: 100%;
@@ -1510,6 +1578,26 @@ form.search-sites{
   display: flex;
   align-items: center;
   width: 100%;
+  background-color: #FFFFFF;
+  z-index: 9;
+}
+
+.trip_time_layer line {
+    stroke: rgba(11, 21, 36, .3);
+    fill: none;
+    stroke-width: 3px;
+    stroke-opacity: .5;
+    stroke-dasharray: 0, 7;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+}
+.trip_time_layer svg {
+  fill: none;
+  height: 6px;
+  padding: 0 12px;
+  position: absolute;
+  width: 100%;
+  top: 12px;
 }
 
 .trip_driver_photo{}
@@ -1621,10 +1709,27 @@ form.search-sites{
 }
 
 
+.chat-layout input {
+  border: 1px solid #ffffff!IMPORTANT;
+  border-radius: 50px;
+  padding: 15px 25px 15px 25px!IMPORTANT;
+  width: 100%;
+  font-size: 17px;
+}
 
 
+.message-input form{
+  box-shadow: none;
+}
+.message-input svg{
+  fill: #00000049;
+  position: relative;
+  top:2px;
+}
 
-
+.message-input svg:hover{
+  fill: #7e52c7;
+}
 
 .travel__header{
   width: 100%;
@@ -1759,6 +1864,7 @@ img.city_img{
   font-size: 15px;
   margin: 0px 0px 0px 15px;
   border: 1px solid #979797;
+  border: 2px solid #E1E1E1;
 }
 
 
@@ -1793,6 +1899,19 @@ img.city_img{
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
+
+
+  display: inline-flex;
+  align-items: center;
+  margin: 0px 9px 0px 9px;
+  padding: 0px 0px 15px 0px;
+  font-weight: 700;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  border-radius: 179px;
+  padding: 9px 15px 9px 15px ! IMPORTANT;
+  background-color: #f3f3f3;
 }
 
 .select_service a:hover{
@@ -1808,20 +1927,61 @@ img.city_img{
   height: 25px;
   object-fit: cover;
 }
-
 .select_service a.active{
-  border-bottom: 2px solid #00c7bb;
-  border-bottom: 2px solid #7e52c7;
+  /* border-bottom: 2px solid #00c7bb;
+  border-bottom: 2px solid #7e52c7; */
   padding: 0px 0px 15px 0px;
   color: #00c7bb!IMPORTANT;
   color: #7e52c7 !IMPORTANT;
   font-weight: 700;
+
+  background-color: #7e52c7;
+    /* border-bottom: 2px solid #00c7bb; */
+    /* border-bottom: 2px solid #7e52c7; */
+    padding: 0px 0px 15px 0px;
+    color: #00c7bb ! IMPORTANT;
+    color: #ffffff ! IMPORTANT;
+    font-weight: 700;
+}
+
+.trips{
+  display: flex;
+  flex-direction: column;
+}
+.search_trip_two_layer{
+
+  & svg,img{
+    width: 19px!IMPORTANT;
+    height: 19px!IMPORTANT;
+    object-fit: cover!IMPORTANT;
+    margin: 0px 9px 0px 0px!IMPORTANT;
+  }
+
+}
+.search_trip_two_layer{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 9px 15px 0px 9px;
+}
+.search_trip_two_layer span{
+  display: flex;
+  align-items: center;
+}
+.select_service svg{
+  width: 19px;
+  height: 19px;
 }
 
 .opacity02{
   opacity: 0.2;
 }
-
+.search_trip_one_layer{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
 /* мобильная версия */
 @media (max-width: 770px){
     .search-result-info h2 {

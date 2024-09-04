@@ -46,4 +46,4 @@ def create_travel(request):
             return redirect('travel', travel_id=new_travel.id)  # Redirect to the created travel page
     else:
         form = TravelForm(user=request.user)
-    return render(request, 'index.html', {'form': form})
+    return render(request, 'pages/create_travel.html', {'form': form})

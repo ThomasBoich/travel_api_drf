@@ -8,7 +8,7 @@ class TravelersForm(forms.ModelForm):
     class Meta:
         model = Trip
         fields = '__all__'
-        exclude = ['user', 'trip_users','tipr_users','trip_date','free_seats','city','price','status','finish','cityin','trip_in_time','trip_out_time','trip_car','trip_baggage','trip_smoking','trip_hild_seat','trip_animals',]  # Exclude the 'user' field from the form
+        exclude = ['user', 'trip_users','finish','status']  # Exclude the 'user' field from the form
         
 
 

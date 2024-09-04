@@ -182,7 +182,8 @@
             <div class="add-layer-content">
               <!-- <a id="" onclick="create_travel()" href="">Создать путешествие</a> -->
               <a id="" href="" class="no_active">Запись в блоге</a>
-              <span onclick="create_trip()" style="
+              <a href="{% url 'create_trip' %}"><span  style="
+              /* onclick="create_trip()" */
               cursor: pointer;
               width: 100%;
               margin: 0px 0px 0px 0px;
@@ -192,9 +193,10 @@
               padding: 15px 25px;
               transition: background-color 0.3s;
               -moz-transition: background-color 0.3s;
-              -webkit-transition: background-color 0.3s;">Создать поездку</span>
-              <span id="create_travels" onclick="create_travel()"
-              style="              
+              -webkit-transition: background-color 0.3s;">Создать поездку</span></a>
+              <a href="{% url 'create_travel' %}"><span id="create_travels"
+              style="             
+              /* onclick="create_travel()"  */
               cursor: pointer;
               width: 100%;
               margin: 0px 0px 0px 0px;
@@ -205,7 +207,7 @@
               transition: background-color 0.3s;
               -moz-transition: background-color 0.3s;
               -webkit-transition: background-color 0.3s;
-              ">Создать путешествие</span>
+              ">Создать путешествие</span></a>
               <script>
                 const html = document.querySelector('html')
                 const create_modal = document.querySelector('.create_travel_window_script')

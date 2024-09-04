@@ -1,0 +1,255 @@
+{% extends 'base_site.html' %}{% load static %}
+{% block content %}
+ <!-- <div class="wow animate__fadeInDown"></div> -->
+ <form id="create_travel_window_script_form" action="{% url 'create_travel' %}" method="post" class="create-travel-form">
+  {% csrf_token %}
+  <!-- {{form.as_p}} -->
+  <h1>Создать путешествие</h1>
+  <div class="create_travel_layer_content">
+  <div class="form-user-info">
+    <div>
+      <label for="id_gender">Я</label>
+      <select name="gender" id="id_gender">
+        <option value="Мужчина">Мужчина</option>
+        <option value="Женщина">Женщина</option>
+      </select>
+    </div>
+  <div>
+    <label for="id_gender_search">Ищу</label>
+    <select name="gender_search" id="id_gender_search" required><option value="Семью">Семью</option>
+      <option value="Женщину">Женщину</option>
+      <option value="Мужчину">Мужчину</option>
+    </select>
+  </div><div class="from_city_link_layer" style="width: 100%;">
+    <select name="from_city" id="id_from_city" class="js-chosen3" style="" required>
+      {% for city in cities %}
+          <option value="{{city.id}}">{{ city.name }}</option>
+      {% endfor %}
+      <option value="" selected disabled>Откуда?</option>
+  </select>
+  <style>
+    
+    .from_city_link_layer{}
+    .from_city_link_layer a{
+      width: 100%;
+    padding: 15px!IMPORTANT;
+    border-radius: 9px;
+    border: 1px solid #00000045;
+    border: 1px solid #00000045;
+    font-size: 15px!IMPORTANT;
+    margin: 9px 0px 0px 0px;
+    }.from_city_link_layer span{
+      font-size: 15px!IMPORTANT;
+      font-weight: 500;
+    }.where{
+      width: 100%;
+      padding: 15px ! IMPORTANT;
+      border-radius: 9px;
+      border: 1px solid #00000045;
+      border: 1px solid #00000045;
+      font-size: 15px ! IMPORTANT;
+      margin: -15px 0px 25px 0px;
+      height: 49px;
+    }.where span{
+      top: 5px;
+      position: relative;
+      margin: 0px 0px 0px 0px;
+      font-size: 17px;
+    }.form-date{
+      display: flex;
+      align-items: center;
+    }
+    .form-date div{margin: 0px 15px 0px 0px;}
+    .form-date label{
+      font-weight: 700;
+      margin: 0px 15px 0px 0px;
+    }.form-date input{
+      padding: 9px 15px 9px 15px;
+      border-radius: 15px;
+      border: 2px solid #E1E1E1;
+    }
+    .create_travel_window_script .chosen-container{
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #E1E1E1;
+      border-radius: 5px;
+      font-size: 15px;
+    }
+    .chosen-container-multi .chosen-choices {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 0 5px;
+    width: 100%;
+    height: auto;
+    border: 1px solid #aaa;
+    background-color: #fff;
+    /* background-image: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #eee), color-stop(15%, #fff)); */
+    /* background-image: linear-gradient(#eee 1%, #fff 15%); */
+    cursor: text;
+    top: -9px;
+}.chosen-container .chosen-drop {
+    position: absolute;
+    top: 100%;
+    z-index: 1010;
+    width: 100%;
+    border: 1px solid #aaa;
+    border-top: 0;
+    background: #fff;
+    -webkit-box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+    clip: rect(0, 0, 0, 0);
+    -webkit-clip-path: inset(100% 100%);
+    clip-path: inset(100% 100%);
+    top: 15px!IMPORTANT;
+}
+    .where{
+      /* {#padding: 0!IMPORTANT;#}
+      {#margin: 0!IMPORTANT;#} */
+    }
+    .create_travel_window_script form .where{
+      padding: 0!IMPORTANT;
+      margin: 0!IMPORTANT;
+    }
+    .create_travel_window_script form .where{
+      background-color: inherit;
+      padding: 0!IMPORTANT;
+      margin: 0!IMPORTANT;
+    }
+    .chosen-container-multi .chosen-choices{
+      border: none!IMPORTANT;
+      font-weight: 700;
+    }.create_travel_window_script form textarea{
+      font-family: 'Arial';
+      font-size: 15px;
+    }
+  </style>
+  </div>
+</div>
+<div class="where">
+  <select name="country" id="id_country"  class="js-chosen3" style="" multiple required>
+    <option value="" selected disabled>Куда?</option>
+    {% for country in countries %}
+    <option value="{{country.id}}">{{country.name}}</option>
+    {% endfor %}
+  </select>
+  <!-- <label for="id_country" style="border-bottom: 1px solid rgb(225, 225, 225); padding: 0px 0px 9px; margin: 0px 0px 15px;">Куда</label>
+  <div class="where-content-form">
+    {% for country in countries_as %}
+    <div>
+      <input type="checkbox" name="country" id="{{country_id}}">
+      <label for="{{country.id}}">{{country.name}}</label>
+    </div>
+    {% endfor %}
+  </div> -->
+</div>
+<div class="form-city">
+  <label for="id_city">Город, курорт</label>
+  <input type="text" placeholder="Новосибирск" name="city" id="id_city" required></div>
+  <div class="form-date">
+    <div>
+      <label for="">Когда</label>
+      <input type="date" id="id_date" name="date" min="2018-01-01" max="3999-12-31" required>
+    </div>
+    <div>
+      <label for="id_days">Кол-во дней</label>
+      <input type="number" placeholder="15" style="max-width: 70px; text-align: center;" name="days" id="id_days" value="15" required>
+    </div>
+    {% comment %}
+    <div style="flex-direction: row; align-items: center; margin: 25px 0px 0px;">
+      <label for="" style="margin: 0px 15px 0px 0px;">Уже отдыхаю</label>
+  <button class="relative inline-flex flex-shrink-0 border-2 border-transparent disabled:cursor-not-allowed disabled:opacity-50 focus:outline-none h-5 w-9 rounded-full focus-visible:ring-2 focus-visible:ring-primary-500 dark:focus-visible:ring-primary-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900 bg-gray-200 dark:bg-gray-700" role="switch" type="button" tabindex="0" aria-checked="false" data-headlessui-state="" id="nuid-2"><span class="pointer-events-none relative inline-block rounded-full bg-white dark:bg-gray-900 shadow transform ring-0 transition ease-in-out duration-200 h-4 w-4 translate-x-0 rtl:-translate-x-0">v-if<!--v-if--></span>
+   </button> 
+     </div>
+     {% endcomment %}
+  </div>
+ <textarea name="description" id="id_description" cols="15" rows="2" placeholder="Опишите ваше путешествие ....." required></textarea>
+ <p style="margin: 0px 0px 35px 0px;">
+  <label for="id_travel_now">Уже путешествую:</label>
+  <select name="travel_now" id="id_travel_now" required>
+<option value="unknown">Неизвестно</option>
+
+<option value="true">Да</option>
+
+<option value="false" selected="">Нет</option>
+
+</select>
+  
+  
+</p> 
+</div>
+ <button type="submit">Опубликовать</button>
+</form>
+  </div>
+</div>
+<style>
+  .base-content{
+    background-color: inherit!IMPORTANT;
+  }
+  .create-trip-form{
+    background-color: #FFFFFF;
+    max-width: 779px;
+    height: 79dvh;
+  }
+
+  .trip_form_layer_content{
+    
+    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0px 15px 0px 0px!IMPORTANT;
+
+  }
+    .road-view{display: flex;flex-wrap: wrap;gap: 15px;margin:0px 0px 25px 0px;}
+    .road-view span{
+        border-radius: 50px;
+        border:1px solid #EBEBEB;
+        padding: 9px 15px 9px 15px;
+        min-width: max-content;
+        display: flex;
+        align-items: center;
+        font-size: 17px;
+    }
+    .road-view span img{
+        margin: 0px 5px 0px 0px;
+    }
+
+    @media (max-width: 770px){
+    .index-friends-layout{
+        margin: 0px auto 35px;
+    }
+    .index-friends-title{
+        width: calc(100% -30px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0px 0px 0px 15px;
+    }
+    .index-friends-title h2{
+        font-size: 5vw;
+    }
+    .road-view{
+        overflow: hidden;
+        overflow-x: auto;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(2, auto);
+    padding: 0px 15px 0px 15px;
+    }
+    .index-friends-user{
+        margin: 0px 15px 0px 0px;
+    }
+    .index-friends-user img{
+        max-width: 135px;
+    }.index-friends-user p{
+        font-size: 12px;
+        padding: 0px;
+        width: 100%;
+        margin: 0px 0px 0px 0px;
+    }
+    .index-friends-users{
+        padding: 0px 15px 0px 15px;
+        margin: 0px 0px 35px 0px;
+    }
+}
+</style>
+{% endblock %}

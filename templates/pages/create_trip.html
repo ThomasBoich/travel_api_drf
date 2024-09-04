@@ -2,43 +2,89 @@
 {% block content %}
 
  <div class="wow animate__fadeInDown"></div>
-<div class="content" style="width:100%;max-width: 100%;" v-if="loaded" data-aos="fade-down">
-    <div class="travel__header">
-      <div class="travel__header__title">
-       
-        <h1 class="travel__header__title__text">
-        Поездка: <span style="color: blueviolet;">{{trip.city}} — {{trip.cityin}}</span> ({{trip.trip_date}})
+ <form id="create_trip_window_script_form" action="{% url 'create_trip' %}" method="post" class="create-trip-form">
+  {% csrf_token %}
+  <!-- {{form.as_p}} -->
+  <h1>Создать поездку</h1>
+  <div class="trip_form_layer_content">
+  <div class="from-city">
+  <label for="">Откуда едите?</label>
+  <select name="city" id="id_city">
+    <option value="" selected disabled>Выбирите город</option>
+    {%for city in cities%}
+    <option value="{{city.id}}">{{city.name}}</option>
+    {%endfor%}
+  </select>
+</div>
+  <div class="form-city">
+  <label for="id_cityin" style="font-weight: 500;font-size:17px;">Куда едите?</label>
+  <!-- <input type="text" placeholder="Новосибирск" name="city" id="id_city" required> -->
+  <select name="cityin" id="id_cityin">
+    <option value="" selected disabled>Выбирите город</option>
+    {% for city in cities %}
+    <option value="{{city.id}}">{{city.name}}</option>
+    {% endfor %}
+  </select>
+</div>
 
-        </h1>
-        </div>
-      </div>
-
-      <div class="travel__user__layer">
-        <a href="{% url 'profile' trip.user.id %}">
-        <div class="travel_user">
-          <img src="{{ trip.user.photo.url }}" alt="">
-          <div class="">
-            <div class="travel_user_info">
-              Водитель:
-            </div>
-            <span class="travel_user_name">{{ trip.user.first_name }}</span>
-          </div>
-          <!-- стрелка -->
-        </div>
-      </a>
-
-        <p>
-
-        </p>
-        <div class="road-view">
-
-      </div>
-      </div>
-
+  <div class="form-date">
+    <div>
+      <label for="id_trip_in_time">Дата начала поездки</label>
+      <input type="datetime-local" id="id_date" name="trip_in_time" min="2018-01-01" max="3999-12-31" id="id_trip_in_time" required>
+    </div>
+    <div>
+      <label for="id_trip_out_time">Дата прибытия</label>
+      <input type="datetime-local" id="id_trip_out_time" name="trip_out_time" min="2018-01-01" max="3999-12-31" id="id_trip_out_time" required>
+    </div>
+    <div>
+      <label for="id_free_seats">Количество мест</label>
+      <input type="number" placeholder="2" style="max-width: 70px; text-align: center;" name="free_seats" id="id_days" value="0" id="id_free_seats" required>
+    </div>
+    <div>
+      <label for="id_price">Цена за одно место, руб.</label>
+      <input type="number" name="price" id="id_price" placeholder="200">
+    </div>
+    <div class="trip_others">
+      <label for="id_trip_others">Условия поездки</label>
+      {{trip_form.trip_others}}
+    </div>
+    <div class="trip_car">
+      <label for="id_trip_car">Автомобиль</label>
+      
+      
+      <select name="trip_car" id="id_trip_car">
+        {% for car in request.user.cars.all %}
+        <option value="{{car.car.id}}">{{car.car.name}}</option>
+        {% endfor %}
+      </select>
+      
+      
+      
     </div>
   </div>
 </div>
+ <button type="submit">Опубликовать</button>
+</form>
+  </div>
+</div>
 <style>
+  .base-content{
+    background-color: inherit!IMPORTANT;
+  }
+  .create-trip-form{
+    background-color: #FFFFFF;
+    max-width: 779px;
+    height: 79dvh;
+  }
+
+  .trip_form_layer_content{
+    
+    overflow: hidden;
+    overflow-y: auto;
+    height: 100%;
+    padding: 0px 15px 0px 0px!IMPORTANT;
+
+  }
     .road-view{display: flex;flex-wrap: wrap;gap: 15px;margin:0px 0px 25px 0px;}
     .road-view span{
         border-radius: 50px;

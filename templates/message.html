@@ -81,7 +81,12 @@
       <form method="post" action="{% url 'message' recipient_id=recipient.id %}" style="width:100%;max-width:100%;padding: 0;margin: 0;box-shadow: 0;">
         {% csrf_token %}
         <input type="text" name="message_content" placeholder="Введите сообщение" required>
-        <button type="submit" style="padding: 5px 15px; font-weight: 700;">Ок</button>
+        <button type="submit" style="padding: 5px 15px; font-weight: 700;">
+          <!-- Ок -->
+          <svg width="21" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 18L21 9L0 0V7L15 9L0 11V18Z"></path>
+        </svg>
+        </button>
     </form>
     {% comment %}
     <form action="{% url 'display_messages' recipient_id=recipient.id %}" method="post" style="width:100%;max-width:100%;padding: 0;margin: 0;box-shadow: 0;">

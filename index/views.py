@@ -265,21 +265,34 @@ def trips(request):
         travels_title = f'Поиск поездок - {trips.count()} шт.'
         city_name = request.GET.get('city')
         from_city = request.GET.get('from_city')
+        date = request.GET.get('date')
         cities = City.objects.all()
         filters = Q()
         
      
-        # if city_name:
-        #     travels_title = f'Поиск поездок из города {city_name}'
-        #     travels = Travel.objects.filter(from_city__name=city_name).distinct()
-        
-        # if country_name and city_name:
-        #     travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name))
-        #     travels_title = f"Поездки: {city_name} — {country_name}"
+        if from_city:
+            travels_title = f'Поиск поездок из города {from_city}'
+            trips = Trip.objects.filter(city__name=from_city).distinct()
+            
+        if date:
+            travels_title = travels_title
+            trips = Trip.objects.filter(trip_in_time__date=date).distinct()
+            
+        if from_city and date:
+            trips = Trip.objects.filter(Q(city__name=from_city), Q(trip_in_time__date=date)).distinct()
+            travels_title = f"Поездки: {from_city} — {date}"
+            
+        if city_name and date:
+            trips = Trip.objects.filter(Q(cityin__name=city_name), Q(trip_in_time__date=date)).distinct()
+            travels_title = f"Поездки: в {city_name} — {date}"
+            
+        if from_city and city_name:
+            trips = Trip.objects.filter(Q(city__name=from_city), Q(cityin__name=city_name)).distinct()
+            travels_title = f"Поездки: {from_city} — {city_name} — {date}"
 
-        # if country_name and city_name and interest_name:
-        #     travels = Travel.objects.filter(Q(from_city__name=city_name), Q(country__name=country_name), Q(gender_search=interest_name))
-        #     travels_title = f"Поездки: {city_name} — {country_name}"
+        if from_city and city_name and date:
+            trips = Trip.objects.filter(Q(cityin__name=city_name), Q(city__name=from_city), Q(trip_in_time__date=date))
+            travels_title = f"Поездки: {from_city} — {city_name} — {date}"
 
         # if interest_name:
         #     interest = get_object_or_404(Interests, name=interest_name)
