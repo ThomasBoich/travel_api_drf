@@ -122,12 +122,14 @@ def me(request):
 
 def profile(request, user_id):
     travels = Travel.objects.all()
+    trips = Trip.objects.filter(user=user_id)
     user = CustomUser.objects.get(id=user_id)
     interests = Interests.objects.filter(users_interests=user)
     habits = Habits.objects.filter(user_habits=user)
     user_travels = Travel.objects.filter(user=user)
     context = {
         'travels': travels,
+        'trips': trips,
         'habits': habits,
         'interests': interests,
         'user': user,

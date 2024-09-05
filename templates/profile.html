@@ -57,6 +57,8 @@
       <label for="tab-btn-2">Отзывы</label>
       <input id="tab-btn-3" name="tab-btn" type="radio" value="">
       <label for="tab-btn-3">Объявления</label>
+      <input id="tab-btn-4" name="tab-btn" type="radio" value="">
+      <label for="tab-btn-4">Поездки</label>
       <div class="tab-content" id="content-1" style="border-top: 1px solid #00000025;margin: -17px 0px 0px 0px;">
 
 
@@ -115,6 +117,97 @@
           </a>
           {% endfor %}
       </div>
+      <div class="tab-content" id="content-4">
+        
+        {% for trip in trips %}
+        <a href="{% url 'trip' trip.id %}">
+          <div class="search-result trips wow animate__fadeInDown">
+          
+            <div class="search_trip_one_layer">
+          <div class="trip_time_layer">
+            <div class="trip_in_time">
+              <div class="time__layer">
+                {{trip.trip_in_time|date:"H:i"}}
+                <span>{{trip.trip_in_time|date:"d M, D"}}</span>
+              </div>
+              <div class="trip_city">
+                {{trip.city}}
+              </div>
+          
+            </div>
+            <div class="trip_out_time">
+              <div class="time__layer">
+                {{trip.trip_out_time|date:"H:i"}}
+                <span>{{trip.trip_out_time|date:"d M, D"}}</span>
+              </div>
+              <div class="trip_city">
+                {{trip.cityin}}
+              </div>
+            </div>
+            <svg xmlns="http://www.w3.org/2000/svg">
+              <line x1="0" y1="3" x2="100%" y2="3"></line>
+          </svg>
+          </div>
+          
+          <div class="trip_driver">
+            <div class="trip_driver_photo">
+              <img src="{{ trip.user.photo.url }}" alt="">
+            </div>
+            <div class="trip_driver_info">
+              {{trip.user.first_name}}
+              <span>{{trip.trip_car.car.brand.name}} {{trip.trip_car.car.name}}
+                <!-- Audi Q9 -->
+              </span>
+            </div>
+          </div>
+          
+          <div class="trip_info">
+            <div class="trip_price">
+              <span>{{trip.price}} ₽</span>
+              <p>
+                {% if trip.free_seats == 0 %}
+                 <inf style="color:blueviolet;">мест нет</inf>
+                {% else %}
+                  Осталось:  {{trip.free_seats}}
+                {% endif %}      
+              </p>
+            </div>
+            <!-- <a href="">Выбрать</a> -->
+          </div>
+          
+          
+          </div>
+          <div class="search_trip_two_layer">
+            {% for other in trip.trip_others.all %}
+              <span><img src="{{other.image.url}}" alt="">
+                <!-- {{other.name}} -->
+              </span>
+            {% endfor %}  
+          </div>
+          
+          
+          
+          
+          <!-- 
+            <img src="{{trip.user.photo.url}}" alt="">
+            <div class="search-result-info">
+          
+          
+          
+              <div class="search-info-status">
+                <span>{{trip.user.first_name}}, {{trip.user.age}}  · &nbsp; ·</span>&nbsp;
+          
+          
+              </div>
+                <p> 
+                   
+                </p>
+              </div> -->
+          </div>
+          </a>
+        {% endfor %}
+
+      </div>
     </div>
 
      
@@ -140,7 +233,8 @@
 
 #tab-btn-1:checked~#content-1,
 #tab-btn-2:checked~#content-2,
-#tab-btn-3:checked~#content-3 {
+#tab-btn-3:checked~#content-3,
+#tab-btn-4:checked~#content-4 {
   display: block;
 }
 
