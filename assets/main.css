@@ -1982,6 +1982,207 @@ img.city_img{
   flex-direction: row;
   width: 100%;
 }
+
+.trip_layout{
+  display: flex;
+  justify-content: space-between;
+  max-width: 100%;
+  max-width: 779px;
+  margin: 0 auto;
+  flex-direction: column;
+}
+.trip_header{
+  padding: 25px 0px 25px 0px;
+  /* border-radius: 15px; */
+  /* background-color: #FFFFFF; */
+  display: flex;
+  margin: 0px 0px 25px 0px;
+}
+
+.trip_user{
+  display: flex;
+  align-items: center;
+  background-color: #FFFFFF;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 0px 0px 25px 0px;
+  align-items: center;
+  position: relative;
+}
+
+svg.trip_user_svg_image{
+  position: absolute;
+  right: 25px;
+  fill: #00000079;
+  color: #00000079;
+}
+
+.trip_user img{
+  width: 49px;
+  height: 49px;
+  object-fit: cover;
+  border-radius: 179px;
+  margin: 0px 15px 0px 0px;
+}
+
+.trip_user span{
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.trip_user p{
+  display: flex;
+  align-items: center;
+  margin: 2px 0px 0px 0px;
+  color: #00000070;
+}
+
+.trip_user_info p{
+  display: flex;
+}
+
+.trip_user p svg{
+  margin: 0px 15px 0px 2px;
+}
+
+.trip_passenger{
+  padding: 15px;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+  margin: 0px 0px 15px 0px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.trip_passenger svg{
+  position: absolute;
+  float: right;
+  fill: #00000079;
+  right: 25px;
+}
+
+.trip_boocking{
+  background-color: #7e52c7;
+  padding: 15px 15px 15px 15px;
+  border-radius: 9px;
+  color: #FFFFFF;
+  font-size: 17px;
+  font-weight: 700;
+  width: 100%;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+}
+
+.trip_passenger img{
+  width: 49px;
+  height: 49px;
+  border-radius: 179px;
+  margin: 0px 15px 0px 0px;
+  object-fit: cover;
+}
+
+.trip_passenger__{
+  display: flex;
+  align-items: center;
+}
+
+.trip_layout_left h2{
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0px 0px 15px 0px;
+  color: #00000079;
+}
+
+.trip_layout_right{
+  width: 100%;
+  max-width: 100%;
+  margin: 25px 0px 0px 0px;
+}
+
+.trip_layout_right h2{
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0px 0px 15px 0px;
+  color: #00000079;
+}
+
+.trip_others{
+  padding: 15px 15px 15px 15px;
+  border-radius: 15px;
+  background-color: #FFFFFF;
+  margin: 0px 0px 25px 0px;
+}
+.trip_others .trip_option:last-child{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+  border-bottom: none;
+}
+.trip_option{
+  display: flex;
+  align-items: center;
+  margin: 0px 0px 15px 0px;
+  padding: 0px 0px 15px 0px;
+  border-bottom: 1px solid #00000025;
+}
+
+.trip_ditails{
+  background-color: #FFFFFF;
+  border-radius: 15px;
+  padding: 15px 15px 15px 15px;
+  margin: 0px 0px 25px 0px;
+}
+
+.trip_ditails span:last-child{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+.trip_ditails span{
+  width: 100%;
+  font-size: 15px;
+  font-weight: 700;
+  display: block;
+  align-items: center;
+  margin: 0px 0px 15px 0px;
+  position: relative;
+  background-color: #FFFFFF;
+  padding: 0px 0px 0px 0px;
+  z-index: 9;
+  height: max-content;
+  overflow: hidden;
+}
+
+.trip_ditails span svg{
+    fill: #000000;
+    height: 9px;
+    padding: 0 12px;
+    position: absolute;
+    width: 100%;
+    top: 7px;
+    color: #000000;
+}
+
+.trip_ditails span line{
+    stroke: rgba(11, 21, 36, .3);
+    fill: none;
+    stroke-width: 3px;
+    stroke-opacity: .5;
+    stroke-dasharray: 0, 7;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+}
+
+.trip_option img{
+  width: 25px;
+  height: 25px;
+  object-fit: cover;
+  margin: 0px 15px 0px 0px;
+}
+
 /* мобильная версия */
 @media (max-width: 770px){
     .search-result-info h2 {

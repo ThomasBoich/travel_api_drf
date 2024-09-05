@@ -1,44 +1,109 @@
 {% extends 'base_site.html' %}{% load static %}
 {% block content %}
-
- <div class="wow animate__fadeInDown"></div>
 <div class="content" style="width:100%;max-width: 100%;" v-if="loaded" data-aos="fade-down">
-    <div class="travel__header">
-      <div class="travel__header__title">
-       
+  <div class="trip_layout">
+    <div class="trip_layout_left">
+      <div class="trip_header">
         <h1 class="travel__header__title__text">
-        Поездка: <span style="color: blueviolet;">{{trip.city}} — {{trip.cityin}}</span> ({{trip.trip_date}})
-
+        Поездка: <span style="color: blueviolet;">{{trip.city}} — {{trip.cityin}}</span> ({{trip.trip_in_time}})
         </h1>
-        </div>
       </div>
-
-      <div class="travel__user__layer">
-        <a href="{% url 'profile' trip.user.id %}">
-        <div class="travel_user">
-          <img src="{{ trip.user.photo.url }}" alt="">
-          <div class="">
-            <div class="travel_user_info">
-              Водитель:
-            </div>
-            <span class="travel_user_name">{{ trip.user.first_name }}</span>
-          </div>
-          <!-- стрелка -->
-        </div>
-      </a>
-
-        <p>
-
+      <h2>Водитель</h2>
+      <a href="{% url 'profile' trip.user.id %}">
+    <div class="trip_user">
+      <img src="{{trip.user.photo.url}}" alt="">
+      <div class="trip_user_info">
+        <span>{{trip.user.first_name}} {{trip.user.last_name}}</span>
+        <p><!-- Рейтинг:  --> 0
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            viewBox="0 0 32 32" 
+            aria-hidden="true" 
+            role="presentation" 
+            focusable="false" 
+            style="display: block; height: 16px; width: 16px; fill: 
+            currentcolor;">
+            <path 
+              fill-rule="evenodd" 
+              d="m15.1 1.58-4.13 8.88-9.86 1.27a1 1 0 0 0-.54 1.74l7.3 6.57-1.97 9.85a1 1 0 0 0 1.48 1.06l8.62-5 8.63 5a1 1 0 0 0 1.48-1.06l-1.97-9.85 7.3-6.57a1 1 0 0 0-.55-1.73l-9.86-1.28-4.12-8.88a1 1 0 0 0-1.82 0z">
+            </path>
+          </svg>
+          <!-- <div class="" style="width: 9px;height: 9px;border-radius: 179px;background-color: #000000;display: block"></div> -->
+          0 отзывов
         </p>
-        <div class="road-view">
-
       </div>
-      </div>
-
+      <svg class="trip_user_svg_image" width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0.589844 10.59L5.16984 6L0.589844 1.41L1.99984 0L7.99984 6L1.99984 12L0.589844 10.59Z"></path>
+      </svg>
     </div>
+  </a>
+    <div class="trip_passengers_layout">
+      <h2>Пассажиры</h2>
+      {% for passenger in trip.trip_users.all %}
+      <a href="{% url 'profile' passenger.id %}">
+      <div class="trip_passenger">
+        <div class="trip_passenger__">
+        <img src="{{passenger.photo.url}}" alt="">
+        <div class="">
+          <span>{{ passenger.first_name }} {{passenger.last_name}}</span>
+          <p>{{passenger.age}} лет</p>
+        </div>
+      </div>
+        <svg width="8" height="12" viewBox="0 0 8 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.589844 10.59L5.16984 6L0.589844 1.41L1.99984 0L7.99984 6L1.99984 12L0.589844 10.59Z"></path>
+        </svg>
+      </div>
+    </a>
+    {% endfor %}
+    </div>
+    
+    </div>
+
+    <div class="trip_layout_right">
+      <h2>Дополнительные опции</h2>
+      <div class="trip_others">
+        {% for option in trip.trip_others.all %}
+        <div class="trip_option">
+          <img src="{{option.image.url}}" alt=""> {{option.name}}
+        </div>
+        {% endfor %}
+      </div>
+      <h2>Детали поездки</h2>
+      <div class="trip_ditails">
+        
+        <span>Цена за 1 человека: {{trip.price}} руб.
+
+          <svg xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="3" x2="100%" y2="3"></line>
+        </svg>
+
+        </span>
+        <span>Свободных мест: {{trip.free_seats}}
+
+          <svg xmlns="http://www.w3.org/2000/svg">
+            <line x1="0" y1="3" x2="100%" y2="3"></line>
+        </svg>
+
+        </span>
+      </div>
+
+      {% if trip.free_seats == 0 or trip.user == request.user %}
+      <span class="trip_boocking" style="background-color: #00000025;color: #00000045;">Невозможно забронировать</span>
+      {% else %}
+      <a href="{% url 'trip_boocking' trip.id %}" class="trip_boocking">Забронировать поездку</a>
+      {% endif %}
+    </div>
+
   </div>
 </div>
+  </div>
+</div>
+
 <style>
+  .base-content{
+    background-color: inherit!important;
+    padding: 0!important;
+  }
     .road-view{display: flex;flex-wrap: wrap;gap: 15px;margin:0px 0px 25px 0px;}
     .road-view span{
         border-radius: 50px;

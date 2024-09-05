@@ -3,6 +3,7 @@ from users.forms import CustomUserRegistrationForm
 from .forms import TravelersForm
 from users.models import CustomUser, City, Interests
 from travels.models import Travel, Country
+from .models import Trip
 # Create your views here.
 
 def travelers(request):
@@ -44,3 +45,13 @@ def create_trip(request):
     else:
         form = TravelersForm(user=request.user)
     return render(request, 'pages/create_trip.html', {'trip_form': form})
+
+
+def trip_boocking(request, trip_id):
+    if request.method == 'POST':
+        trip = Trip.objects.get(id=trip_id)
+        if trip.free_seats > 0:
+            trip.trip_users.add(request.user)
+            return redirect('trip', trip_id=trip_id)
+        else:
+            return redirect('no_seats')
