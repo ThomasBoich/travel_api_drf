@@ -98,8 +98,8 @@
 
       {% if trip.free_seats == 0 %}
       <span class="trip_boocking" style="background-color: #00000025;color: #00000045;">Невозможно забронировать</span>
-      {% elif trip.user == request.user %}
-      <a href="{% url 'trip_boocking' trip.id %}" class="trip_boocking" style="background-color: brown; color: #FFFFFF;">Отменить поездку</a>
+      {% elif trip.user.id == request.user.id %}
+      <a href="{% url 'close_trip' trip.id %}" class="trip_boocking" style="background-color: brown; color: #FFFFFF;">Отменить поездку</a>
       {% elif request.user in trip.trip_users.all %}
       <a href="{% url 'close_boocking' trip.id %}" class="trip_boocking" style="background-color: brown; color: #FFFFFF;">Отменить бронирование</a>
       {% else %}

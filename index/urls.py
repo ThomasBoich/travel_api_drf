@@ -1,6 +1,6 @@
 from django.urls import path, include
 from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites,trips,trip
-from trips.views import travelers,create_trip,trip_boocking,close_boocking
+from trips.views import travelers,create_trip,trip_boocking,close_boocking,close_trip
 from travels.views import create_travel
 from chat.views import private_chat, send_message, display_messages
 from users.views import addToFriends, addFavorites
@@ -23,6 +23,7 @@ urlpatterns = [
     path('trips/', trips, name='trips'),
     path('trip_boocking/<int:trip_id>/', trip_boocking, name='trip_boocking'),
     path('close_boocking/<int:trip_id>/', close_boocking, name='close_boocking'),
+    path('close_trip/<int:trip_id>/', close_trip, name='close_trip'),
     path('users/', users, name='users'),
     path('travel/<travel_id>/', travel, name='travel'),
     path('trip/<trip_id>/', trip, name='trip'),
