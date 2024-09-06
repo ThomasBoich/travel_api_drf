@@ -47,7 +47,11 @@
 
 <div class="trip_driver">
   <div class="trip_driver_photo">
+    {% if trip.user.photo.url and trip.user.photo %}
     <img src="{{ trip.user.photo.url }}" alt="">
+    {% else %}
+    <img src="{% static 'avatar/user.png' %}" alt="">
+    {% endif %}
   </div>
   <div class="trip_driver_info">
     {{trip.user.first_name}}
