@@ -1,18 +1,21 @@
-  <div class="footer">
+ {% load static %}
+ <div class="footer">
     <div
       class="footer-layout" data-aos="fade-up" data-aos-anchor-placement="center-bothrefm">
       <div class="footer-nav-layout">
         <ul>
           <span><a href="">Сервисы</a></span>
           <li><a href="{% url 'travels' %}">Поиск попутчиков</a></li>
-          <li><a href="{% url 'about' %}">О Сервисе</a></li>
+          <li><a href="{% url 'trips' %}">Поиск поездок</a></li>
+          <!-- <li><a href="{% url 'about' %}">О Сервисе</a></li> -->
         </ul>
         <ul>
           <span><a href="">Пользователям</a></span>
           <li><a href="{% url 'about' %}">О Сервисе</a></li>
-          <li><a href="">Служба поддержки</a></li>
-          <li><a href="">Пользовательское соглашение</a></li>
-          <li><a href="">Правила рекомендаций</a></li>
+          <!-- <li><a href="">Служба поддержки</a></li> -->
+          <li><a href="{% static 'User_Agreement.pdf' %}" target="_blank">Пользовательское соглашение</a></li>
+          <li><a href="{% static 'Privacy_Policy.pdf' %}" target="_blank">Политика конфиденциальности</a></li>
+          <!-- <li><a href="">Правила рекомендаций</a></li> -->
         </ul>
         <ul>
           <span>Мы в социальных сетях</span>
