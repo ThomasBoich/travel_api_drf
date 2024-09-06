@@ -11,7 +11,12 @@
       <h2>Водитель</h2>
       <a href="{% url 'profile' trip.user.id %}">
     <div class="trip_user">
+      {% if trip.user.photo.url and trip.user.photo%}
       <img src="{{trip.user.photo.url}}" alt="">
+      {% else %}
+      <img src="{% static 'avatar/user.png' %}" alt="">
+      {% endif %}
+      
       <div class="trip_user_info">
         <span>{{trip.user.first_name}} {{trip.user.last_name}}</span>
         <p><!-- Рейтинг:  --> 0
