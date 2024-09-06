@@ -215,4 +215,5 @@ CSRF_TRUSTED_ORIGINS=["http://travel.deadspace14.net/","https://travel.deadspace
 #         }
 #     }
 
+GOOGLE_RECAPTCHA_SECRET_KEY = '6LcsEjgqAAAAAAYVTXYhwhT27Z6TvN21AGRrb8qT'
 SITE_ID = 1

@@ -43,7 +43,11 @@
       <a href="{% url 'profile' passenger.id %}">
       <div class="trip_passenger">
         <div class="trip_passenger__">
-        <img src="{{passenger.photo.url}}" alt="">
+          {% if passenger.photo.url and passenger.photo %}
+          <img src="{{passenger.photo.url}}" alt="">
+          {% else %}
+          <img src="{% static 'avatar/user.png' %}" alt="">
+          {% endif %}
         <div class="">
           <span>{{ passenger.first_name }} {{passenger.last_name}}</span>
           <p>{{passenger.age}} лет</p>
@@ -87,8 +91,12 @@
         </span>
       </div>
 
-      {% if trip.free_seats == 0 or trip.user == request.user %}
+      {% if trip.free_seats == 0 %}
       <span class="trip_boocking" style="background-color: #00000025;color: #00000045;">Невозможно забронировать</span>
+      {% elif trip.user == request.user %}
+      <a href="{% url 'trip_boocking' trip.id %}" class="trip_boocking" style="background-color: brown; color: #FFFFFF;">Отменить поездку</a>
+      {% elif request.user in trip.trip_users.all %}
+      <a href="{% url 'close_boocking' trip.id %}" class="trip_boocking" style="background-color: brown; color: #FFFFFF;">Отменить бронирование</a>
       {% else %}
       <a href="{% url 'trip_boocking' trip.id %}" class="trip_boocking">Забронировать поездку</a>
       {% endif %}

@@ -1,3 +1,4 @@
+{% load static %}
 <div class="index-friends-layout wow animate__fadeInUp" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
 
   <div class="index-friends-title">
@@ -14,7 +15,7 @@
         <a href="{% url 'profile' user.id %}" style="display: flex;flex-direction: column;">
         {%if user.photo.url and user.photo%}<img src="{{user.photo.url}}" alt="" />
         {%else%}
-        <img src="" alt="">
+        <img src="{% static 'avatar/user.png' %}" alt="">
         {%endif%}
           
           <span>{{ user.first_name }}</span>

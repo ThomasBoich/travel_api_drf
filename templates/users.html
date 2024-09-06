@@ -16,7 +16,12 @@
   {% for user in users_list %}
 <a href="{% url 'profile' user.id %}">
 <div class="search-result wow animate__fadeInDown">
+  {% if user.photo.url and user.photo %}
   <img src="{{user.photo.url}}" alt="">
+  {% else %}
+  <img src="{% static 'avatar/user.png' %}" alt="">
+  {% endif %}
+ 
   <div class="search-result-info">
     <h2>
       {{user.first_name}} {{user.last_name}}
@@ -24,8 +29,12 @@
       <p> {{user.description}} </p>
       <div class="user_inteterests interest_list">
       {%for i in user.interests.all%}
-      
+      {% if i.image.url and i.image %}
       <span class="user_interes"><img src="{{i.image.url}}" alt=""> {{i.name}}</span>
+      {% else %}
+      <span class="user_interes"><img src="" alt=""> {{i.name}}</span>
+      {% endif %}
+     
 
 
       {%endfor%}

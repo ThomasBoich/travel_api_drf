@@ -1,3 +1,4 @@
+{% load static %}
 <div
 class="index-pupular-roads-layer wow animate__fadeInRight"
 data-aos="fade-up"
@@ -18,7 +19,11 @@ data-aos-anchor-placement="center-bottom"
         <span>{{road.name}}</span>
         <p>{{road.description}}</p>
       </div>
+      {% if road.image.url and road.image %}
       <img src="{{road.image.url}}" alt="">
+      {% else %}
+      <img src="{% static 'avatar/user.png' %}" alt="">
+      {% endif %}
     </a>   
   </div>  
   {% endfor %}

@@ -249,7 +249,7 @@
             {%if request.user.photo.url and request.user.photo%}
             <img id="user_nav" class="user_nav" src="{{ request.user.photo.url }}" alt="">
             {%else%}
-            <img id="user_nav" class="user_nav" src="" alt="">
+            <img id="user_nav" class="user_nav" src="{% static 'avatar/user.png' %}" alt="">
             {%endif%}
             
             <div class="user-nav-layer">
@@ -348,8 +348,10 @@
                   <input type="number" name="phone" maxlength="24" id="id_phone">    
                 </p> -->
                 <input type="password" name="password" maxlength="128" required="" aria-invalid="true" id="id_password" placeholder="Пароль">
-        
+
                 <button type="submit">Создать аккаунт</button>
+                <script src='https://www.google.com/recaptcha/api.js'></script>
+                <div class="form-group g-recaptcha" data-sitekey="6LcsEjgqAAAAAI6TuTW5bZOsyTEO6D5NaIUCeDAB"></div>
               </form>
               <a id="za_form">Есть аккаунт?<span>Войти</span></a>
             </div>

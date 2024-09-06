@@ -23,16 +23,18 @@ def register_user(request):
     if request.method == 'POST':
         form = CustomUserRegistrationForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            
-            # Authenticate and login the user
-            username = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
+            if request.recaptcha_is_valid:
+
+                user = form.save()
                 
-            return redirect('update_user', user_id=user.id)  # Redirect to the index page after successful registration
+                # Authenticate and login the user
+                username = form.cleaned_data['email']
+                password = form.cleaned_data['password']
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    
+                return redirect('update_user', user_id=user.id)  # Redirect to the index page after successful registration
     else:
         form = CustomUserRegistrationForm()
     
@@ -122,7 +124,7 @@ def me(request):
 
 def profile(request, user_id):
     travels = Travel.objects.all()
-    trips = Trip.objects.filter(user=user_id)
+    trips = Trip.objects.filter(Q(user=user_id) | Q(trip_users=user_id))
     user = CustomUser.objects.get(id=user_id)
     interests = Interests.objects.filter(users_interests=user)
     habits = Habits.objects.filter(user_habits=user)
@@ -263,7 +265,7 @@ def travels(request):
 
 def trips(request):
     if request.method == 'GET':
-        trips = Trip.objects.all()
+        trips = Trip.objects.filter(status=True)
         travels_title = f'Поиск поездок - {trips.count()} шт.'
         city_name = request.GET.get('city')
         from_city = request.GET.get('from_city')

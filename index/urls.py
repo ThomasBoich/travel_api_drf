@@ -1,9 +1,11 @@
 from django.urls import path, include
 from .views import index, profile, user_logout, AppLoginView,UpdateUserView,travels,about,travel,register_user,chats,message,folder,folderCreate,users,tarifs,friends,favorites,trips,trip
-from trips.views import travelers,create_trip,trip_boocking
+from trips.views import travelers,create_trip,trip_boocking,close_boocking
 from travels.views import create_travel
 from chat.views import private_chat, send_message, display_messages
 from users.views import addToFriends, addFavorites
+
+from users.decorators import check_recaptcha
 
 urlpatterns = [
     path('', index, name='index'),
@@ -16,10 +18,11 @@ urlpatterns = [
     path('profile/settings/<int:user_id>/', UpdateUserView.as_view(), name='update_user'),
     path('logout/', user_logout, name='logout'),
     path('login/', AppLoginView.as_view(), name='custom_login'),
-    path('registration/', register_user, name='register_user'),
+    path('registration/', check_recaptcha(register_user), name='register_user'),
     path('travels/', travels, name='travels'),
     path('trips/', trips, name='trips'),
     path('trip_boocking/<int:trip_id>/', trip_boocking, name='trip_boocking'),
+    path('close_boocking/<int:trip_id>/', close_boocking, name='close_boocking'),
     path('users/', users, name='users'),
     path('travel/<travel_id>/', travel, name='travel'),
     path('trip/<trip_id>/', trip, name='trip'),
