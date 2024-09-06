@@ -14,11 +14,14 @@
 
 <ul></ul>
   {% for travel in travels %}
-
-
 <a href="{% url 'travel' travel.id %}">
 <div class="search-result wow animate__fadeInDown">
+  {% if travel.user.photo.url and travel.user.photo%}
   <img src="{{travel.user.photo.url}}" alt="">
+  {% else %}
+  <img src="{% static 'avatar/user.png' %}" alt="">
+  {% endif %}
+  
   <div class="search-result-info">
     <h2>
     {% for country in travel.country.all %}

@@ -36,7 +36,12 @@
       <div class="travel__user__layer">
         <a href="{% url 'profile' travel.user.id %}">
         <div class="travel_user">
+          {% if travel.user.photo.url and travel.user.photo %}
           <img src="{{ travel.user.photo.url }}" alt="">
+          {% else %}
+          <img src="{% static 'avatar/user.png' %}" alt="">
+          {% endif %}
+          
           <div class="">
             <div class="travel_user_info">
               <img src="{% static 'img/pic_location_grey.png' %}" alt="" class="city_img"> {{ travel.user.city.name }}
