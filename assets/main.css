@@ -2183,6 +2183,29 @@ svg.trip_user_svg_image{
   margin: 0px 15px 0px 0px;
 }
 
+.navigantion-layer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 100%;
+}
+.navigantion-layer a{
+  margin: 0px 15px 0px 15px;
+}
+
+.index_navigation{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: max-content;
+}
+
+.index_navigation a{
+  margin: 0px 15px 0px 15px;
+}
+
 /* мобильная версия */
 @media (max-width: 770px){
     .search-result-info h2 {
