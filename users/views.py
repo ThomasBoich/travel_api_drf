@@ -37,10 +37,14 @@ def addFavorites(request, user_id):
 
 
 from django.http import JsonResponse
-from yookassa import Payment
+from yookassa import Payment, Configuration
 
 from travelo.settings import YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY
 import uuid
+
+Configuration.account_id = YOOKASSA_SHOP_ID
+Configuration.secret_key = YOOKASSA_SECRET_KEY
+
 def create_payment(request):
     if request.method == 'POST':
         summa = request.POST.get('summa')
