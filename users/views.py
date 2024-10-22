@@ -78,7 +78,9 @@ def create_payment(request):
                             },
                             "vat_code": 1  # Код НДС (если требуется)
                         }
-                    ]
+                    ],
+                    "email": "test@test.test",
+                    "phone": "+799999999",
                 }                
             }, idempotence_key)
 
