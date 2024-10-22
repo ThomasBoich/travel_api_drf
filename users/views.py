@@ -66,7 +66,7 @@ def create_payment(request):
                 "type": "redirect",
                 "return_url": "https://kudaugodno.com"
                 },
-                "description": ""
+                "description": "sdfsdfsdfsdfsdfsdf"
             }, idempotence_key)
 
         # Перенаправляем пользователя на страницу YooKassa для ввода данных карты
