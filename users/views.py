@@ -42,8 +42,8 @@ from yookassa import Payment, Configuration
 from travelo.settings import YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY
 import uuid
 
-Configuration.account_id = YOOKASSA_SHOP_ID
-Configuration.secret_key = YOOKASSA_SECRET_KEY
+Configuration.account_id = "478867"
+Configuration.secret_key = "test_k-_pd0qm2t0fkZDKmNYwoLwnpPAn4XhOxFD2OSSOJXo"
 
 def create_payment(request):
     if request.method == 'POST':
