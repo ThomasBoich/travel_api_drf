@@ -1,0 +1,89 @@
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+<div class="blog_content post_content">
+    <h1>{{ post.title }}</h1>
+    <p>{{ post.public_date }}</p>
+    <div class="blog_text">
+        {{ post.text }}
+
+    <form action="" method="post" id="like-form" class="like_form">
+
+
+<!---    {% if request.user in post.likes.all %}
+    <button type="button" id="like-button" data-post-id="{{ post.id }}">{{post.likes.all.count}}</button>
+    {% else %}
+    <button type="button" id="like-button" data-post-id="{{ post.id }}">{{post.likes.all.count}}</button>
+    {% endif %}
+--->
+    <button type="button" id="like-button" data-post-id="{{ post.id }}">
+        {{ post.likes.count }} 
+        <span id="like-text">
+            {% if request.user in post.likes.all %}
+                <!-----Убрать лайк---->
+            {% else %}
+                <!-----Лайкнуть---->
+            {% endif %}
+        </span>
+        <img id="like-icon" src="{% static 'img/like_on.svg' if request.user in post.likes.all else 'img/like_off.svg' %}" />
+    </button>
+    </form>
+    </div>
+    
+    <script>
+    document.getElementById('like-button').addEventListener('click', function() {
+        var postId = this.getAttribute('data-post-id');
+        var csrfToken = '{{ csrf_token }}';
+
+        fetch(`/toggle_like/${postId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            },
+            body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Обновляем текст кнопки
+            document.getElementById('like-text').textContent = data.liked ? '' : '';
+            
+            // Обновляем изображение
+            var likeIcon = document.getElementById('like-icon');
+            likeIcon.src = data.liked ? '{% static "img/like_on.svg" %}' : '{% static "img/like_off.svg" %}';
+            
+            // Обновляем количество лайков
+            this.firstChild.textContent = data.likes_count + ' '; // Обновляем количество лайков
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+        });
+    });
+    </script>
+    
+    <div class="post_comments">
+    <h2>Комментарии: {{comments.all.count}}</h2>
+    {% if request.user.is_authenticated %}
+        <form action="" method="post">
+        {% csrf_token %}
+        <input name="text" id="id_text" required placeholder="Текст комментария"/>
+        <button type="submit">Комментировать</button>
+    </form>
+    {% else %}
+    
+    {% endif %}
+
+
+    {% for comment in comments %}
+    <a href="{% url 'profile' comment.user.id %}">
+        <div class="post_comment">
+            <img src="{{comment.user.photo.url}}" />
+            <div class="comment_text_content_date">
+                <p>{{comment.text}}</p>
+                <span>{{comment.public_date}}</span>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

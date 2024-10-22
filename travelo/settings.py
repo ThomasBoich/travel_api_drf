@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'index',
     'chat',
     'trips',
+    'blog',
     "corsheaders",
     'rest_framework',
     'drf_yasg',
@@ -90,6 +91,7 @@ TEMPLATES = [
                 'index.context_processors.get_countries',
                 'index.context_processors.get_registration',
                 #'index.context_processors.get_dealog',
+                'blog.context_processors.get_categories',
             ],
         },
     },
@@ -214,6 +216,12 @@ CSRF_TRUSTED_ORIGINS=["http://travel.deadspace14.net/","https://travel.deadspace
 #             "BACKEND": "channels.layers.InMemoryChannelLayer"
 #         }
 #     }
+
+
+
+YOOKASSA_SHOP_ID = '474055'
+YOOKASSA_SECRET_KEY = 'live_ni-YBvnuXjdDkHoOn1I41rWf7wAJ9zGMMBS-gI2i704'
+
 
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LcsEjgqAAAAAAYVTXYhwhT27Z6TvN21AGRrb8qT'
 SITE_ID = 1

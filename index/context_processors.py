@@ -4,10 +4,7 @@ from travels.models import City, Country, Travel
 from chat.models import Dialog, Message
 from chat.models import *
 from django.db.models import Q
-
-
 from travels.forms import TravelForm
-
 
 def get_cities(request):
     cities_as: QuerySet[Any] = City.objects.all()

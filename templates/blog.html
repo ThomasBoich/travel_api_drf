@@ -1,0 +1,25 @@
+{% extends 'base.html' %}{% load static %}
+{% block content %}
+<div class="blog_content">
+    <div class="blog_menu">
+    <!------<span>Категории {{get_categories}}</span>------->
+    <a href="{% url 'blog' %}" class="active">Все статьи {{ posts.all.count }}</a>
+    {% for category in categories %}
+        <a href="" class="">{{category.name}}</a>
+    {% endfor %}
+    </div>
+    <div class="blog_posts">
+        <!------<h1>Блог {{ posts.all.count }}</h1>------>
+    {% for i in posts %}
+    <a href="{% url 'post' i.id %}">
+        <div class="post {% if forloop.counter|divisibleby:4 %}post_margin{% endif %}">
+            <img src="{{ i.image.url }}" />
+            <h2>{{ i.title }}</h2>
+            <span>{{ i.public_date }}</span>
+            <!----<p>{{i.text}}</p>----->
+        </div>
+    </a>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}

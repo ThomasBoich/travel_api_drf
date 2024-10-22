@@ -34,3 +34,30 @@ def addFavorites(request, user_id):
     favorites, created = Favorites.objects.get_or_create(user=user)
     favorites.favorites.add(favorit)
     return redirect('index')
+
+
+from django.http import JsonResponse
+from yookassa import Payment
+
+from travelo.settings import YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY
+
+def create_payment(request):
+    if request.method == 'POST':
+        summa = request.POST.get('summa')
+        user = request.user.email
+        
+        payment = Payment.create({
+            "amount": {
+                "value": f"{summa}",  # Сумма платежа
+                "currency": "RUB"  # Валюта
+            },
+            "confirmation": {
+                "type": "redirect",
+                "return_url": "https://kudaugodno.com"  # URL для возврата после оплаты
+            },
+            "capture": True,
+            "description": f"Покупка VIP Статуса пользователем: {user}"
+        }, shop_id=YOOKASSA_SHOP_ID, secret_key=YOOKASSA_SECRET_KEY)
+
+        # Перенаправляем пользователя на страницу YooKassa для ввода данных карты
+        return redirect(payment.confirmation.confirmation_url)
