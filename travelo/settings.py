@@ -196,7 +196,7 @@ LOGOUT_REDIRECT_URL = 'pages:index'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = 'TRAVELO'
 ADMIN_SITE_HEADER_COLOR = 'green'
-CSRF_TRUSTED_ORIGINS=["http://travel.deadspace14.net/","https://travel.deadspace14.net/"]
+CSRF_TRUSTED_ORIGINS=["http://kudaugodno.com/","https://kudaugodno.com/"]
 
 #   REDIS
 # REDIS = False
