@@ -40,24 +40,30 @@ from django.http import JsonResponse
 from yookassa import Payment
 
 from travelo.settings import YOOKASSA_SHOP_ID, YOOKASSA_SECRET_KEY
-
+import uuid
 def create_payment(request):
     if request.method == 'POST':
         summa = request.POST.get('summa')
         user = request.user.email
-        
+        idempotence_key = str(uuid.uuid4())
         payment = Payment.create({
-            "amount": {
-                "value": f"{summa}",  # Сумма платежа
-                "currency": "RUB"  # Валюта
-            },
-            "confirmation": {
+                "id": 500,
+                "status": "pending",
+                "paid": False,
+                "capture": True,
+                "amount": {
+                "value": 999.00,
+                "currency": "RUB"
+                },
+                "payment_method_data": {
+                "type": "bank_card"
+                },
+                "confirmation": {
                 "type": "redirect",
-                "return_url": "https://kudaugodno.com"  # URL для возврата после оплаты
-            },
-            "capture": True,
-            "description": f"Покупка VIP Статуса пользователем: {user}"
-        }, shop_id=YOOKASSA_SHOP_ID, secret_key=YOOKASSA_SECRET_KEY)
+                "return_url": "https://kudaugodno.com"
+                },
+                "description": ""
+            }, idempotence_key)
 
         # Перенаправляем пользователя на страницу YooKassa для ввода данных карты
         return redirect(payment.confirmation.confirmation_url)
