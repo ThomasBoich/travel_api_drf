@@ -61,3 +61,5 @@ def create_payment(request):
 
         # Перенаправляем пользователя на страницу YooKassa для ввода данных карты
         return redirect(payment.confirmation.confirmation_url)
+    else:
+        return redirect('index')

@@ -193,11 +193,6 @@ LOGOUT_REDIRECT_URL = 'pages:index'
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-ADMIN_SITE_HEADER = 'TRAVELO'
-ADMIN_SITE_HEADER_COLOR = 'green'
-CSRF_TRUSTED_ORIGINS=["http://kudaugodno.com/","https://kudaugodno.com/"]
-
 #   REDIS
 # REDIS = False
 
@@ -225,3 +220,9 @@ YOOKASSA_SECRET_KEY = 'live_ni-YBvnuXjdDkHoOn1I41rWf7wAJ9zGMMBS-gI2i704'
 
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LcsEjgqAAAAAAYVTXYhwhT27Z6TvN21AGRrb8qT'
 SITE_ID = 1
+
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+ADMIN_SITE_HEADER = 'TRAVELO'
+ADMIN_SITE_HEADER_COLOR = 'green'
+CSRF_TRUSTED_ORIGINS=["http://kudaugodno.com/","https://kudaugodno.com/"]
