@@ -66,7 +66,20 @@ def create_payment(request):
                 "type": "redirect",
                 "return_url": "https://kudaugodno.com"
                 },
-                "description": "sdfsdfsdfsdfsdfsdf"
+                "description": "sdfsdfsdfsdfsdfsdf",
+                "receipt": {
+                    "items": [
+                        {
+                            "description": "Товар 1",  # Название товара
+                            "quantity": 1.0,  # Количество
+                            "amount": {
+                                "value": 999.00,  # Сумма товара
+                                "currency": "RUB"
+                            },
+                            "vat_code": 1  # Код НДС (если требуется)
+                        }
+                    ]
+                }                
             }, idempotence_key)
 
         # Перенаправляем пользователя на страницу YooKassa для ввода данных карты
