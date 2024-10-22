@@ -82,8 +82,8 @@ def create_payment(request):
                     "email": "test@test.test",
                     "phone": "+799999999",
                 },
-                "refundable": false,
-                "test": true               
+                "refundable": False,
+                "test": True               
             }, idempotence_key)
 
         # Перенаправляем пользователя на страницу YooKassa для ввода данных карты
