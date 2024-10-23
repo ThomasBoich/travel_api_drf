@@ -39,11 +39,15 @@
         <p>- Возможность размещения до 10 объявлений в профиле (в обычном сделать в дальнейшем 2 объявления)</p>
         <p>- Занчок Премиум на автарке или имени</p>
         <span>399 руб за 30 дней</span>
-        <form action="{% url 'create_payment' %}" method="post">
-          {% csrf_token %}
-          <input name="summa" type="number" value="50" />
+        {% csrf_token %}
+        {% if request.user.is_authenticated %}
+        <form action="{% url 'create_payment' %}" method="post" style="box-shadow: none;border: none;">
           <button class="select-tarif" type="submit">Купить Премиум</button>
+          <input name="summa" type="number" value="399" style="visibility: hidden;" />
         </div>
+        {% else %}
+          <p>Чтобы купить, необходимо авторизироваться</p>
+        {% endif %}
       </div>
 
      </div>

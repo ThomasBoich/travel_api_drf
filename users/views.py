@@ -51,12 +51,12 @@ def create_payment(request):
         user = request.user.email
         idempotence_key = str(uuid.uuid4())
         payment = Payment.create({
-                "id": 500,
+                "id": request.user.id,
                 "status": "pending",
                 "paid": False,
                 "capture": True,
                 "amount": {
-                "value": 999.00,
+                "value": 399.00,
                 "currency": "RUB"
                 },
                 "payment_method_data": {
@@ -66,21 +66,21 @@ def create_payment(request):
                 "type": "redirect",
                 "return_url": "https://kudaugodno.com"
                 },
-                "description": "sdfsdfsdfsdfsdfsdf",
+                "description": "Оформление подписки на сайте",
                 "receipt": {
                     "items": [
                         {
-                            "description": "Товар 1",  # Название товара
+                            "description": "ВИП Подписка На Сайте",  # Название товара
                             "quantity": 1.0,  # Количество
                             "amount": {
-                                "value": 999.00,  # Сумма товара
+                                "value": 399.00,  # Сумма товара
                                 "currency": "RUB"
                             },
                             "vat_code": 1  # Код НДС (если требуется)
                         }
                     ],
-                    "email": "test@test.test",
-                    "phone": "+799999999",
+                    "email": request.user.email,
+                    "phone": request.user.phone or "00",
                 },
                 "refundable": False,
                 "test": True               

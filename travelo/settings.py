@@ -225,4 +225,4 @@ SITE_ID = 1
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = 'TRAVELO'
 ADMIN_SITE_HEADER_COLOR = 'green'
-CSRF_TRUSTED_ORIGINS=["http://kudaugodno.com/","https://kudaugodno.com/"]
+CSRF_TRUSTED_ORIGINS=["http://kudaugodno.com","https://kudaugodno.com"]
