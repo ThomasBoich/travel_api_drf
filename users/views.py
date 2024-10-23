@@ -62,6 +62,9 @@ def create_payment(request):
                 "payment_method_data": {
                 "type": "bank_card"
                 },
+                "metadata": {
+                    "user_id": request.user.id
+                },
                 "confirmation": {
                 "type": "redirect",
                 "return_url": "https://kudaugodno.com"
@@ -90,3 +93,32 @@ def create_payment(request):
         return redirect(payment.confirmation.confirmation_url)
     else:
         return redirect('index')
+
+
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+@csrf_exempt
+def activate_vip(request):
+
+    if request.method == 'POST':
+
+        notification = json.loads(request.body)
+        try:
+            # Проверяем, что это событие успешного платежа
+            if notification.get('event') == 'payment.succeeded':
+                payment_id = notification['object']['id']
+                user_id = notification['object']['metadata']['user_id']
+            
+            premium = CustomUser.objects.get(id=user_id)
+
+            premium.premium = True
+            premium.save()
+
+            return redirect('index')
+        except:
+            return redirect('index')
+
+    else:
+        return redirect('index')
+    
