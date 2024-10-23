@@ -187,8 +187,8 @@ class UserCar(models.Model):
 
 
 
-from datetime import datetime
-
+from datetime import datetime, timedelta
+from django.utils import timezone  # Импортируем timezone
 from django.contrib.auth.signals import user_logged_out, user_logged_in
 
 @receiver(user_logged_out)
@@ -202,7 +202,8 @@ def user_logged_in_handler(sender, request, user, **kwargs):
     # Например, можно установить VIP статус или выполнить другие действия
 
     now_user = user
-    if now_user.premium_activate and now_user.premium_activate < datetime.now():
+    print(now_user.premium_activate)
+    if now_user.premium_activate and now_user.premium_activate < timezone.now() - timedelta(days=29):
         now_user.premium = False
         now_user.save()
     else:

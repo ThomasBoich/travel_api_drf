@@ -38,7 +38,7 @@ class Travel(models.Model):
     from_city = models.ForeignKey(City, blank=True, null=True, on_delete=models.CASCADE, verbose_name='Откуда')
 
     def __str__(self):
-        return self.city
+        return f''
 
 
     class Meta:
