@@ -254,9 +254,9 @@
           <!-- <span class="create-button">+ Создать</span> -->         
           <div class="user-nav">
             {%if request.user.photo.url and request.user.photo%}
-            <img id="user_nav" class="user_nav" src="{{ request.user.photo.url }}" alt="">
+            <img id="user_nav" class="user_nav {% if request.user.premium %}premium{% endif %}" src="{{ request.user.photo.url }}" alt="">
             {%else%}
-            <img id="user_nav" class="user_nav" src="{% static 'avatar/user.png' %}" alt="">
+            <img id="user_nav" class="user_nav {% if request.user.premium %}premium{% endif %}" src="{% static 'avatar/user.png' %}" alt="">
             {%endif%}
             
             <div class="user-nav-layer">

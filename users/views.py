@@ -97,7 +97,7 @@ def create_payment(request):
 
 from django.views.decorators.csrf import csrf_exempt
 import json
-
+from datetime import datetime
 @csrf_exempt
 def activate_premium(request):
 
@@ -113,6 +113,7 @@ def activate_premium(request):
             premium = CustomUser.objects.get(id=user_id)
 
             premium.premium = True
+            premium.premium_activate = datetime.now()
             premium.save()
 
             return redirect('index')

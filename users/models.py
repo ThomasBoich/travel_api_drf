@@ -33,6 +33,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     habits = models.ManyToManyField('Habits', related_name='user_habits', blank=True)
     interests = models.ManyToManyField('Interests', related_name='users_interests', blank=True)
     premium = models.BooleanField(default=False, verbose_name='premium', blank=True, null=True)
+    premium_activate = models.DateTimeField(auto_now_add=False, blank=True, null=True)
     cars = models.ManyToManyField('UserCar', related_name='user_cars', blank=True, null=True)
     
     ADMINISTRATOR = 'AD'
@@ -183,3 +184,26 @@ class UserCar(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, blank=True, null=True)
     car = models.ForeignKey(CarModel, on_delete=models.CASCADE, blank=True, null=True)
     image = models.ImageField(upload_to="usercars/%Y/%m/%d/", blank=True, null=True)
+
+
+
+from datetime import datetime
+
+from django.contrib.auth.signals import user_logged_out, user_logged_in
+
+@receiver(user_logged_out)
+def user_logged_out_handler(sender, request, user, **kwargs):
+    print(f'Пользователь {user.email} вышел из системы.')
+
+@receiver(user_logged_in)
+def user_logged_in_handler(sender, request, user, **kwargs):
+    # Здесь вы можете выполнить действия, которые хотите
+    print(f'Пользователь {user.email} вошел в систему.')
+    # Например, можно установить VIP статус или выполнить другие действия
+
+    now_user = user
+    if now_user.premium_activate and now_user.premium_activate < datetime.now():
+        now_user.premium = False
+        now_user.save()
+    else:
+        return

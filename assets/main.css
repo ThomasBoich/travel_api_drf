@@ -113,6 +113,18 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
   transition: opacity 0.3s;
 }.user-nav img:active{
   outline: 2px inset #4dd8cf;
+}.user-nav img.premium{
+  height: 35px;
+  width: 35px;
+  object-fit: cover;
+  margin: 0px 0px 0px 25px;
+  border-radius: 49px;
+  cursor: pointer;
+  opacity: 9;
+  -webkit-transition: opacity 0.3s;
+  -moz-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+  outline: 4px solid #7e52c7;
 }
 .add-layer{
   position: relative;

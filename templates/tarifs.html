@@ -32,19 +32,21 @@
       </div> -->
       
       <div class="tarif-premium">
-        <h2>Премиум доступ &#128142;</h2>
+        <h2>Премиум доступ &#128142; - {% if request.user.is_authenticated and request.user.premium %}<span>Активен</span>{% else %}{% endif %}</h2>
         <p>- Предоставление возможности создавать до 5 групп чатов</p>
         <p>- Неограниченные возможности создавать новые контакты в сутки (у Махнем 10 контактов в сутки)</p>
         <p>- Добаление больше 5 фото в аккаунт + видео (в дальнейшем доработаем чтобы на простых аккаунтах была закрыта эта возможность)</p>
         <p>- Возможность размещения до 10 объявлений в профиле (в обычном сделать в дальнейшем 2 объявления)</p>
         <p>- Занчок Премиум на автарке или имени</p>
         <span>399 руб за 30 дней</span>
-        {% if request.user.is_authenticated and request.user.phone%}
+        {% if request.user.is_authenticated and request.user.phone and request.user.premium == False %}
         <form action="{% url 'create_payment' %}" method="post" style="box-shadow: none;border: none;">
           {% csrf_token %}
           <button class="select-tarif" type="submit">Купить Премиум</button>
           <input name="summa" type="number" value="399" style="visibility: hidden;" />
         </div>
+        {% elif request.user.is_authenticated and request.user.premium == True %}
+        <p>Премиум Подписка Уже Активирована</p>
         {% else %}
           <p>Чтобы купить, необходимо авторизироваться и подтвердить телефон</p>
         {% endif %}
