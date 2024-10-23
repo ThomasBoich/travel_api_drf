@@ -80,7 +80,7 @@ def create_payment(request):
                         }
                     ],
                     "email": request.user.email,
-                    "phone": request.user.phone or "00",
+                    "phone": request.user.phone,
                 },
                 "refundable": False,
                 "test": True               
