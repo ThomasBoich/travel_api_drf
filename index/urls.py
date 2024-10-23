@@ -3,7 +3,7 @@ from .views import index, profile, user_logout, AppLoginView,UpdateUserView,trav
 from trips.views import travelers,create_trip,trip_boocking,close_boocking,close_trip
 from travels.views import create_travel
 from chat.views import private_chat, send_message, display_messages
-from users.views import addToFriends, addFavorites, create_payment
+from users.views import addToFriends, addFavorites, create_payment, activate_premium
 from users.decorators import check_recaptcha
 from blog.views import blog, post, toggle_like
 
@@ -43,4 +43,5 @@ urlpatterns = [
     path('blog/<int:post_id>/', post, name='post'),
     path('toggle_like/<int:post_id>/', toggle_like, name='toggle_like'),
     path('create-payment/', create_payment, name='create_payment'),
+    path('activate_premium/', activate_premium, name='activate_premium'),
 ]

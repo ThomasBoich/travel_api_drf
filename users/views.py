@@ -99,7 +99,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 
 @csrf_exempt
-def activate_vip(request):
+def activate_premium(request):
 
     if request.method == 'POST':
 
