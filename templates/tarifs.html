@@ -45,10 +45,8 @@
           <button class="select-tarif" type="submit">Купить Премиум</button>
           <input name="summa" type="number" value="399" style="visibility: hidden;" />
         </div>
-        {% elif request.user.is_authenticated and request.user.phone == "" %}
-        <p>Чтобы оформить тариф у вас должен быть заполнен телефон</p>
         {% else %}
-          <p>Чтобы купить, необходимо авторизироваться</p>
+          <p>Чтобы купить, необходимо авторизироваться и подтвердить телефон</p>
         {% endif %}
       </div>
 
