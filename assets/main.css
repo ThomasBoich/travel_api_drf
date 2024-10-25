@@ -2887,6 +2887,24 @@ svg.trip_user_svg_image{
       .trip_time_layer svg{
         display: none;
       }
+      .advantage-layout-list{
+        flex-direction: column;
+      }
+      .advantage{
+        width: 100%;
+      }
+      .advantage-layout{
+        flex-direction: column;
+      }
+      .advantage-cart span{
+        text-align: center;
+      }
+      .advantage a{
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        display: flex;
+      }
 }
 
 
