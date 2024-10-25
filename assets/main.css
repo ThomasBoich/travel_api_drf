@@ -2944,6 +2944,10 @@ svg.trip_user_svg_image{
         min-width: max-content!IMPORTANT;
         width: max-content!IMPORTANT;
     }
+    .popular-countries-title h2 span{
+      min-width: max-content!IMPORTANT;
+      width: max-content!IMPORTANT;
+    }
 
 }
 
