@@ -1,10 +1,13 @@
 {% load static %}
 <div class="chat-nav">
+  <div class="chat_nav_logo_title" id="chat_nav_logo_title">
     <h2>{{title_chat}} <span><!--2-->{{dialog_count}}</span></h2>
     <div class="prime-chat-menu">
     <a href="{% url 'chats' %}" class="active">Все <!--2-->{{dialog_count}}</a>
     <!-- <a to="chat/favorite">Избранные 9</a> -->
     </div>
+  </div> 
+
     <div class="chat-folders-layout">
     <div class="chat-folders">
       {% for folder in folders %}
@@ -102,5 +105,9 @@
       .users-folder img{
         width: 25px!IMPORTANT;
         height: 25px!IMPORTANT;
+      }
+      .base-content{
+        margin: 25px auto auto auto!IMPORTANT;
+        padding: auto auto 25px auto!IMPORTANT;
       }
     </style>

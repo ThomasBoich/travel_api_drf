@@ -2438,8 +2438,196 @@ svg.trip_user_svg_image{
   font-weight: 700;
   margin: 0px 0px 15px 0px;
 }
+
+.chat_nav_logo_title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: max-content;
+}
+#chat_nav_logo_title{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: max-content;
+}
+
 /* мобильная версия */
 @media (max-width: 770px){
+  .chat_nav_logo_title{
+    width: 100%;
+    margin: 0px 0px 15px 0px;
+    justify-content: flex-start;
+  }
+  #chat_nav_logo_title{
+    width: 100%;
+    margin: 0px 0px 15px 0px;
+    justify-content: flex-start;
+  }
+  .chat-nav{
+    flex-direction: column;
+    width: 100%;
+    padding: 0px 0px 0px 0px;
+  }.chat-folders-layout {
+    width: 100%!IMPORTANT;
+    display: flex!IMPORTANT;
+    align-items: center!IMPORTANT;
+}
+  .chat-folders {
+    width: 79%!IMPORTANT;
+    width: 100%!IMPORTANT;
+    display: inline-flex!IMPORTANT;
+    align-items: center!IMPORTANT;
+    overflow: hidden!IMPORTANT;
+    overflow-x: auto!IMPORTANT;
+}
+
+
+
+.chat-content-message {
+  width: 100%!IMPORTANT;
+  height: 60dvh!IMPORTANT;
+  padding: 15px!IMPORTANT;
+  overflow-y: auto!IMPORTANT;
+}
+
+
+.message-input form{
+  margin: 0 auto!IMPORTANT;
+  width: 95%!IMPORTANT;
+}
+.message-user-nav-layout{
+  width: 95%;
+  margin: 0 auto;
+  padding: 0px 0px 0px 15px;
+}
+.chat-nav a {
+  font-weight: 700!IMPORTANT;
+  cursor: pointer!IMPORTANT;
+  color: #A4A4A4!IMPORTANT;
+  font-size: 15px!IMPORTANT;
+  min-width: max-content!IMPORTANT;
+  margin: 0px 9px 0px 0px!IMPORTANT;
+  padding: 5px 9px 5px 0px!IMPORTANT;
+  border-radius: 9px!IMPORTANT;
+}
+
+.prime-chat-menu a{
+  padding: 9px 9px 9px 9px!IMPORTANT;
+  width: 100%!IMPORTANT;
+}
+  .chat-layout {
+    background-color: #F9F9F9!IMPORTANT;
+    background-color: #FFFFFF!IMPORTANT;
+    width: 100%!IMPORTANT;
+    border-radius: 15px!IMPORTANT;
+    padding: 15px 15px 15px 15px!IMPORTANT;
+    padding: 0px 0px 0px 0px!IMPORTANT;
+    display: flex!IMPORTANT;
+    flex-direction: column!IMPORTANT;
+    min-height: 70dvh!IMPORTANT;
+    position: relative!IMPORTANT;
+    max-width: 1009px!IMPORTANT;
+    max-width: 100%!IMPORTANT;
+    overflow: hidden!IMPORTANT;
+}
+  .info-slide {
+    align-items: center;
+    background-color: #f6f5f2;
+    border-radius: 35px;
+    display: flex;
+    flex-direction: row;
+    margin: 0px 0px 0px 0px;
+    min-height: 95%;
+    padding: 15px 15px 15px 15px;
+    width: 95%;
+    margin: 0 auto;
+}
+  .info-slide-layout {
+    display: flex;
+    flex-direction: column;
+    height: -moz-max-content;
+    height: max-content;
+    margin: 0px 0px 0px 0px;
+    padding: 25px 25px 25px 25px;
+    box-sizing: border-box;
+}
+  .index_navigation{
+    display: none;
+  }.info-slide p{
+    color: #7b7b7b;
+    font-size: 16px;
+    margin: 0 0 50px;
+    max-width: 100%;
+    padding: 0;
+  }
+  .info-slide button{
+    width: 100%;
+  }
+  .select_service{
+    overflow: hidden;
+    overflow-x: auto;
+    width: 100%;
+    height: max-content;
+  }
+  .what-search-layout svg,.where-layout svg, .where svg{
+    display: none;
+  }
+  .date_travelers input {
+    padding: 0px 0px 25px 0px;
+    border: none;
+    font-size: 15px;
+    font-size: 18px;
+    font-weight: 700;
+    border-left: none;
+    margin: 0px 0px 0px 0px;
+    outline: none;
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -2px;
+    width: 100%;
+    text-align: left;
+    justify-content: flex-start;
+}.date_travelers {
+  display: flex;
+  width: max-content;
+  min-width: max-content;
+  border: none;
+  font-size: 15px;
+  font-weight: 700;
+  outline: none;
+  width: 100%;
+  padding: 0px 25px 0px 25px;
+} 
+.hello-layout h1 {
+  width: 95%;
+  text-align: center;
+  font-size: 9.5vw;
+  margin: 35px 0px 15px 0px;
+}
+  .hello-layout h1{
+    width: 95%;
+    text-align: center;
+    font-size: 9.5vw;
+    margin: 35px 0px 15px 0px;
+  }
+
+  .other {
+    border: 1px solid #e6e6e6!IMPORTANT;
+    border-radius: 9px!IMPORTANT;
+    font-size: 17px!IMPORTANT;
+    text-align: center!IMPORTANT;
+    width: 95%!IMPORTANT;
+    padding: 15px 15px 15px 15px!IMPORTANT;
+    transition: all 0.3s!IMPORTANT;
+    -webkit-transition: all 0.3s!IMPORTANT;
+    -moz-transition: all 0.3s!IMPORTANT;
+    margin: 0 auto!IMPORTANT;
+    display: flex!IMPORTANT;
+    text-align: center!IMPORTANT;
+    justify-content: center!IMPORTANT;
+}
     .search-result-info h2 {
         font-weight: 700;
         font-size: 17px;
@@ -2460,8 +2648,19 @@ svg.trip_user_svg_image{
     }
     form.search-sites{
         margin: 0px 0px 25px 0px!IMPORTANT;
-        width: 100%!IMPORTANT;
+        width: 95%!IMPORTANT;
     }
+    .base-content {
+      display: flex!IMPORTANT;
+      justify-content: space-between!IMPORTANT;
+      margin: 0 auto!IMPORTANT;
+      max-width: 1279px!IMPORTANT;
+      width: 90%!IMPORTANT;
+      padding: 15px 0px 15px 0px!IMPORTANT;
+  }.base-content form.search-sites{
+    margin: 0px 0px 25px 0px!IMPORTANT;
+    width: 100%!IMPORTANT;
+  }
     .interest_list{
         flex-wrap: wrap;
     }
@@ -2486,7 +2685,7 @@ svg.trip_user_svg_image{
         margin: 0px 0px 50px 0px;
     }
     .hello-layout h1{
-        margin: 75px 0px 0px 0px;
+        margin: 75px 0px 15px 0px;
     }
     .where {
         width: 100%;
@@ -2515,7 +2714,12 @@ svg.trip_user_svg_image{
         padding: 15px 15px 15px 19px!IMPORTANT;
         width: 100%!IMPORTANT;
         display: flex;
+        border-right: none;
     }
+    .where-layout{
+      border-right: none;
+    }
+    
 
     .what-navigation{
         z-index: 9999!IMPORTANT;
@@ -2546,6 +2750,10 @@ svg.trip_user_svg_image{
     }
     .user-avatar{
         margin: 25px 0px 25px 0px;
+    }
+    .tab-content{
+      overflow: hidden;
+      overflow-y: auto;
     }
     .where-layout select{
         padding: 15px 15px 15px 0px!IMPORTANT;
@@ -2638,10 +2846,10 @@ svg.trip_user_svg_image{
         max-width: 90%;
     }
 
-    {
+    /* {
         width: 100%!IMPORTANT;
         max-width: 100%!IMPORTANT;
-    }
+    } */
 
     .where-layout{
         padding: 19px 17px 5px 17px !IMPORTANT;
@@ -2660,10 +2868,10 @@ svg.trip_user_svg_image{
 
 @media (max-width: 490px){
     .hello-layout h1{
-        width: 99%;
+        width: 95%;
         text-align: center;
-        font-size: 6.5vw;
-        margin: 35px 0px 0px 0px;
+        font-size: 9.5vw;
+        margin: 35px 0px 15px 0px;
     }
     .hello-layout p{
         width: 95%;
