@@ -2907,7 +2907,14 @@ svg.trip_user_svg_image{
       }
 }
 
-
+.popular-countries-title h2 span{
+  width: max-content;
+  min-width: max-content;
+}
+.index-popular-roads-title span{
+  width: max-content;
+  min-width: max-content;
+}
 
 
 @media (max-width: 500px){
@@ -2941,12 +2948,7 @@ svg.trip_user_svg_image{
         margin: 0 auto!IMPORTANT;
     }
     .index-popular-roads-title span{
-        min-width: max-content!IMPORTANT;
-        width: max-content!IMPORTANT;
-    }
-    .popular-countries-title h2 span{
-      min-width: max-content!IMPORTANT;
-      width: max-content!IMPORTANT;
+        min-width: max-content;
     }
 
 }
