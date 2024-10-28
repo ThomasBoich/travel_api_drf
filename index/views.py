@@ -412,7 +412,10 @@ def chats(request):
     chats = Message.objects.filter(Q(recipient=request.user) | Q(sender=request.user)).order_by('-timestamp')
     # people = CustomUser.objects.filter(Q(recipient=request.user) | Q(sender=request.user)).order_by('-timestamp')
     dialogs_response = Dialog.objects.filter(Q(user=request.user) | Q(with_user=request.user)) #recipient,
-    folders = Folder.objects.filter(user=request.user)[0:2]
+    if request.user.premium:
+        folders = Folder.objects.filter(user=request.user)
+    else:
+        folders = Folder.objects.filter(user=request.user)[0:2]
     folders_count = Folder.objects.filter(user=request.user).count()
     
     # recipient = User.objects.get(id=recipient_id)
@@ -441,7 +444,10 @@ def chats(request):
 def folder(request, folder_id):
     user = request.user.id
     folder = Folder.objects.get(user=user, id=folder_id)
-    folders = Folder.objects.filter(user=request.user)[0:2]
+    if request.user.premium:
+        folders = Folder.objects.filter(user=request.user)
+    else:
+        folders = Folder.objects.filter(user=request.user)[0:2]
     folders_count = Folder.objects.filter(user=request.user).count()
     return render(request, 'folder.html', {'folder': folder, 'title_chat': f'{folder.name}', 'folders': folders,'folders_count':folders_count,})
 

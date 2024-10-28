@@ -19,7 +19,7 @@
 
     </div>
 
-    {%if folders_count > 2%}
+    {%if folders_count > 2 and request.user.premium != True%}
     <button onclick="alert('Чтобы создать больше 2х папок, вам нужна премиум подписка');"><img src="{% static 'img/plus.png' %}" alt=""></button> <!---->
     {%else%}
     <button class="fc"><img src="{% static 'img/plus.png' %}" alt=""></button> <!---->

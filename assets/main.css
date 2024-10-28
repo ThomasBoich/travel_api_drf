@@ -125,6 +125,7 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
   -moz-transition: opacity 0.3s;
   transition: opacity 0.3s;
   outline: 4px solid #7e52c7;
+  outline: 4px solid #2963d6;
 }
 .add-layer{
   position: relative;
@@ -1469,6 +1470,7 @@ form.search-sites{
   background: -moz-linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
   background: -webkit-linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
   background: linear-gradient(90deg, rgba(243,79,188,1) 0%, rgba(126,82,199,1) 100%);
+  background: linear-gradient(90deg, #1a73e8 0%, rgb(109 176 117) 100%);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f34fbc",endColorstr="#7e52c7",GradientType=1);
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
@@ -1948,6 +1950,7 @@ img.city_img{
   font-weight: 700;
 
   background-color: #7e52c7;
+  background-color: #2963d6;
     /* border-bottom: 2px solid #00c7bb; */
     /* border-bottom: 2px solid #7e52c7; */
     padding: 0px 0px 15px 0px;
@@ -2452,8 +2455,18 @@ svg.trip_user_svg_image{
   width: max-content;
 }
 
+.smart_telephone{
+  display: none!IMPORTANT;
+}
+
 /* мобильная версия */
 @media (max-width: 770px){
+  .smart_pc{
+    display: none!IMPORTANT;
+  }
+  .smart_telephone{
+    display: flex!IMPORTANT;
+  }
   .chat_nav_logo_title{
     width: 100%;
     margin: 0px 0px 15px 0px;
