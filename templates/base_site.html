@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>«Travelo» — Портал для поиска попутчиков куда угодно</title>
+    <title>«КудаУкогдно» — Портал для поиска попутчиков куда угодно</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{%  static 'img/favicons/faviicon.ico' %}">
     <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}" type="image/x-icon">
@@ -21,10 +21,12 @@
   body{background-color: #f1f1f1f1;}
 </style>
   {% include 'navigation.html' %}
+  <div class="preloader" id="preloader" style="display: flex;width: 100%;height: 100dvh;align-items: center;justify-content: center;"><img src="{% static 'img/preloader.gif' %}" alt=""></div>
+  <div class="load_content" id="load_content" style="display: none;">
   <div class="base-content">
+
   {% if request.user.is_authenticated %}
 {% comment %}  <div class="vertical-nav">
- 
     <a href="{% url 'profile' request.user.id %}">
       {%if request.user.photo.url and request.user.photo%}<img src="{{request.user.photo.url}}" style="border-radius: 50px;"/>
       {%else%}
@@ -42,12 +44,26 @@
     padding: 9px 19px;
     font-size: 17px;
     width: max-content;">Авторизироваться</span> -->
-
   </div>
   {%endcomment%}
   {% endif %}
+
+ 
 {% block content %}
 {% endblock %}
+
+</div>
+</div>
+<script>
+  window.addEventListener('load', function() {
+  // Скрываем прелоадер
+  const preloader = document.getElementById('preloader');
+  const content = document.getElementById('load_content');
+
+  preloader.style.display = 'none'; // Скрываем прелоадер
+  content.style.display = 'block'; // Показываем контент
+});
+</script>
 {% include 'footer.html' %}
 <style>
   .base-content{

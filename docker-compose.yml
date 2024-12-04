@@ -1,0 +1,82 @@
+services:
+  travelo:
+    container_name: travelo
+    build: .
+    ports:
+      - "8015:8000"
+    volumes:
+      - .:/travelo
+    # environment:
+    #   - PYTHONUNBUFFERED=1
+    #   - CELERY_BROKER_URL=amqp://PyteAdmin:Password0123456789!@89.223.69.212:4979/
+    # env_file:
+    #   - .env
+#   db:
+#     image: postgres:latest
+#     environment:
+#       POSTGRES_DB: ${DB_NAME}
+#       POSTGRES_USER: ${DB_USER}
+#       POSTGRES_PASSWORD: ${DB_PASSWORD}
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+# volumes:
+#   postgres_data:
+  # rabbitmq:
+  #   image: rabbitmq:4-management
+  #   container_name: rabbitmq
+  #   ports:
+  #     - "4479:5672"
+  #     - "4478:15672"
+  #   environment:
+  #     RABBITMQ_DEFAULT_USER: Admin0123456789!
+  #     RABBITMQ_DEFAULT_PASS: Password0123456789!
+  #   # networks:
+  #   #   - rabbitmq_network
+  #   restart: always
+#  redis:
+#    container_name: redis
+#    image: "redis:alpine"
+#    ports:
+#      - "6379:6379"
+#    env_file:
+#      - .env
+#    healthcheck:
+#      test: ["CMD", "redis-cli", "ping"]
+#      interval: 29s
+#      timeout: 11s
+#      retries: 11
+
+  # celery:
+  #   container_name: celery
+  #   build: .
+  #   command: celery -A pyte_games worker --loglevel=info
+  #   volumes:
+  #     - .:/pyte_games
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     #- CELERY_BROKER_URL=redis://redis:6379/0
+  #     - CELERY_BROKER_URL=amqp://PyteAdmin:Password0123456789!@89.223.69.212:4979/
+
+
+  # celery-beat:
+  #   container_name: celery-beat
+  #   build: .
+  #   command: celery -A pyte_games.celery beat --loglevel=info
+  #   volumes:
+  #     - .:/pyte_games
+  #   environment:
+  #     - PYTHONUNBUFFERED=1
+  #     #- CELERY_BROKER_URL=redis://redis:6379/0
+  #     - CELERY_BROKER_URL=amqp://PyteAdmin:Password0123456789!@89.223.69.212:4979/
+
+  # flower:
+  #   container_name: flower
+  #   build: .
+  #   #command: celery -A pyte_games.celery flower --broker=redis://redis:6379/0 --basic_auth=user:password --port=8099
+  #   command: celery -A pyte_games.celery flower --broker=amqp://PyteAdmin:Password0123456789!@89.223.69.212:4478:4979// --basic_auth=user:password --port=8099
+  #   ports:
+  #     - "8099:8099"
+  #   volumes:
+  #     - .:/pyte_games
+  #   environment:
+  #     - PYTHONUNBUFFERED=1

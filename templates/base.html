@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>«Travelo» — Портал для поиска попутчиков куда угодно</title>
+    <title>«КудаУгодно» — Портал для поиска попутчиков куда угодно</title>
 <!--    <link rel="shortcut icon" href="{%  static 'icon.svg' %}">-->
    <link rel="shortcut icon" href="{%  static 'img/favicons/faviicon.ico' %}">
    <link rel="icon" href="{% static 'img/favicons/favicon.ico' %}" type="image/x-icon">
@@ -17,16 +17,28 @@
   />
 </head>
 <body>
-
 {% include 'navigation.html' %}
+<div class="preloader" id="preloader" style="display: flex;width: 100%;height: 100dvh;align-items: center;justify-content: center;"><img src="{% static 'img/preloader.gif' %}" alt=""></div>
+<div class="load_content" id="load_content" style="display: none;">
 {% block content %}
 {% endblock %}
+</div>
 {% include 'footer.html' %}
     <script>
     const toogle_buttons = document.querySelectorAll('#active_toogle')
     toogle_buttons.forEach(button => button.addEventListener('click', function(){
     button.classList.toggle('active')    
     }))
+  </script>
+  <script>
+    window.addEventListener('load', function() {
+    // Скрываем прелоадер
+    const preloader = document.getElementById('preloader');
+    const content = document.getElementById('load_content');
+
+    preloader.style.display = 'none'; // Скрываем прелоадер
+    content.style.display = 'block'; // Показываем контент
+});
   </script>
 <link rel="stylesheet" href="{% static 'css/chosen.css' %}">
 <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
