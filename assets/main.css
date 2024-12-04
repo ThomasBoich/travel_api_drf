@@ -87,6 +87,20 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
   -moz-transition: background-color 0.3s;
   -webkit-transition: background-color 0.3s;
 }
+.preloader{}
+#preloader{}
+#preloader img{
+  width: 95%;
+  max-width: 115px;
+  height: auto;
+  object-fit: cover;
+}
+.preloader img{
+  width: 95%;
+  max-width: 115px;
+  height: auto;
+  object-fit: cover;
+}
 .user-nav-layer.active{
   visibility: visible;
   transition: opacity 0.3s;
