@@ -375,6 +375,10 @@ ul, li, a{width: min-content;}button,a{border: none;cursor: pointer;text-decorat
 }.add_content:active{
   color: #4ac9c0;
 }
+.add_content svg{
+  padding: 0px 0px 0px 0px;
+  margin: 0px 9px 0px 0px;
+}
 
 /*навигация*/
 
