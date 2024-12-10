@@ -16,7 +16,7 @@
     <Button class="search" label="Найти" severity="contrast" rounded />
   </form> 
 </template>-->
-<form action="{% url 'trips' %}" method="GET" class="search-sites wow animate__fadeInDown">
+<form action="{% url 'trips' %}" method="GET" class="search-sites wow animate__fadeInDown" style="overflow: hidden;">
   <div class="where-layout">
               <select name="from_city" id="" class="js-chosen1">
             {% for city in cities %}
