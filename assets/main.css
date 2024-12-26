@@ -2685,6 +2685,7 @@ svg.trip_user_svg_image{
     .user_search_status{
         display: flex;
         flex-direction: column;
+        width: 100%;
     }
     form.search-sites{
         margin: 0px 0px 25px 0px!IMPORTANT;
@@ -2868,7 +2869,7 @@ svg.trip_user_svg_image{
 
       .search-result img{
         width: 49px!IMPORTANT;
-        height: auto!IMPORTANT;
+        height: 49px!IMPORTANT;
         object-fit: cover!IMPORTANT;
         display: flex!IMPORTANT;
         margin: 0px 0px 15px 0px!IMPORTANT;
@@ -2901,8 +2902,12 @@ svg.trip_user_svg_image{
       .trip_time_layer{
         display: flex;
         flex-direction: column;
+        flex-direction: row;
         min-width: 100%;
-      }
+        min-width: max-content;
+        width: max-content;
+        column-gap: 0px;
+      }.trip_out_time{min-width: max-content;}
       
       .search_trip_two_layer img{
         width: 19px!IMPORTANT;
@@ -2910,7 +2915,8 @@ svg.trip_user_svg_image{
         object-fit: cover!IMPORTANT;
         display: flex!IMPORTANT;
         margin: 0px 9px 0px 0px!IMPORTANT;
-      }
+      }.trip_in_time, .trip_out_time{
+      padding: 0px 9px 0px 0px;font-size: 22px;}.search-result{overflow: hidden;}
       .search_trip_two_layer{
         padding: 15px 0px 0px 0px;
         margin: 0px 0px 15px 0px;

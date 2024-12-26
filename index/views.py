@@ -47,8 +47,8 @@ def index(request):
     countries = Country.objects.all()
     travels = Travel.objects.all()
     cities = City.objects.all()
-    users = CustomUser.objects.all()
-    users = CustomUser.objects.all()
+    # users = CustomUser.objects.all()
+    users = CustomUser.objects.all().order_by('-id')
     interests = Interests.objects.all()
     countries_from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()[0:3]
     context = {
