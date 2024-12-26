@@ -325,7 +325,7 @@ def trips(request):
 
 def users(request):
     if request.method == 'GET':
-        users_list = CustomUser.objects.all()
+        users_list = CustomUser.objects.all().order_by('-id')
         interests = Interests.objects.all()
         #from_moscow = Country.objects.filter(travels__from_city__name='Москва').distinct()
         users_title = f'Поиск друзей - {users_list.count()} шт.'
