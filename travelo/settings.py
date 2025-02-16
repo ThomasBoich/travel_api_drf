@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from datetime import timedelta
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -47,6 +48,7 @@ INSTALLED_APPS = [
     'blog',
     "corsheaders",
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_yasg',
     
     'allauth',
@@ -180,7 +182,11 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ]
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        # ...
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
 }
 
 # Internationalization
@@ -246,3 +252,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ADMIN_SITE_HEADER = 'TRAVELO'
 ADMIN_SITE_HEADER_COLOR = 'green'
 CSRF_TRUSTED_ORIGINS=["http://kudaugodno.com","https://kudaugodno.com"]
+APPEND_SLASH = True
+# REMOVE_SLASH = True
+
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(seconds=20),  # Время жизни токена доступа
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),  # Время жизни refresh-токена
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+}

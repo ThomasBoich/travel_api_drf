@@ -58,10 +58,10 @@ class Country(models.Model):
         verbose_name = 'Страна'
         verbose_name_plural = 'Страны'
 
-    @property
-    def travel_count(self):
-        return self.travels.count()
+    # @property
+    # def travel_count(self):
+    #     return self.travels.count()
 
-    @classmethod
-    def with_travel_counts(cls):
-        return cls.objects.annotate(travel_count=Count('travels'))
+    # @classmethod
+    # def with_travel_counts(cls):
+    #     return cls.objects.annotate(travel_count=Count('travels'))

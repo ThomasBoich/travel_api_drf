@@ -10,11 +10,11 @@ class CountrySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'image', 'travel_count']
 
 class TravelSerializer(serializers.ModelSerializer):
-    travel_count = serializers.IntegerField(read_only=True)
     from_city = CitySerializer()
-    country = CountrySerializer(many=True)
+    country = CountrySerializer(many=True, read_only=True)
     user = CustomUserSerializer()
-    city = CitySerializer()
+    from_city = CitySerializer(read_only=True)
+
     class Meta:
         model = Travel
         fields = '__all__'

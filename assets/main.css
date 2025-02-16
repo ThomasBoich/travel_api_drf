@@ -869,6 +869,7 @@ h1{
     align-items: center;
     justify-content: space-between;
     width: calc(100% - 27px);
+    width: 100%;
     max-width: 768px;
     border-radius: 50px;
     border: 1px solid #00000015;

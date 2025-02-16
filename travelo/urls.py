@@ -20,14 +20,21 @@ from django.conf.urls.static import static
 from django.urls import path, include
 from rest_framework import routers, permissions
 from rest_framework.routers import DefaultRouter
-from users.views import CustomUserViewSet, InterestsViewSet, HabitsViewSet
-from travels.views import TravelViewSet, CountryViewSet
+from users.views import CustomUserViewSet, InterestsViewSet, HabitsViewSet, JWTLoginView, JWTRegisterView, JWTLogoutView, UserProfileInfoView
+from travels.views import TravelViewSet, CountryViewSet, TravelViewSetFromMoscow, TravelListAPIView, CityViewSet, TravelFilterView, TravelFilterInfoView
+from trips.views import TripFilterView, TripFilterInfoView, TriplViewSet
+
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 router = routers.DefaultRouter()
 router.register(r'users', CustomUserViewSet)
 router.register(r'travels', TravelViewSet)
+router.register(r'trips', TriplViewSet)
 router.register(r'countries', CountryViewSet)
+router.register(r'cities', CityViewSet)
 router.register(r'interests', InterestsViewSet)
 router.register(r'habits', HabitsViewSet)
+router.register(r'from_moscow', TravelViewSetFromMoscow, basename="from_moscow")
 
 
 from drf_yasg.views import get_schema_view
@@ -47,12 +54,25 @@ schema_view = get_schema_view(
 )
 
 from chat import views as chat_views
+from django.urls import re_path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')), #  <- include the allauth urls here
     path('', include('index.urls')),
     path('api/', include(router.urls)),
+    path('api/login/', JWTLoginView.as_view(), name='jwt_login'),
+    path('api/logout/', JWTLogoutView.as_view(), name='jwt_logout'),
+    path('api/register/', JWTRegisterView.as_view(), name='jwt_register'),
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/profile-info/', UserProfileInfoView.as_view(), name='user_profile'),
+    # path('api/travels/filter/', TravelFilterView.as_view(), name='travel-filter'),    
+    re_path(r'^api/travels/filter/?$', TravelFilterView.as_view(), name='travel-filter'),
+    re_path(r'^api/travels/filter/info?$', TravelFilterInfoView.as_view(), name='travel-filter-info'),
+    re_path(r'^api/trips/filter/?$', TripFilterView.as_view(), name='trips-filter'),
+    re_path(r'^api/trips/filter/info?$', TripFilterInfoView.as_view(), name='trip-filter-info'),
+    path('travels/list/', TravelListAPIView.as_view(), name='travel-list'),
     path('api-auth/', include('rest_framework.urls')),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

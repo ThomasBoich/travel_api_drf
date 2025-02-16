@@ -1,0 +1,13 @@
+
+
+    <!-- <NuxtLink :to="`/trips/${trip.id}/`" v-for="trip in trips" :key="trip.id" v-else>
+        <div class="trip">
+            <img :src="trip?.user?.photo" alt="">
+            <div class="trip_cart_info">
+                <div class="trip_cart_user_info">
+                    <h3>{{trip?.user?.first_name}} {{trip?.user?.last_name}} , Возраст: {{trip?.user?.age}}</h3>
+                </div>
+                <!-- <h1>{{travel.id}}</h1> -->
+            </div>
+        </div>
+    </NuxtLink> -->
