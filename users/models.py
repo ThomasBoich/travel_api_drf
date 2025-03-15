@@ -144,7 +144,7 @@ class Friends(models.Model):
     friends = models.ManyToManyField(CustomUser, related_name='users_friends', blank=True, null=True)
 
     def __str__(self):
-        return f'{self.user} - {self.friends.all()}'
+        return f'{self.user} - {[friend for friend in self.friends.all()]}'
 
     class Meta:
         verbose_name = 'Друг'
@@ -208,3 +208,31 @@ def user_logged_in_handler(sender, request, user, **kwargs):
         now_user.save()
     else:
         return
+    
+
+
+
+
+
+class Friendship(models.Model):
+    PENDING = 'pending'
+    ACCEPTED = 'accepted'
+    REJECTED = 'rejected'
+
+    STATUS_CHOICES = [
+        (PENDING, 'Pending'),
+        (ACCEPTED, 'Accepted'),
+        (REJECTED, 'Rejected'),
+    ]
+
+    from_user = models.ForeignKey(CustomUser, related_name='friendship_requests_sent', on_delete=models.CASCADE)
+    to_user = models.ForeignKey(CustomUser, related_name='friendship_requests_received', on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=PENDING)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ('from_user', 'to_user')  # Уникальная связь между пользователями
+
+    def __str__(self):
+        return f'{self.from_user.email} -> {self.to_user.email} ({self.status})'

@@ -4,42 +4,20 @@ definePageMeta({
 });
 // Получаем объект маршрута
 const route = useRoute();
-import axios from 'axios';
 // Извлекаем параметры из маршрута
 const fromCity = route.params._fromCity; // Параметр из URL
-const goCity = route.params._goCity; // Параметр из URL
-
+const goCountry = route.params._goCountry; // Параметр из URL
 import {API, apiConfig, base_url} from '@/api/api'
-// const {data: trips, pending} = await useFetch(apiConfig.trips)
-
-
-const trips = ref([]);
-const error = ref(null);
-const pending = ref(true);
-
-// Функция для создания задержки
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-
-const fetchTrips = async () => {
-  try {
-    await delay(0); // Задержка в 2 секунды
-    const response = await axios.get(apiConfig.trips);
-    trips.value = response.data;
-  } catch (err) {
-    error.value = err;
-  } finally {
-    pending.value = false; // Устанавливаем pending в false после завершения запроса
-  }
-};
-
-
-onMounted(async () => {
-    await fetchTrips();
+const {data: trips, pending} = await useFetch(apiConfig.trips_filter, {
+    method: 'POST',
+    body: {
+        from_city: fromCity,
+        to_city: false
+    }
 })
 </script>
 <template>
-Поездки: 
+Путешествия:
 <template v-if="trips?.length == 0 || trips?.length == null || trips?.length == undefined">
     0
 </template>
@@ -48,12 +26,13 @@ onMounted(async () => {
 </template>
 
 <div class="search_title">
-    <h1>Поиск поездок</h1>
+    <h1>Из {{fromCity}}</h1>
 </div>
 <SearchTrips></SearchTrips>
-<div class="trips_list">
-    <!-- <span v-if="pending">Загрузка....</span> -->
 
+
+<div class="travels_list">
+    <span v-if="pending">Загрузка....</span>
     <template v-if="pending">
         <div class="pulsar" style="margin: 20px 0px 0px 0px;">
             <div class="block pulsate" style="height: 90px;"></div>
@@ -68,16 +47,7 @@ onMounted(async () => {
             <div class="block pulsate" style="height: 90px;"></div>
         </div>
     </template>
-
-
-
-<TripCard :search_trip="trip" v-for="trip in trips"></TripCard>
-
-    
-
-
-    
-
+    <TripCard :search_trip="trip" v-for="trip in trips"></TripCard>
 
 
 </div>
@@ -90,7 +60,7 @@ onMounted(async () => {
 .search-result {
     display: flex;
     width: 100%;
-    margin: 25px 0px 0px 0px;
+    margin: 0px 0px 25px 0px;
     padding: 0px 0px 25px 0px;
     border-bottom: 1px solid #dddddd;
     align-items: center;

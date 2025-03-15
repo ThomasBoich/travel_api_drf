@@ -65,7 +65,7 @@ const limitedUsers = ref([]);
   >
     <div class="index-friends-title">
       <h2>Найди друга по интересам</h2>
-      <button>Как найти надежного попутчика ></button>
+      <!-- <button>Как найти надежного попутчика ></button> -->
     </div>
     <div class="friends-layout">
       <roadViews :popular_interests></roadViews>

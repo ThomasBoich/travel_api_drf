@@ -8,13 +8,15 @@ const route = useRoute();
 // Извлекаем параметры из маршрута
 const fromCity = route.params._fromCity; // Параметр из URL
 const goCountry = route.params._goCountry; // Параметр из URL
+const what = route.query.what;
 
 import {API, apiConfig, base_url} from '@/api/api'
 const {data: travels, pending} = await useFetch(apiConfig.travels_filter, {
     method: 'POST',
     body: {
         from_city: false,
-        to_country: goCountry
+        to_country: goCountry,
+        what: what,
     }
 })
 </script>

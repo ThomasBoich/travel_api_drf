@@ -29,7 +29,7 @@ const {data: travel, pending} = await useFetch(apiConfig.travel, {
         <img v-else src="~/assets/img/photo.png" alt="">
 
         <div class="travel_user_info">
-            <h2>{{travel?.user?.first_name}} {{travel?.user?.last_name}}</h2>
+            <NuxtLink :to="`/profile/${travel?.user?.id}`"><h2>{{travel?.user?.first_name}} {{travel?.user?.last_name}}</h2></NuxtLink>
             <p>
                 <span style="
                 border-radius: 15px;
@@ -41,7 +41,7 @@ const {data: travel, pending} = await useFetch(apiConfig.travel, {
                 margin: 0px 15px 0px 0px;
                 ">
                 {{travel?.gender}} ищет {{travel?.gender_search}}</span>
-                <span><img src="~/assets/img/pic_location_grey.png" alt="">{{travel?.user?.city}}</span>, 0 отзывов</p>
+                <span><img src="~/assets/img/pic_location_grey.png" alt="">{{travel?.user?.city.name}}</span>, 0 отзывов</p>
         </div>
     </div>
 

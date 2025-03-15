@@ -36,7 +36,15 @@
     /> -->
     
     <div class="from_city">
-      <div class="from_city_input" @click="activeListCityFrom">{{fromCity}}</div>
+      <div class="from_city_input" @click="activeListCityFrom">
+        <template v-if="fromCity">
+          {{fromCity}}
+        </template>
+        <template v-else>
+          Откуда?
+        </template>
+        
+      </div>
       <!-- <input
        class="from_city_input"
        type="text"
@@ -55,14 +63,22 @@
 
     
     <div class="goCity">
-      <div class="go_country_input" @click="activeListGoCounty">{{goCity}}</div>
-      <div class="from_country_list" :class="{'active': activeCountry}">
-        <input type="text" placeholder="Название города" @input="updateFilteredCountries" v-model="searchCountry">
-        <span v-if="countryLoad">Загрузка....</span>
-        <span v-if="!countryLoad"
-         v-for="country in filteredCountries" :key="country"
-         @click="selectCountry(country.name)">🌐 {{ country.name }}</span>
-         <span v-if="!filteredCountries.length">Ничего не найдено</span>
+      <div class="go_country_input" @click="activeListGoCities">
+        <template v-if="goCity">
+          {{goCity}}
+        </template>
+        <template v-else>
+          Куда?
+        </template>
+        
+      </div>
+      <div class="from_country_list" :class="{'active': activeGoCities}">
+        <input type="text" placeholder="Название города" @input="updateFilteredCountries" v-model="searchGoCity">
+        <span v-if="GoCitiesLoad">Загрузка....</span>
+        <span v-if="!GoCitiesLoad"
+         v-for="city in filteredGoCities" :key="city"
+         @click="selectGoCity(city.name)">🌐 {{ city.name }}</span>
+         <span v-if="!filteredGoCities.length">Ничего не найдено</span>
       </div>
     </div>    
     <Button class="search" label="Найти" severity="contrast" rounded>Найти</Button>
@@ -76,14 +92,24 @@ import { API, apiConfig } from "@/api/api";
 
 
 function filterTrips(){
-  navigateTo(`/trips/${fromCity.value}/${goCity.value}`)
+  if (!fromCity.value && (goCity.value != false && goCity.value != true)){
+    navigateTo(`/trips/in/${goCity.value}`)
+  }
+  else if(!goCity.value && (fromCity.value != false && fromCity.value != true)){
+    navigateTo(`/trips/from/${fromCity.value}`)
+  }
+  else if(!goCity.value && !fromCity.value){
+    navigateTo(`/trips/`)
+  } else{
+    navigateTo(`/trips/${fromCity.value}/${goCity.value}`)
+  }
 }
 
 
-const countryLoad = ref(true)
+const GoCitiesLoad = ref(true)
 const cityLoad = ref(true)
 
-const fromCity = ref('Откуда?')
+const fromCity = ref(false)
 const searchQuery = ref('');
 const cities = ref([]);
 const activeCity = ref(false)
@@ -101,7 +127,7 @@ const filteredCities = computed(() => {
    });
 
 const selectCity = (city) => {
-  searchQuery.value = city;
+  searchQuery.value = '';
   activeCity.value = !activeCity.value
   fromCity.value = city
 };
@@ -115,35 +141,41 @@ const updateFilteredCities = () => {
 
 onMounted(()=>{
   document.addEventListener('click', (e)=>{
-    if(!e.target.closest('.from_city')){
+    if(!e.target.closest('.from_city') && activeCity.value){
       activeCity.value = false
     }
+
+    if(!e.target.closest('.goCity') && activeGoCities.value){
+      activeGoCities.value = false
+    }
+
   })
 })
 
 
-const goCity = ref('Куда?')
-const searchCountry = ref('');
-const go_countries = ref([]);
-const activeCountry = ref(false)
+const goCity = ref(false)
+const searchGoCity = ref('');
+const go_cities = ref();
+const activeGoCities = ref(false)
 
-function activeListGoCounty(){
-  activeCountry.value = !activeCountry.value
-  fetchCountries();
+function activeListGoCities(){
+  activeGoCities.value = !activeGoCities.value
+  fetchGoCities();
 }
 
-const filteredCountries = computed(() => {
-     if (!go_countries.value) return []; // Возвращаем пустой массив, если countries не определен
-     return go_countries.value.filter(city =>
-       city.name.toLowerCase().includes(searchCountry.value.toLowerCase())
+const filteredGoCities = computed(() => {
+     if (!go_cities.value) return []; // Возвращаем пустой массив, если countries не определен
+     return go_cities.value.filter(city =>
+       city.name.toLowerCase().includes(searchGoCity.value.toLowerCase())
      );
    });
 
 
-const selectCountry = (city) => {
-  searchCountry.value = city;
-  activeCountry.value = !activeCountry.value
+const selectGoCity = (city) => {
+  searchGoCity.value = '';
+  activeGoCities.value = !activeGoCities.value
   goCity.value = city
+  searchGoCity.value = ''
 };
 
 
@@ -160,17 +192,17 @@ const fetchCities = async () => {
      cityLoad.value = false
    };
 
-const fetchCountries = async () => {
+const fetchGoCities = async () => {
      const { data, pending } = await useFetch(apiConfig.cities);
      console.log('Данные из API:', data.value); // Логирование данных
-     countryLoad.value = pending.value; // Логирование статуса загрузки
+     GoCitiesLoad.value = pending.value; // Логирование статуса загрузки
      if (Array.isArray(data.value)) {
-       go_countries.value = data.value; // Убедитесь, что это массив
+        go_cities.value = data.value; // Убедитесь, что это массив
      } else {
        console.error('Полученные данные не являются массивом:', data.value);
-       countries.value = []; // Или обработайте ошибку по-другому
+       go_cities.value = []; // Или обработайте ошибку по-другому
      }
-     countryLoad.value = false
+     GoCitiesLoad.value = false
    };
    
 onMounted(() => {

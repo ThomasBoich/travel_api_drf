@@ -55,6 +55,8 @@ schema_view = get_schema_view(
 
 from chat import views as chat_views
 from django.urls import re_path
+from trips.views import UserTripsFilterInfoView
+from travels.views import UserTravelsFilterInfoView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -67,6 +69,8 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/profile-info/', UserProfileInfoView.as_view(), name='user_profile'),
+    path('api/user/travels/<user_id>/', UserTravelsFilterInfoView.as_view(), name='user_travels'),
+    path('api/user/trips/<user_id>/', UserTripsFilterInfoView.as_view(), name='user_trips'),
     # path('api/travels/filter/', TravelFilterView.as_view(), name='travel-filter'),    
     re_path(r'^api/travels/filter/?$', TravelFilterView.as_view(), name='travel-filter'),
     re_path(r'^api/travels/filter/info?$', TravelFilterInfoView.as_view(), name='travel-filter-info'),

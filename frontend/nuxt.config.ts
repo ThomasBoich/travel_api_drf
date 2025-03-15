@@ -2,8 +2,14 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  modules: ['@pinia/nuxt',],
-  ssr: true,
+  modules: ['@pinia/nuxt','vue-yandex-maps/nuxt'],
+  yandexMaps: {
+    apikey: '8817a9d8-7d4e-40b7-b810-c68354620fb6',
+  },
+  ssr: {
+    // true,
+    noExternal: [ 'vue-yandex-maps' ],
+  },
   app: {
     head: {
       meta: [

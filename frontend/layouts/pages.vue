@@ -8,7 +8,7 @@
             <slot></slot>
         </div>
     </div>
-    <Footer></Footer>
+    <Footer style="background-color: #F1F1F1;"></Footer>
 </template>
 <style scoped>
 .layout_pages{

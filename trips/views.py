@@ -6,6 +6,7 @@ from travels.models import Travel, Country
 from .models import Trip
 from django.http import HttpResponseForbidden
 from .serializers import TripSerializer
+from django.db.models import Q
 # Create your views here.
 
 def travelers(request):
@@ -100,14 +101,29 @@ class TripFilterView(APIView):
     def post(self, request):
         from_city_name = request.data.get('from_city')
         to_city_name = request.data.get('to_city')
-        from_city = City.objects.get(name=from_city_name)
-        to_city = City.objects.get(name=to_city_name)
-       
+        from_city = False
+        to_city = False
+        
+
         try:
-            trips = Trip.objects.filter(city=from_city, cityin=to_city)
-            serializer = TripSerializer(trips, many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        except Travel.DoesNotExist:
+            if from_city_name == False:
+                trips = Trip.objects.filter(cityin__name=to_city_name)
+                serializer = TripSerializer(trips, many=True)
+                print('Выполнилось без города')
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            elif from_city_name and to_city_name == False:
+                trips = Trip.objects.filter(city__name=from_city_name)
+                serializer = TripSerializer(trips, many=True)
+                print(from_city_name)
+                print(trips)
+                print('Выполнилось без пункта назначения')
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                trips = Trip.objects.filter(city__name=from_city_name, cityin__name=to_city_name)
+                serializer = TripSerializer(trips, many=True)
+                print('Выполнилось с городом')
+                return Response(serializer.data, status=status.HTTP_200_OK)
+        except Trip.DoesNotExist:
             return Response([], status=status.HTTP_200_OK)
 
         # try:
@@ -132,8 +148,13 @@ class TripFilterInfoView(APIView):
         except Travel.DoesNotExist:
             return Response([], status=status.HTTP_200_OK)
 
+class UserTripsFilterInfoView(APIView):
+    permission_classes = [AllowAny]
 
-
+    def get(self, request, user_id):
+        trips = Trip.objects.filter(Q(user=user_id) | Q(trip_users=user_id))
+        serializer = TripSerializer(trips, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
   
 
 class TriplViewSet(viewsets.ModelViewSet):

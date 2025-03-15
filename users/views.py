@@ -4,11 +4,13 @@ from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.views.generic import CreateView
 from rest_framework import viewsets
-from .models import CustomUser, Interests, Habits, Friends, Favorites
+from .models import CustomUser, Interests, Habits, Friends, Favorites, Friendship
+from rest_framework import generics, permissions, status
 from .serializers import CustomUserSerializer, InterestsSerializer, HabitsSerializer
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.db.models import Q
 
 from .forms import CustomUserCreationForm
 
@@ -394,3 +396,52 @@ class UserProfileInfoView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+from .serializers import FriendshipSerializer, FriendshipCreateSerializer, FriendshipUpdateSerializer, UserSerializer
+
+class FriendshipCreateView(generics.CreateAPIView):
+    queryset = Friendship.objects.all()
+    serializer_class = FriendshipCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(from_user=self.request.user)
+
+class FriendshipUpdateView(generics.UpdateAPIView):
+    queryset = Friendship.objects.all()
+    serializer_class = FriendshipUpdateSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        if instance.to_user != request.user:
+            return Response({'detail': 'You can only update your own friendship requests.'}, status=status.HTTP_403_FORBIDDEN)
+        return super().update(request, *args, **kwargs)
+
+class FriendshipListView(generics.ListAPIView):
+    serializer_class = FriendshipSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return Friendship.objects.filter(Q(from_user=user) | Q(to_user=user))
+
+class FriendListView(generics.ListAPIView):
+    serializer_class = UserSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        # Получаем всех друзей (подтверждённые запросы)
+        friendships = Friendship.objects.filter(
+            Q(from_user=user) | Q(to_user=user),
+            status=Friendship.ACCEPTED
+        )
+        friend_ids = []
+        for friendship in friendships:
+            if friendship.from_user == user:
+                friend_ids.append(friendship.to_user.id)
+            else:
+                friend_ids.append(friendship.from_user.id)
+        return CustomUser.objects.filter(id__in=friend_ids)

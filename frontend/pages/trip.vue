@@ -1,9 +1,7 @@
 <script setup>
-const hello = ref("Путешевствуй в компании");
-const description = ref('Тысячи любителей впечатлений в одном месте')
+const hello = ref("Поездки по низким ценам");
+const description = ref('Всегда найдется тот, кому с тобой по пути')
 import { apiConfig } from '@/api/api';
-
-
 // const travels = ref([])
 
 // const fetchTravels = async (fromCity, country) => {
@@ -18,45 +16,26 @@ import { apiConfig } from '@/api/api';
 //   console.log(travels.value)
 //   // Пример вызова функции с параметрами
 //   fetchTravels('Новосибирск', 'СССР')
-
-
 const loaded = ref(true);
 
-const {data: countries, error:countries_e, pending: countries_p} = useFetch(apiConfig.countries);
-
-const limitedCountries = computed(() => {
-  return countries.value ? countries.value.slice(0, 12) : [];
-});
-
-const {data: travels_from_moscow, error: travels_from_moscow_e, pending: travels_from_moscow_p} = useFetch(apiConfig.travel_from_moscow_now)
-
-const {data: users, error: users_e, pending: users_p} = useFetch(apiConfig.users)
-const FilterUsers = computed(() => {
-  return users.value ? users.value.slice(0, 5) : [];
-});
-const {data: interests, error: interests_e, pending: interests_p} = useFetch(apiConfig.interests)
-// Общее состояние загрузки
-const isLoading = computed(() => countries_p || travels_from_moscow_p || users_p || interests_p);
 // Отслеживание состояния загрузки
-watchEffect(() => {
-  if (isLoading.value) {
-    console.log('Загрузка данных...');
-  } else {
-    console.log('Все данные загружены');
-  }
-});
-const page = ref(false)
+// watchEffect(() => {
+//   if (isLoading.value) {
+//     console.log('Загрузка данных...');
+//   } else {
+//     console.log('Все данные загружены');
+//   }
+// });
+const page = ref(true)
 
 onMounted(async () => {
   // Измерение времени монтирования компонента
   setTimeout(() => {
-    loaded.value = true;
-    handleImageLoad;
-  }, 70);
+    loaded.value = false;
+    page.value = false;
+    // handleImageLoad;
+  }, 700);
   // Установка loaded после завершения монтирования
-
-
-  page.value = true;
   
 });
 
@@ -73,26 +52,26 @@ onMounted(async () => {
       /> -->
 
 
-      <div class="pulsar" style="margin: 75px 0px 0px 0px;font-size: clamp(25px, 4.99vw, 79px);max-width: max-content;" v-if="!page">
+      <div class="pulsar" style="margin: 75px 0px 0px 0px;font-size: clamp(25px, 4.99vw, 79px);max-width: max-content;" v-if="loaded">
         <div class="block pulsate" style="height: max-content;color: #FFFFFF00;width: max-content;">Путешевствуй в компании</div>
       </div>
 
-      <div class="pulsar" style="margin: 20px 0px 75px 0px;font-size: clamp(25px, 4.99vw, 25px);max-width: max-content;" v-if="!page">
+      <div class="pulsar" style="margin: 20px 0px 75px 0px;font-size: clamp(25px, 4.99vw, 25px);max-width: max-content;" v-if="loaded">
         <div class="block pulsate" style="height: max-content;color: #FFFFFF00;width: max-content;">Путешевствуй в компании</div>
       </div>
 
-      <h1 v-if="page" data-aos="fade-down">
+      <h1 v-if="!loaded" data-aos="fade-down">
         {{ hello }}
       </h1>
       <!-- <p>Travelo — это тысячи любителей впечатлений в одном месте</p> -->
-      <p v-if="page">{{description}}</p>
+      <p v-if="!loaded">{{description}}</p>
       <div class="select_service wow animate__fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
-        <a href="/" class="active">
+        <a href="/" class="">
             <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.34388 3.71925C6.21098 2.43331 8.40417 1.70258 10.6694 1.61169C12.9347 1.5208 15.1794 2.07347 17.1435 3.20569C19.1077 4.33792 20.7109 6.00337 21.7675 8.00918C22.8241 10.015 23.2909 12.2791 23.1139 14.5393C23.108 14.6546 23.0785 14.7839 23.0722 14.8048C22.5513 15.7519 18.3542 14.2632 13.477 11.5374L10.9179 16.0009H8.5974L11.7554 10.5392C7.00747 7.68232 3.68538 4.78324 4.19388 3.87925C4.23475 3.81804 4.28543 3.76398 4.34388 3.71925ZM13.5039 9.52925C14.9432 10.3723 16.4289 11.1335 17.9539 11.8093C18.8239 8.50925 18.4839 5.29925 16.5739 4.19925C14.6639 3.09925 11.7139 4.40925 9.29388 6.80925C10.6485 7.78913 12.0538 8.69706 13.5039 9.52925ZM22.84 6.88894C22.8382 6.91557 22.8382 6.9423 22.84 6.96894C22.8418 6.9423 22.8418 6.91557 22.84 6.88894ZM5 12.9989L8 16.9989H17C17.5304 16.9989 18.0391 17.2097 18.4142 17.5847C18.7893 17.9598 19 18.4685 19 18.9989V21.9989H17L15 19.9989H6L4 21.9989H2L4 18.6289L0 12.9989H5Z" fill="currentColor"></path></svg>
             <!-- <img src="" alt=""> -->
             <span>Путешествия</span>
         </a>
-        <NuxtLink to="/trip" class="">
+        <NuxtLink to="/trip" class="active">
             <svg width="24" height="24" fill="none" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M15.5627 4.31989C16.2489 4.44411 16.929 4.60428 17.6 4.8C18.0063 4.92779 18.3613 5.18197 18.6131 5.52552C18.8649 5.86907 19.0005 6.28404 19 6.71V11C19 11 19 13 16 13H8C5.01625 13 5.00009 11.0216 5 11.0002V6.71C4.99955 6.28404 5.1351 5.86907 5.38692 5.52552C5.63874 5.18197 5.99367 4.92779 6.4 4.8C7.07103 4.60428 7.75107 4.44411 8.43726 4.31989L8.54 4.63C8.67246 5.02911 8.92735 5.37631 9.26845 5.62226C9.60954 5.86821 10.0195 6.00038 10.44 6H13.56C13.9805 6.00038 14.3905 5.86821 14.7316 5.62226C15.0726 5.37631 15.3275 5.02911 15.46 4.63L15.5627 4.31989ZM12 2C9.91535 2 7.84127 2.2963 5.84 2.88C5.01823 3.12901 4.29841 3.63586 3.78696 4.32559C3.27551 5.01533 2.99959 5.85133 3 6.71V22H6.94L7.94 20H16.08L17.08 22H21V6.71C21.0004 5.85133 20.7245 5.01533 20.213 4.32559C19.7016 3.63586 18.9818 3.12901 18.16 2.88C16.1587 2.2963 14.0847 2 12 2ZM5 15V17H9C9 16.4696 8.78929 15.9609 8.41422 15.5858C8.03914 15.2107 7.53043 15 7 15H5ZM19 17V15H17C16.4696 15 15.9609 15.2107 15.5858 15.5858C15.2107 15.9609 15 16.4696 15 17H19Z" fill="currentColor"></path></svg>
             <!-- <img src="" alt=""> -->
             <span>Попутчики</span>
@@ -110,18 +89,141 @@ onMounted(async () => {
 
       </div>
 
-      <div class="pulsar" style="margin: 0px 0px 0px 0px;" v-if="!page">
+      <div class="pulsar" style="margin: 0px 0px 0px 0px;" v-if="loaded">
         <div class="block pulsate" style="height: 70px;color: #FFFFFF00;"></div>
       </div>
+      
+      <SearchTrips v-if="!loaded"></SearchTrips>
 
-      <Search v-if="page"></Search>
-      
-      <IndexSearch :popular_countries="countries" :total_popular_countries="countries?.length" :limitedCountries="limitedCountries"></IndexSearch>
-      
-      <NuxtLink to="/travels" style="width:100%;display: flex;"><button class="other">Еще варианты: {{countries?.length}} шт.</button></NuxtLink>
+      <div class="advantage-layout-list">
+        <div class="advantage wow animate__fadeInLeft" style="visibility: visible; animation-name: fadeInLeft;">
+            <h2>Если вы пассажир</h2>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                        <span>
+                            Легкость путешествия
+                        </span>
+                        <p>
+                            Больше никаких пересадок и ожиданий на остановках. Под рукой всегда комфортабельный автомобиль.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                        <span>
+                            Безопасность
+                        </span>
+                        <p>
+                            Наши рейтинговые системы всегда подскажут вам наилучший выбор для вашего безопасного путешествия.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                        <span>
+                            Доступность
+                        </span>
+                        <p>
+                            Больше никаких пересадок и ожиданий на остановках. Под рукой всегда комфортабельный автомобиль.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                        <span>
+                            Легкость путешествия
+                        </span>
+                        <p>
+                            Забронируйте машину по самой выгодной цене, на необходимую дату с нужными опциями.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+            <a href=""><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.8 20.3C20.4134 20.6866 19.7866 20.6866 19.4 20.3L13.8 14.7C13.3 15.1 12.725 15.4167 12.075 15.65C11.425 15.8833 10.7333 16 10 16C8.18333 16 6.646 15.371 5.388 14.113C4.12933 12.8543 3.5 11.3167 3.5 9.5C3.5 7.68333 4.12933 6.14567 5.388 4.887C6.646 3.629 8.18333 3 10 3C11.8167 3 13.3543 3.629 14.613 4.887C15.871 6.14567 16.5 7.68333 16.5 9.5C16.5 10.2333 16.3833 10.925 16.15 11.575C15.9167 12.225 15.6 12.8 15.2 13.3L20.8 18.9C21.1866 19.2866 21.1866 19.9134 20.8 20.3ZM10 14C11.25 14 12.3127 13.5627 13.188 12.688C14.0627 11.8127 14.5 10.75 14.5 9.5C14.5 8.25 14.0627 7.18733 13.188 6.312C12.3127 5.43733 11.25 5 10 5C8.75 5 7.68733 5.43733 6.812 6.312C5.93733 7.18733 5.5 8.25 5.5 9.5C5.5 10.75 5.93733 11.8127 6.812 12.688C7.68733 13.5627 8.75 14 10 14Z" fill="#0B1524"></path>
+            </svg> Найти поездку</a>
+        </div>
+        <div class="advantage wow animate__fadeInRight" style="visibility: visible; animation-name: fadeInRight;">
+            <h2>Если вы водитель</h2>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                    <span>
+                        Много попутчиков
+                    </span>
+                    <p>
+                        Среди огромной базы наших пассажиров вы точно найдете попутчиков, которым с вами по пути.
+                    </p>
+                </div>
+                </div>
+
+            </div>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                    <span>
+                        Экономия
+                    </span>
+                    <p>
+                        Вы можете не только разделить ваши расходы на поездку с попутчиками, но и получить дополнительные бонусы.
+                    </p>
+                </div>
+                </div>
+
+            </div>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                    <span>
+                        Весело
+                    </span>
+                    <p>
+                        Вы не успеете заскучать в поездке. Ведь с вами рядом всегда много интересных людей.
+                    </p>
+                </div>
+                </div>
+
+            </div>
+            <div class="advantage-content">
+                <div class="advantage-layout">
+                    <img src="~/assets/img/icon-shield.webp" alt="">
+                    <div class="advantage-cart">
+                    <span>
+                        Много попутчиков
+                    </span>
+                    <p>
+                        Среди огромной базы наших пассажиров вы точно найдете попутчиков, которым с вами по пути.
+                    </p>
+                </div>
+                </div>
+
+            </div>
+            <a href=""><svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.5 13H13.5V18C13.5 18.55 13.05 19 12.5 19C11.95 19 11.5 18.55 11.5 18V13H6.5C5.95 13 5.5 12.55 5.5 12C5.5 11.45 5.95 11 6.5 11H11.5V6C11.5 5.45 11.95 5 12.5 5C13.05 5 13.5 5.45 13.5 6V11H18.5C19.05 11 19.5 11.45 19.5 12C19.5 12.55 19.05 13 18.5 13Z" fill="#0B1524"></path>
+            </svg> Создать поездку</a>
+        </div>        
+      </div>
+
     </div>
-    <PopularRoad :travels_from_moscow></PopularRoad>
-    <IndexFriends :popular_users="FilterUsers" :popular_interests="interests"></IndexFriends>
+
     <div class="info-slide" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
       <div class="info-slide-layout">
       <!-- <span>KUDUGODNO</span> -->
@@ -141,6 +243,92 @@ onMounted(async () => {
     </slot>
 </template>
 <style>
+.advantage-layout-list {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1260px;
+    margin: 75px auto 50px auto;
+}
+.animate__fadeInLeft {
+    -webkit-animation-name: fadeInLeft;
+    animation-name: fadeInLeft;
+}
+.advantage {
+    background: rgba(11, 21, 36, .05);
+    border-radius: 15px;
+    padding: 25px 15px 25px 15px;
+    width: 49%;
+    text-align: center;
+}
+.advantage h2 {
+    margin: 0px 0px 25px 0px;
+}
+h2 {
+    line-height: 0.9;
+}
+.advantage-content {
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    padding: 15px 15px 15px 15px;
+    margin: 9px 0px 9px 0px;
+}
+.advantage-layout {
+    display: flex;
+    align-items: center;
+}
+.advantage-content img {
+    display: flex;
+    border-radius: 99px;
+    padding: 15px;
+    background-color: #f6f6f6;
+    object-fit: cover;
+    margin: 0px 15px 0px 0px;
+}
+.advantage-cart {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: left;
+    justify-content: flex-start;
+}
+.advantage-cart span {
+    font-size: 17px;
+    font-weight: 700;
+    float: left;
+    width: 100%;
+    margin: 0px 0px 5px 0px;
+}
+.advantage-cart p {
+    padding: auto;
+    margin: auto;
+    font-size: 15px;
+}
+.advantage a {
+    width: max-content;
+    border-radius: 100px;
+    padding: 12px 19px 12px 19px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    margin: 25px auto 5px auto;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+}
+button, a {
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+    background-color: inherit;
+    min-width: max-content;
+}
+.hello-layout p {
+    font-size: 25px;
+    font-weight: 500;
+    margin: 0px 0px 75px 0px;
+}
 .about-link{
   color: #FFFFFF;
   width: max-content;
@@ -223,7 +411,11 @@ umodal{
     opacity: 0.2;
 }
 
-
+.advantage-cart p {
+    padding: auto;
+    margin: auto;
+    font-size: 15px;
+}
 
 @media(max-width: 960px){
   .select_service a span{
@@ -231,6 +423,15 @@ umodal{
   }
   .select_service svg{
     margin: 0 0 0 0;
+  }
+}
+
+@media (max-width: 900px){
+  .advantage-layout-list{
+    flex-direction: column;
+  }
+  .advantage{
+    width: 100%;
   }
 }
 

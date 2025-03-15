@@ -60,9 +60,7 @@ onMounted(() => {
   document.addEventListener('click', outsideClick);
 })
 
-
 const people = ['Мужчину', 'Женщину', 'Пару', 'Семью', 'Не важно']
-
 const selected = ref()
 const query = ref('')
 </script>
@@ -173,6 +171,8 @@ z-index: 147;
   }
 }
 .what-search{
-  padding: 9px 0px 15px 0px;
+  padding: 10px 10px  10px 10px;
+  border-radius: 9px;
+  border: 1px solid #00000025;
 }
 </style>

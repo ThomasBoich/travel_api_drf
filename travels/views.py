@@ -124,9 +124,22 @@ class TravelFilterView(APIView):
     def post(self, request):
         from_city_name = request.data.get('from_city')
         to_country_name = request.data.get('to_country')
+        what_query = request.data.get('what')
         print(f'from_city_name {from_city_name}')
+        print(what_query)
         from_city = False
         to_country = False
+        what = None
+
+        if what_query == 'Не важно':
+            what = None
+        if what_query == 'Мужчину':
+            what = 'Женщину'
+        if what_query == 'Женщину':
+            what = 'Мужчину'
+        if what_query == 'Семью':
+            what = 'Семью'
+        
 
         if from_city_name == False:
             to_country = Country.objects.get(name=to_country_name)
@@ -141,21 +154,52 @@ class TravelFilterView(APIView):
         print(f'to_country {to_country_name}')
         
         try:
-            if from_city_name == False:
-                travels = Travel.objects.filter(country=to_country)
-                serializer = TravelSerializer(travels, many=True)
-                print('Выполнилось без города')
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            elif from_city_name and to_country_name == False:
-                travels = Travel.objects.filter(from_city=from_city)
-                serializer = TravelSerializer(travels, many=True)
-                print('Выполнилось без страны')
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                travels = Travel.objects.filter(from_city=from_city, country=to_country)
-                serializer = TravelSerializer(travels, many=True)
-                print('Выполнилось с городом')
-                return Response(serializer.data, status=status.HTTP_200_OK)
+            if from_city_name == False and to_country_name:
+                if what == None:
+                    travels = Travel.objects.filter(country=to_country)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось без города')
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:                    
+                    travels = Travel.objects.filter(country=to_country, gender_search=what)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось без города')
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            if from_city_name and to_country_name == False:
+                if what == None:                
+                    travels = Travel.objects.filter(from_city=from_city)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось без страны')
+                    print(what)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    travels = Travel.objects.filter(from_city, gender_search=what)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось без страны')
+                    print(what)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            if from_city_name and to_country_name:
+                if what == None:
+                    travels = Travel.objects.filter(from_city=from_city, country=to_country)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось с городом')
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:                    
+                    travels = Travel.objects.filter(from_city=from_city, country=to_country, gender_search=what)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось с городом')
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            if from_city_name == False and to_country_name == False:
+                if what == None:
+                    travels = Travel.objects.all()
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось с городом')
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:                    
+                    travels = Travel.objects.filter(gender_search=what)
+                    serializer = TravelSerializer(travels, many=True)
+                    print('Выполнилось с городом')
+                    return Response(serializer.data, status=status.HTTP_200_OK)               
         except Travel.DoesNotExist:
             return Response([], status=status.HTTP_200_OK)
 
@@ -182,3 +226,10 @@ class TravelFilterInfoView(APIView):
             return Response([], status=status.HTTP_200_OK)
 
 
+class UserTravelsFilterInfoView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, request, user_id):
+        travels = Travel.objects.filter(user=user_id)
+        serializer = TravelSerializer(travels, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

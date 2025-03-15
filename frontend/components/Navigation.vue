@@ -42,7 +42,7 @@
             </template>
                   
             <div class="user-nav-layer " :class="{'active': isOpen}">
-              <!-- <NuxtLink to="/profile/1/">Моя страница</NuxtLink> -->
+              <NuxtLink :to="`/profile/${user?.id}`">Моя страница</NuxtLink>
               <!-- <NuxtLink to="">Сообщения</NuxtLink> -->
               <NuxtLink to="/travels/">Поиск путешествий</NuxtLink>
               <NuxtLink to="/trips/">Поиск поездок</NuxtLink>

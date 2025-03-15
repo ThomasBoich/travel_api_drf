@@ -74,7 +74,7 @@ onMounted( () => {
     </div>
 </template>
 
-    <NuxtLink :to="`/users/${user.id}/`" v-for="user in users" :key="user.id" v-else>
+    <NuxtLink :to="`/profile/${user.id}/`" v-for="user in users" :key="user.id" v-else>
         <div class="travel">
             <img :src="user?.photo" alt="" v-if="user?.photo && user?.photo?.length > 0">
             <img src="~/assets/img/photo.png" alt="" v-else>

@@ -1,92 +1,126 @@
 <script setup>
-definePageMeta({
-  layout: 'pages'
-});
-// Получаем объект маршрута
-const route = useRoute();
-import axios from 'axios';
-// Извлекаем параметры из маршрута
-const fromCity = route.params._fromCity; // Параметр из URL
-const goCity = route.params._goCity; // Параметр из URL
-
-import {API, apiConfig, base_url} from '@/api/api'
-// const {data: trips, pending} = await useFetch(apiConfig.trips)
-
-
-const trips = ref([]);
-const error = ref(null);
-const pending = ref(true);
-
-// Функция для создания задержки
-const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
-
-
-const fetchTrips = async () => {
-  try {
-    await delay(0); // Задержка в 2 секунды
-    const response = await axios.get(apiConfig.trips);
-    trips.value = response.data;
-  } catch (err) {
-    error.value = err;
-  } finally {
-    pending.value = false; // Устанавливаем pending в false после завершения запроса
-  }
-};
-
-
-onMounted(async () => {
-    await fetchTrips();
+const props = defineProps({
+    search_trip: {
+        type: Array,
+        required: true,
+    }
 })
+// Функция для извлечения времени из даты
+const extractTime = (dateString) => {
+  const date = new Date(dateString) // Преобразуем строку в объект Date
+  const hours = String(date.getHours()).padStart(2, '0') // Получаем часы и добавляем ведущий ноль
+  const minutes = String(date.getMinutes()).padStart(2, '0') // Получаем минуты и добавляем ведущий ноль
+  return `${hours}:${minutes}` // Форматируем время
+}
+
+
+// Функция для форматирования даты
+const formatDate = (dateString) => {
+  const date = new Date(dateString) // Преобразуем строку в объект Date
+  const day = String(date.getDate()).padStart(2, '0') // Получаем день
+  const options = { month: 'short', weekday: 'short' } // Опции для форматирования месяца и дня недели
+  const month = new Intl.DateTimeFormat('ru-RU', options).format(date).split(' ')[0] // Получаем сокращенное название месяца
+  const weekday = new Intl.DateTimeFormat('ru-RU', { weekday: 'short' }).format(date) // Получаем сокращенное название дня недели
+  return `${day} ${month}, ${weekday}` // Форматируем строку
+}
+
+// Метод для получения форматированного времени
+const getFormattedTripInTime = () => {
+  return extractTime(props.search_trip.trip_in_time)
+}
+
+// Метод для получения форматированного времени
+const getFormattedtrip_out_time = () => {
+  return extractTime(props.search_trip.trip_out_time)
+}
 </script>
 <template>
-Поездки: 
-<template v-if="trips?.length == 0 || trips?.length == null || trips?.length == undefined">
-    0
-</template>
-<template v-else>
-    {{trips?.length}}
-</template>
+    <NuxtLink :to="`/trips/${search_trip.id}`">
+        
+        <!-- //1/ -->
+<div class="search-result trips wow animate__fadeInDown" style="visibility: visible; animation-name: fadeInDown;">
 
-<div class="search_title">
-    <h1>Поиск поездок</h1>
+  <div class="search_trip_one_layer">
+<div class="trip_time_layer">
+  <div class="trip_in_time">
+    <div class="time__layer">
+
+      {{ getFormattedTripInTime() }}
+      <span>
+        <!-- 06 Сен, Пт -->
+        {{ formatDate(search_trip.trip_in_time) }}
+    </span>
+    </div>
+    <div class="trip_city">
+      {{search_trip?.city?.name}}
+    </div>
+
+  </div>
+  <div class="trip_out_time">
+    <div class="time__layer">
+      {{getFormattedtrip_out_time()}}
+      <span>
+        <!-- 13 Сен, Пт -->
+        {{ formatDate(search_trip.trip_out_time) }}
+    </span>
+    </div>
+    <div class="trip_city">
+      {{search_trip?.cityin?.name}}
+    </div>
+  </div>
+  <svg xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="3" x2="100%" y2="3"></line>
+</svg>
 </div>
-<SearchTrips></SearchTrips>
-<div class="trips_list">
-    <!-- <span v-if="pending">Загрузка....</span> -->
 
-    <template v-if="pending">
-        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
-            <div class="block pulsate" style="height: 90px;"></div>
-        </div>
-        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
-            <div class="block pulsate" style="height: 90px;"></div>
-        </div>
-        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
-            <div class="block pulsate" style="height: 90px;"></div>
-        </div>
-        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
-            <div class="block pulsate" style="height: 90px;"></div>
-        </div>
-    </template>
+<div class="trip_driver">
+  <div class="trip_driver_photo">
+        <img v-if="search_trip?.user?.photo" :src="search_trip?.user?.photo" alt="">
+        <img v-else src="~/assets/img/user.png" alt="">
+    </div>
+  <div class="trip_driver_info">
+    Контент
+    <span>
+        
+        <template v-if="search_trip?.trip_car?.name">
+            {{search_trip?.trip_car?.name}}
+        <!-- Toyota Camry -->
+      <!-- Audi Q9 -->
+        </template>
+        <template v-else>
+        Нет данных
+        </template>
 
-
-
-<TripCard :search_trip="trip" v-for="trip in trips"></TripCard>
-
-    
-
-
-    
-
-
-
+    </span>
+  </div>
 </div>
+
+<div class="trip_info">
+  <div class="trip_price">
+    <span>
+        
+        {{search_trip?.price}} ₽
+        <!-- 2500 ₽ -->
+    </span>
+    <p>      
+        <!-- Осталось:  4 -->
+        Осталось: {{search_trip?.free_seats}}
+                  
+    </p>
+  </div>
+  <!-- <a href="">Выбрать</a> -->
+</div>
+</div>
+<div class="search_trip_two_layer">
+    <span>
+        <!-- <img src="" alt=""> -->
+      <!-- Не курить -->
+    </span>    
+</div>
+</div>
+</NuxtLink>
 </template>
 <style scoped>
-
-.trips_list{
-    margin: 15px 0px 0px 0px;
-}
 .search-result {
     display: flex;
     width: 100%;
@@ -203,7 +237,7 @@ onMounted(async () => {
     background-color: #FFFFFF;
     padding: 15px 15px 15px 15px ! IMPORTANT;
     border-radius: 15px;
-    margin: 0px 0px 15px 0px ! IMPORTANT;
+    margin: 15px 0px 0px 0px ! IMPORTANT;
 }
 .trip_info {
     width: 33%;
@@ -326,17 +360,6 @@ onMounted(async () => {
         text-overflow: ellipsis;
         white-space: nowrap;
         margin: 0px 0px 10px 0px;
-    }
-}
-/* travel */
-
-
-.search_title{
-    font-size: 5vw;
-    margin: 0px 0px 25px 0px;
-
-    && h1{
-        font-size: clamp(25px, 4vw, 49px);
     }
 }
 

@@ -4,11 +4,9 @@ definePageMeta({
 });
 // Получаем объект маршрута
 const route = useRoute();
-
 // Извлекаем параметры из маршрута
 const fromCity = route.params._fromCity; // Параметр из URL
 const goCity = route.params._goCity; // Параметр из URL
-
 import {API, apiConfig, base_url} from '@/api/api'
 const {data: trips, pending} = await useFetch(apiConfig.trips_filter, {
     method: 'POST',
@@ -31,23 +29,24 @@ const {data: trips, pending} = await useFetch(apiConfig.trips_filter, {
 <div class="search_title">
     <h1>{{fromCity}} — {{goCity}}</h1>
 </div>
-
 <SearchTrips></SearchTrips>
 
 <div class="trips_list">
-    <span v-if="pending">Загрузка....</span>
-    <NuxtLink :to="`/trips/${trip.id}/`" v-for="trip in trips" :key="trip.id" v-else>
-        <div class="trip">
-            <img :src="`${base_url}${trip?.user?.photo}`" alt="">
-            <div class="trip_cart_info">
-                <div class="trip_cart_user_info">
-
-                </div>
-                <!-- <h1>{{travel.id}}</h1> -->
-                <!-- <p>{{travel?.description}}</p> -->
-            </div>
+    <template v-if="pending">
+        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
+            <div class="block pulsate" style="height: 90px;"></div>
         </div>
-    </NuxtLink>
+        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
+            <div class="block pulsate" style="height: 90px;"></div>
+        </div>
+        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
+            <div class="block pulsate" style="height: 90px;"></div>
+        </div>
+        <div class="pulsar" style="margin: 20px 0px 0px 0px;">
+            <div class="block pulsate" style="height: 90px;"></div>
+        </div>
+    </template>
+    <TripCard :search_trip="trip" v-for="trip in trips"></TripCard>
 
 </div>
 </template>

@@ -2,7 +2,7 @@
   <div class="popular-countries">
     <div class="popular-countries-title">
       <h2>Популярные направления <span>{{ countries?.length }} шт.</span></h2>
-      <button>Как найти надежного попутчика ></button>
+      <!-- <button>Как найти надежного попутчика ></button> -->
     </div>
 
     <div

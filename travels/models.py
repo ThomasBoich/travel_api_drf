@@ -27,8 +27,8 @@ class Travel(models.Model):
         (SEARCH_FAMIlY, 'Семью'),
     ]
 
-    gender = models.CharField(max_length=15, choices=GENDERS_LIST, default=MEN, verbose_name='Пол', null=True, blank=True)
-    gender_search = models.CharField(max_length=15, choices=SEARCH_GENDERS_LIST, default=SEARCH_GIRL, verbose_name='Ищу', blank=True, null=True)
+    gender = models.CharField(max_length=15, choices=GENDERS_LIST, default=None, verbose_name='Пол', null=True, blank=True)
+    gender_search = models.CharField(max_length=15, choices=SEARCH_GENDERS_LIST, default=None, verbose_name='Ищу', blank=True, null=True)
     city = models.CharField(max_length=200, verbose_name='Город, Курорт', blank=True, null=True)
     country = models.ManyToManyField('Country', related_name='travels', verbose_name='Страна')
     days = models.IntegerField(verbose_name='Количество дней', blank=True, null=True)
